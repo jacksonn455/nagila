@@ -1,0 +1,84 @@
+{
+  "site": {
+    "name": "Nágila Bernarda Zortéa",
+    "title": "Nágila Bernarda Zortéa | Estética, Ciência e Educação em Erechim",
+    "description": "Nágila Bernarda Zortéa — Mestre, Esteticista, Coordenadora do Curso de Estética e Cosmética e da Pós-Graduação em Estética Avançada da URI Erechim. Pesquisadora e palestrante em estética clínica.",
+    "origin": "https://nagilazortea.com.br",
+    "lastmod": "2026-08-08",
+    "locale": "pt_BR",
+    "lang": "pt-BR"
+  },
+  "person": {
+    "name": "Nágila Bernarda Zortéa",
+    "alternateName": ["Nagila Bernarda Zortea", "Nágila Zortéa", "NB Zortéa"],
+    "title": "Mestre em Estética e Cosmetologia",
+    "headline": "Ciência, educação e cuidado no centro de cada decisão estética.",
+    "bio": "Nágila Bernarda Zortéa é esteticista, mestre, docente e coordenadora do Curso de Graduação em Estética e Cosmética e da Pós-Graduação em Estética Avançada da Universidade Regional Integrada do Alto Uruguai e das Missões (URI Erechim). Com trajetória construída entre a clínica, a academia e a pesquisa científica, atua na interface entre o cuidado estético e o conhecimento científico. É autora de publicações científicas em periódicos nacionais e palestrante em eventos de referência na área de estética, incluindo o Estetika, o maior evento de estética da América Latina. É também empresária e responsável pela NZ Beauty Clinic, em Erechim, Rio Grande do Sul.",
+    "location": {
+      "city": "Erechim",
+      "state": "RS",
+      "region": "Alto Uruguai",
+      "country": "Brasil"
+    },
+    "institution": {
+      "name": "Universidade Regional Integrada do Alto Uruguai e das Missões — Campus Erechim",
+      "shortName": "URI Erechim",
+      "url": "https://www.uricer.edu.br/"
+    },
+    "roles": [
+      {
+        "id": "coordenadora-graduacao",
+        "title": "Coordenadora da Graduação",
+        "description": "Coordenadora do Curso de Estética e Cosmética",
+        "institution": "URI Erechim",
+        "institutionUrl": "https://www.uricer.edu.br/"
+      },
+      {
+        "id": "coordenadora-pos",
+        "title": "Coordenadora da Pós-Graduação",
+        "description": "Coordenadora da Pós-Graduação em Estética Avançada",
+        "institution": "URI Erechim",
+        "institutionUrl": "https://www.uricer.edu.br/"
+      },
+      {
+        "id": "docente",
+        "title": "Docente",
+        "description": "Professora Mestre na Graduação e Pós-Graduação em Estética",
+        "institution": "URI Erechim",
+        "institutionUrl": "https://www.uricer.edu.br/"
+      },
+      {
+        "id": "pesquisadora",
+        "title": "Pesquisadora",
+        "description": "Autora de publicações científicas em periódicos nacionais e internacionais"
+      },
+      {
+        "id": "palestrante",
+        "title": "Palestrante",
+        "description": "Palestrante em eventos científicos e profissionais de estética"
+      },
+      {
+        "id": "empresaria",
+        "title": "Empresária",
+        "description": "Responsável pela NZ Beauty Clinic, clínica de estética em Erechim, RS"
+      }
+    ],
+    "sameAs": [
+      "https://linktr.ee/nagi_estetica",
+      "https://www.instagram.com/nzbeautyclinic/",
+      "https://www.uricer.edu.br/"
+    ],
+    "knowsAbout": [
+      "Estética e Cosmetologia",
+      "Estética Facial",
+      "Estética Corporal",
+      "Radiofrequência",
+      "Cosmetologia Clínica",
+      "Educação em Estética",
+      "Pesquisa em Estética",
+      "Acne e Dermatologia Estética",
+      "Melasma",
+      "Tecnologias em Estética"
+    ]
+  }
+}

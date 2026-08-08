@@ -1,0 +1,42 @@
+[
+  {
+    "id": "estetika-2026",
+    "slug": "estetika-2026-olhar-integrativo",
+    "title": "Olhar integrativo na saúde além da pele",
+    "event": "32ª Estetika",
+    "type": "Palestra",
+    "role": "Palestrante",
+    "format": "Presencial",
+    "location": {
+      "venue": "São Paulo Expo",
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "Brasil"
+    },
+    "date": "2026-07-31",
+    "dateEnd": "2026-08-02",
+    "symposium": "Simpósio de Estética Facial de Precisão",
+    "description": "Palestra sobre o olhar integrativo na saúde da pele, abordando a acne como possível manifestação de desequilíbrios sistêmicos e defendendo uma atuação estética fundamentada em ciência, avaliação individualizada e raciocínio clínico.",
+    "topics": ["acne", "saúde sistêmica", "estética facial de precisão", "raciocínio clínico"],
+    "panel": {
+      "title": "Hot Topics na Estética Facial",
+      "description": "Mesa-redonda dedicada ao debate de condutas, limites e tendências da estética facial científica brasileira.",
+      "participants": [
+        "Nágila Zortéa",
+        "João Tassinary",
+        "Lucas Portilho",
+        "Luiz Rabelo",
+        "Priscilla Sebbe",
+        "Daniela Moleiro"
+      ]
+    },
+    "eventDescription": "O Estetika, com mais de 30 anos de história, é apresentado por sua organização como o maior evento de estética da América Latina. Em 2026, reuniu 134 palestrantes, 89 horas de conteúdo e mais de 180 marcas expositoras.",
+    "source": "https://www.uricer.edu.br/site/informacao_noticia.php?id=12573",
+    "sourceTitle": "Professora palestra no Estetika, referência latino-americana em estética",
+    "sourcePublisher": "URI Erechim",
+    "sourceDate": "2026-08-05",
+    "featured": true,
+    "quote": "Estar no Estetika como palestrante representa não apenas uma conquista profissional, mas também a oportunidade de levar o nome da URI a um dos espaços mais relevantes da estética na América Latina e contribuir para o fortalecimento de uma prática cada vez mais científica e responsável.",
+    "quoteSource": "Nágila Zortéa — URI Erechim, agosto de 2026"
+  }
+]

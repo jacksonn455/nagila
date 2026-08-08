@@ -1,0 +1,30 @@
+{
+  "name": "nagila-zortea-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfólio profissional de Nágila Bernarda Zortéa — Esteticista, Docente, Pesquisadora e Coordenadora do Curso de Estética e Cosmética da URI Erechim.",
+  "homepage": "https://nagilazortea.com.br/",
+  "author": "Nágila Bernarda Zortéa",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "build": "npm run build:i18n && npm run build:sitemap",
+    "build:i18n": "node scripts/build-i18n.js",
+    "build:sitemap": "node scripts/build-sitemap.js",
+    "check:links": "node scripts/check-links.js",
+    "check:html": "html-validate index.html 404.html",
+    "check:format": "prettier --check \"assets/**/*.{css,js}\" \"scripts/**/*.js\" \"data/**/*.json\" \"assets/i18n/**/*.json\" \"*.{json,md}\"",
+    "format": "prettier --write \"assets/**/*.{css,js}\" \"scripts/**/*.js\" \"data/**/*.json\" \"assets/i18n/**/*.json\" \"*.{json,md}\"",
+    "check": "npm run check:html && npm run check:links"
+  },
+  "devDependencies": {
+    "html-validate": "^8.24.2",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.3.3"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true
+  }
+}

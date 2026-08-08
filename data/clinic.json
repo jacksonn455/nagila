@@ -1,0 +1,48 @@
+{
+  "name": "NZ Beauty Clinic",
+  "fullName": "Nágila Zortea — NZ Beauty Clinic",
+  "description": "Clínica de estética em Erechim, RS, liderada pela Profa. Mestre Nágila Bernarda Zortéa.",
+  "instagram": "@nzbeautyclinic",
+  "instagramUrl": "https://www.instagram.com/nzbeautyclinic/",
+  "linktree": "https://linktr.ee/nagi_estetica",
+  "phone": "(54) 99651-6136",
+  "address": {
+    "streetAddress": "Rua Cezária Matos, 82",
+    "neighborhood": "Centro",
+    "addressLocality": "Erechim",
+    "addressRegion": "RS",
+    "postalCode": "99700-094",
+    "addressCountry": "BR",
+    "full": "Rua Cezária Matos, 82 — Centro, Erechim/RS, CEP 99700-094"
+  },
+  "geo": {
+    "latitude": -27.6394501,
+    "longitude": -52.2749179
+  },
+  "googleMaps": "https://www.google.com/maps/place/N%C3%A1gila+Zortea+-+Nz+Beauty+Clinic/@-27.6394501,-52.2749179,17z",
+  "googleRating": 5.0,
+  "googleRatingSource": "Google Maps — verificado em agosto de 2026",
+  "tagline": "Excelência em Estética, Resultados que Transformam",
+  "hours": {
+    "note": "TODO: validar horário completo de funcionamento",
+    "partial": "Fecha às 12:00 (horário parcial confirmado via Google Maps)"
+  },
+  "serviceArea": {
+    "city": "Erechim",
+    "state": "RS",
+    "region": "Alto Uruguai",
+    "country": "Brasil"
+  },
+  "services": {
+    "sourceUrl": "https://linktr.ee/nagi_estetica",
+    "sourceNote": "Verificado em agosto de 2026 via Linktree oficial @nagi_estetica",
+    "confirmed": [
+      { "name": "Estética Facial", "description": "Atendimentos faciais personalizados" },
+      { "name": "Estética Corporal", "description": "Atendimentos corporais personalizados" },
+      { "name": "Depilação a Laser", "description": "Tratamento de depilação a laser" },
+      { "name": "Pós-Operatório", "description": "Acompanhamento estético pós-operatório" },
+      { "name": "Lipedema", "description": "Tratamento especializado para lipedema" }
+    ],
+    "note": "Lista confirmada via Linktree oficial @nagi_estetica. Protocolos e equipamentos precisam de validação direta com a clínica."
+  }
+}

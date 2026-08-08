@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página não encontrada — Nágila Bernarda Zortéa</title>
+  <meta name="description" content="A página que você está procurando não foi encontrada. Volte à página inicial de Nágila Bernarda Zortéa.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://nagilazortea.com.br/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script>
+    (() => {
+      try {
+        const t = localStorage.getItem('nz-preferred-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    .error-page {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--sp-6);
+    }
+    .error-page__code {
+      font-family: var(--font-serif);
+      font-size: clamp(6rem, 20vw, 14rem);
+      font-weight: 300;
+      color: var(--accent-vivid);
+      opacity: 0.25;
+      line-height: 1;
+      margin-block-end: var(--sp-4);
+    }
+    .error-page__title {
+      font-family: var(--font-serif);
+      font-size: var(--fs-2xl);
+      font-weight: 400;
+      color: var(--text);
+      margin-block-end: var(--sp-3);
+    }
+    .error-page__desc {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-block-end: var(--sp-7);
+      max-width: 32ch;
+      margin-inline: auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="error-page">
+    <div>
+      <p class="error-page__code" aria-hidden="true">404</p>
+      <h1 class="error-page__title">Página não encontrada</h1>
+      <p class="error-page__desc">A página que você está buscando não existe ou foi movida.</p>
+      <a href="/" class="btn btn--primary">Voltar à página inicial</a>
+    </div>
+  </main>
+</body>
+</html>

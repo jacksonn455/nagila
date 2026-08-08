@@ -1,0 +1,276 @@
+{
+  "metaTitle": "Nágila Bernarda Zortéa | Aesthetics, Science and Education in Erechim",
+  "metaDescription": "Nágila Bernarda Zortéa — Master's degree, Aesthetician, Coordinator of the Aesthetics and Cosmetology Program and Advanced Aesthetics Postgraduate at URI Erechim. Researcher, speaker, and owner of NZ Beauty Clinic in Erechim, RS, Brazil.",
+  "skipToContent": "Skip to main content",
+  "openMenu": "Open navigation menu",
+  "changeLanguage": "Change language",
+  "toggleTheme": "Toggle dark mode",
+  "nav": {
+    "sobre": "About",
+    "docencia": "Teaching",
+    "publicacoes": "Publications",
+    "livros": "Books",
+    "palestras": "Lectures",
+    "clinica": "NZ Beauty Clinic",
+    "contato": "Contact"
+  },
+  "hero": {
+    "label": "Aesthetics · Science · Education · Erechim, RS",
+    "headline": "Science, education, and care at the heart of every aesthetic decision.",
+    "role1": "Aesthetician",
+    "role2": "Professor",
+    "role3": "Researcher",
+    "role4": "Speaker",
+    "role5": "Coordinator — URI Erechim",
+    "cta1": "Discover my journey",
+    "cta2": "NZ Beauty Clinic",
+    "scroll": "Scroll",
+    "scrollAriaLabel": "Scroll to the About section"
+  },
+  "sobre": {
+    "label": "About",
+    "title": "A trajectory built between the clinic, academia, and science.",
+    "bio1": "<strong>Nágila Bernarda Zortéa</strong> holds a Master's degree and works as an Aesthetician and Professor, coordinating the Undergraduate Program in Aesthetics and Cosmetology and the Postgraduate Program in Advanced Aesthetics at <strong>URI Erechim</strong> — Universidade Regional Integrada do Alto Uruguai e das Missões.",
+    "bio2": "Her practice combines individualized clinical care with scientific rigor. As an author of publications in national peer-reviewed journals and a speaker at reference events in Brazilian aesthetics — including the Estetika, Latin America's largest aesthetics event —, Nágila represents a new generation of professionals who place science at the foundation of aesthetic practice.",
+    "bio3": "She is also an entrepreneur and the owner of <strong>NZ Beauty Clinic</strong>, in Erechim, Rio Grande do Sul, where academic and clinical expertise translates into excellence in aesthetic care.",
+    "caption": "Nágila Bernarda Zortéa<br>Aesthetician · Master's · Coordinator URI Erechim",
+    "imageAlt": "Nágila Bernarda Zortéa, Master's degree, Aesthetician and Coordinator at URI Erechim, in the NZ Beauty Clinic environment"
+  },
+  "role1": {
+    "title": "Aesthetics Professional",
+    "desc": "Aesthetician with a solid scientific background, working at the intersection of cosmetology, clinical aesthetics, and evidence-based practice. Specialist in facial and body aesthetics."
+  },
+  "role2": {
+    "title": "Professor and Coordinator",
+    "desc": "Master's-level Professor and Coordinator of the Aesthetics and Cosmetology Program and Advanced Aesthetics Postgraduate at URI Erechim, contributing to the training of aesthetics professionals in Rio Grande do Sul.",
+    "link": "See academic work",
+    "linkAriaLabel": "Learn more about academic activities"
+  },
+  "role3": {
+    "title": "Researcher",
+    "desc": "Author of scientific publications in indexed national journals, including the Brazilian Journal of Plastic Surgery (SciELO), with research on aesthetics technologies, acne, melasma, and cosmetology.",
+    "link": "See publications",
+    "linkAriaLabel": "See scientific publications"
+  },
+  "role4": {
+    "title": "Speaker",
+    "desc": "Participant in leading scientific and professional events in the aesthetics field, including the Estetika — Latin America's largest aesthetics event —, advocating for a science-based aesthetic practice grounded in clinical reasoning.",
+    "link": "See events",
+    "linkAriaLabel": "See lectures and events"
+  },
+  "role5": {
+    "title": "Entrepreneur",
+    "desc": "Owner of NZ Beauty Clinic, an aesthetics clinic located in the center of Erechim, Rio Grande do Sul, where academic and clinical expertise translates into excellence in care.",
+    "link": "Visit the clinic",
+    "linkAriaLabel": "Visit NZ Beauty Clinic"
+  },
+  "docencia": {
+    "label": "Academic Career",
+    "title": "Teaching and Coordination",
+    "subtitle": "Training aesthetics professionals with a scientific foundation at the Universidade Regional Integrada do Alto Uruguai e das Missões, Erechim Campus.",
+    "card1": {
+      "badge": "Undergraduate",
+      "title": "Aesthetics and Cosmetology Program",
+      "institution": "URI Erechim — Program Coordinator",
+      "desc": "Nágila Bernarda Zortéa serves as coordinator of the Undergraduate Program in Aesthetics and Cosmetology at URI Erechim. The program trains professionals with technical, scientific, and clinical knowledge to work in facial, body aesthetics, and cosmetology.",
+      "link": "URI Erechim",
+      "linkAriaLabel": "Visit URI Erechim website (opens in new tab)"
+    },
+    "card2": {
+      "badge": "Postgraduate",
+      "title": "Postgraduate in Advanced Aesthetics",
+      "institution": "URI Erechim — Program Coordinator",
+      "desc": "Coordinator of the Postgraduate Program in Advanced Aesthetics at URI Erechim, a program focused on technical and scientific deepening in clinical aesthetics, with an emphasis on advanced protocols and scientific grounding.",
+      "link": "URI Erechim",
+      "linkAriaLabel": "Visit URI Erechim website (opens in new tab)"
+    },
+    "card3": {
+      "badge": "Research",
+      "title": "Scientific Production",
+      "institution": "URI Erechim — Professor and Researcher",
+      "desc": "As a professor and researcher, Nágila contributes to scientific output in clinical aesthetics, cosmetology, and health. Her research covers topics such as aesthetics technologies, cosmetic microbiology, acne, and melasma.",
+      "link": "See publications",
+      "linkAriaLabel": "See scientific publications"
+    },
+    "uriNote": "The <strong>Universidade Regional Integrada do Alto Uruguai e das Missões (URI)</strong> is a community university in Rio Grande do Sul, with a campus in Erechim. A reference in teaching, research, and extension in the Alto Uruguai region.",
+    "uriBtn": "Visit URI Erechim"
+  },
+  "pub": {
+    "label": "Research &amp; Publications",
+    "title": "Scientific Production",
+    "subtitle": "Verified publications in indexed national journals. Links to original sources.",
+    "featured": "Featured"
+  },
+  "pub1": {
+    "year": "2026",
+    "journal": "Brazilian Journal of Plastic Surgery (RBCP)",
+    "title": "Technical Differentiation and Innovation in Contemporary Liposuction: A Critical Study of the Postoperative Period in Light of New Technologies",
+    "authors": "NB Zortéa",
+    "abstract": "A critical review of technological innovations in contemporary liposuction, evaluating efficacy, safety, and postoperative management. Analyzes VASER, Renuvion, BodyTite, Morpheus8, and Argoplasma, highlighting the need for evidence-based clinical protocols. Published in RBCP, journal of the Brazilian Society of Plastic Surgery.",
+    "linkScielo": "Read on SciELO",
+    "linkScieloAriaLabel": "Access article on SciELO (opens in new tab)",
+    "linkThieme": "Read on Thieme",
+    "linkThiemeAriaLabel": "Access article on Thieme (opens in new tab)"
+  },
+  "pub2": {
+    "journal": "Brazilian Journal of Health Review",
+    "title": "Use of radiofrequency for aesthetic treatments: a systematic review",
+    "authors": "NB Zortéa, ABN de Mattos, CFG Neto et al.",
+    "abstract": "Systematic review of the clinical use of radiofrequency in aesthetic treatments, analyzing 11 studies on different modalities and indications. Addresses the most prevalent aesthetic condition identified and the efficacy of the technology.",
+    "link": "Access article",
+    "linkAriaLabel": "Access article on Academia.edu (opens in new tab)"
+  },
+  "pub3": {
+    "journal": "Editora Científica",
+    "title": "Mask-induced acne vulgaris",
+    "authors": "NB Zortéa, ABN Mattos et al.",
+    "abstract": "Study on the development of acne vulgaris associated with continuous use of protective face masks during the COVID-19 pandemic, investigating pathogenic mechanisms and clinical and aesthetic management approaches.",
+    "link": "Download PDF",
+    "linkAriaLabel": "Download article in PDF (opens in new tab)"
+  },
+  "pub4": {
+    "journal": "O Mundo da Saúde",
+    "citations": "12 citations",
+    "title": "Microbiological contamination of in-store lipstick testers available to the consumer",
+    "authors": "NB Zortéa, M Vassoler, LG Rossato-Grando et al.",
+    "abstract": "Investigation of microbiological contamination in lipstick testers available in retail establishments, highlighting public health risks and the importance of sanitary regulations for collectively used cosmetic products.",
+    "link": "Access in journal",
+    "linkAriaLabel": "Access article in O Mundo da Saúde journal (opens in new tab)"
+  },
+  "pub5": {
+    "year": "URI Erechim",
+    "journal": "Proceedings of the Research and Extension Integration Seminar",
+    "title": "Biochemical Factors of Melasma",
+    "authors": "DJ Wittzinski, NB Zortéa",
+    "abstract": "Study on the biochemical mechanisms of melasma, a highly recurrent skin hyperpigmentation disorder with significant impact on patients' self-esteem and quality of life.",
+    "link": "Access publication",
+    "linkAriaLabel": "Access publication in URI Erechim proceedings (opens in new tab)"
+  },
+  "livros": {
+    "label": "Authorship",
+    "title": "Books",
+    "subtitle": "Bibliographic production by Nágila Bernarda Zortéa — publications that unite clinical practice, scientific foundation, and didactics for the training of aesthetics professionals."
+  },
+  "book1": {
+    "type": "Book",
+    "title": "Descomplicando a Eletroterapia Estética",
+    "authors": "Nágila Bernarda Zortéa",
+    "tag1": "Electrotherapy",
+    "tag2": "Clinical Aesthetics",
+    "tag3": "URI Erechim",
+    "desc": "A practical manual dedicated to aesthetic electrotherapy — a field that applies electrophysical resources to facial and body aesthetic treatments. A didactic and scientific contribution for aesthetics professionals and students.",
+    "cta": "Access at URI Erechim →",
+    "ctaAriaLabel": "Access URI Erechim publications (opens in new tab) — direct link to book will be updated",
+    "coverAlt": "Nágila Bernarda Zortéa — author of the book Descomplicando a Eletroterapia Estética"
+  },
+  "palestras": {
+    "label": "Lectures &amp; Events",
+    "title": "Scientific and Professional Presence",
+    "subtitle": "Participation in reference events in Brazilian aesthetics, bringing scientific knowledge and promoting evidence-based aesthetic practice.",
+    "note": "Only events with a verified public source are displayed. Other events may be added as information becomes available."
+  },
+  "event1": {
+    "eventName": "32nd Estetika · São Paulo Expo · SP",
+    "title": "\"Integrative view on health beyond the skin\"",
+    "imageAlt": "Nágila Bernarda Zortéa speaking at the 32nd Estetika, Latin America's largest aesthetics event, São Paulo, 2026",
+    "location": "São Paulo Expo — São Paulo, SP · Jul 31 – Aug 2, 2026",
+    "desc1": "Lecture presented at the <strong>Symposium on Precision Facial Aesthetics</strong> at the 32nd edition of the Estetika — Latin America's largest aesthetics event, with 134 speakers, 89 hours of content, and more than 180 exhibiting brands. Nágila addressed acne as a possible manifestation of systemic imbalances, advocating for an aesthetic practice grounded in science, individualized assessment, and clinical reasoning.",
+    "desc2": "She also participated in the roundtable discussion <strong>\"Hot Topics in Facial Aesthetics\"</strong>, alongside João Tassinary, Lucas Portilho, Luiz Rabelo, Priscilla Sebbe, and Daniela Moleiro.",
+    "quote": "\"Being at Estetika as a speaker represents not just a professional achievement, but also the opportunity to bring URI's name to one of the most relevant spaces in aesthetics in Latin America and to contribute to the strengthening of an increasingly scientific and responsible practice.\"",
+    "quoteSource": "Nágila Zortéa — URI Erechim, August 2026",
+    "source": "Source: URI Erechim (08/05/2026)",
+    "sourceAriaLabel": "View news on the URI Erechim website (opens in new tab)",
+    "tag1": "Facial Aesthetics",
+    "tag2": "Clinical Science",
+    "tag3": "Systemic Health",
+    "tag4": "Acne"
+  },
+  "clinica": {
+    "label": "Aesthetics Clinic",
+    "brand": "NZ Beauty Clinic",
+    "tagline": "Excellence in Aesthetics, Results that Transform.",
+    "desc1": "<strong>NZ Beauty Clinic</strong> is Nágila Bernarda Zortéa's aesthetics clinic, located in the center of Erechim, Rio Grande do Sul. The clinic combines Prof. Master Nágila's academic and clinical expertise with a commitment to providing aesthetic care grounded in scientific knowledge and individualized assessment.",
+    "desc2": "With a top rating on Google Maps, NZ Beauty Clinic reflects the commitment to excellence and personalized care, aligned with the principles Nágila has championed throughout her academic and professional journey.",
+    "enderecoLabel": "Address",
+    "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>ZIP 99700-094, Brazil",
+    "telLabel": "Phone / WhatsApp",
+    "instLabel": "Instagram",
+    "cta1": "Book an appointment",
+    "cta1AriaLabel": "Access NZ Beauty Clinic links (opens in new tab)",
+    "cta2": "@nzbeautyclinic",
+    "cta2AriaLabel": "Follow @nzbeautyclinic on Instagram (opens in new tab)",
+    "servicosLabel": "Services",
+    "servicoFacial": "Facial Aesthetics",
+    "servicoCorporal": "Body Aesthetics",
+    "servicoLaser": "Laser Hair Removal",
+    "servicoPosOp": "Post-operative Care",
+    "servicoLipedema": "Lipedema",
+    "mapTitle": "NZ Beauty Clinic location — Rua Cezária Matos, 82, Centro, Erechim/RS",
+    "mapAriaLabel": "Map showing NZ Beauty Clinic location in Erechim, RS",
+    "ratingLabel": "5.0 — Google Maps",
+    "ratingAriaLabel": "Rating: 5 out of 5 stars"
+  },
+  "avaliacoes": {
+    "label": "Reviews",
+    "title": "What they say about NZ Beauty Clinic",
+    "ratingLabel": "Top rating on Google Maps<br><strong>NZ Beauty Clinic</strong> — Erechim, RS",
+    "cta": "See Google reviews",
+    "ctaAriaLabel": "See NZ Beauty Clinic reviews on Google Maps (opens in new tab)"
+  },
+  "galeria": {
+    "label": "Gallery",
+    "title": "Professional Moments",
+    "placeholder": "Gallery under construction. Photos from events, the clinic, conferences, and lectures will be added soon."
+  },
+  "faq": {
+    "label": "Frequently Asked Questions",
+    "title": "About Nágila Bernarda Zortéa"
+  },
+  "faq1": {
+    "q": "Who is Nágila Bernarda Zortéa?",
+    "a": "Nágila Bernarda Zortéa holds a Master's degree and is an Aesthetician, Coordinator of the Aesthetics and Cosmetology Program and the Advanced Aesthetics Postgraduate Program at <a href=\"https://www.uricer.edu.br/\" target=\"_blank\" rel=\"noopener noreferrer\">URI Erechim</a>. She is also a researcher, speaker, and owner of NZ Beauty Clinic in Erechim, Rio Grande do Sul."
+  },
+  "faq2": {
+    "q": "Which program does Nágila Zortéa coordinate?",
+    "a": "Nágila Bernarda Zortéa coordinates the Undergraduate Program in Aesthetics and Cosmetology and the Postgraduate Program in Advanced Aesthetics at URI Erechim (Universidade Regional Integrada do Alto Uruguai e das Missões, Erechim Campus, Rio Grande do Sul)."
+  },
+  "faq3": {
+    "q": "Where is NZ Beauty Clinic located?",
+    "a": "NZ Beauty Clinic is located at <strong>Rua Cezária Matos, 82, Centro, Erechim/RS, ZIP 99700-094</strong>. For contact and bookings: <a href=\"tel:+5554996516136\">(54) 99651-6136</a> or on Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+  },
+  "faq4": {
+    "q": "Does Nágila Zortéa give lectures?",
+    "a": "Yes. In 2026, Nágila presented the lecture \"Integrative view on health beyond the skin\" at the 32nd edition of the Estetika — Latin America's largest aesthetics event —, held at São Paulo Expo. She also participated in the roundtable \"Hot Topics in Facial Aesthetics\". See the <a href=\"#palestras\">events section</a> for more information."
+  },
+  "faq5": {
+    "q": "What scientific publications feature Nágila Zortéa?",
+    "a": "Nágila Bernarda Zortéa (NB Zortéa) has published work in national journals, including: \"Technical Differentiation and Innovation in Contemporary Liposuction\" (RBCP, 2026, DOI: 10.1055/s-0046-1820097); \"Use of radiofrequency for aesthetic treatments: a systematic review\" (2021); \"Mask-induced acne vulgaris\" (2021); \"Microbiological contamination of in-store lipstick testers\" (O Mundo da Saúde, 2020); and \"Biochemical Factors of Melasma\" (URI Erechim). See the <a href=\"#publicacoes\">publications section</a> for direct links."
+  },
+  "faq6": {
+    "q": "What is Nágila Zortéa's role at URI Erechim?",
+    "a": "Nágila Bernarda Zortéa is a Master's-level Professor at URI Erechim, where she coordinates the Undergraduate Program in Aesthetics and Cosmetology and the Advanced Aesthetics Postgraduate Program. Her work encompasses teaching, scientific research, and university extension, training aesthetics professionals with a solid scientific foundation in Rio Grande do Sul."
+  },
+  "artigos": {
+    "label": "Knowledge",
+    "title": "Articles and Content",
+    "subtitle": "Coming soon: articles on evidence-based aesthetics, cosmetology, skincare, innovation, and aesthetics education.",
+    "placeholder": "Articles section in preparation. Educational and scientific content will be published soon."
+  },
+  "contato": {
+    "label": "Contact",
+    "title": "Get in Touch",
+    "subtitle": "For appointments at NZ Beauty Clinic, lecture invitations, or information about URI Erechim programs.",
+    "card1Label": "Booking",
+    "card2Label": "Instagram",
+    "card3Label": "Phone / WhatsApp",
+    "card4Label": "Programs — URI Erechim",
+    "card1AriaLabel": "Access NZ Beauty Clinic links on Linktree (opens in new tab)",
+    "card2AriaLabel": "Follow @nzbeautyclinic on Instagram (opens in new tab)",
+    "card3AriaLabel": "Call (54) 99651-6136",
+    "card4AriaLabel": "Visit URI Erechim website for program information (opens in new tab)"
+  },
+  "footer": {
+    "tagline": "Aesthetics · Science · Education · Erechim, RS",
+    "copy": "© 2026 Nágila Bernarda Zortéa"
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "metaTitle": "Nágila Bernarda Zortéa | Estética, Ciência e Educação em Erechim",
+  "metaDescription": "Nágila Bernarda Zortéa — Mestre, Esteticista, Coordenadora do Curso de Estética e Cosmética e da Pós-Graduação em Estética Avançada da URI Erechim. Pesquisadora, palestrante e responsável pela NZ Beauty Clinic, em Erechim/RS.",
+  "skipToContent": "Pular para o conteúdo principal",
+  "openMenu": "Abrir menu de navegação",
+  "changeLanguage": "Mudar idioma",
+  "toggleTheme": "Alternar modo escuro",
+  "nav": {
+    "sobre": "Sobre",
+    "docencia": "Docência",
+    "publicacoes": "Publicações",
+    "livros": "Livros",
+    "palestras": "Palestras",
+    "clinica": "NZ Beauty Clinic",
+    "contato": "Contato"
+  },
+  "hero": {
+    "label": "Estética · Ciência · Educação · Erechim, RS",
+    "headline": "Ciência, educação e cuidado no centro de cada decisão estética.",
+    "role1": "Esteticista",
+    "role2": "Docente",
+    "role3": "Pesquisadora",
+    "role4": "Palestrante",
+    "role5": "Coordenadora URI Erechim",
+    "cta1": "Conheça minha trajetória",
+    "cta2": "NZ Beauty Clinic",
+    "scroll": "Rolar",
+    "scrollAriaLabel": "Rolar para a seção Sobre"
+  },
+  "sobre": {
+    "label": "Sobre",
+    "title": "Uma trajetória construída entre a clínica, a academia e a ciência.",
+    "bio1": "<strong>Nágila Bernarda Zortéa</strong> é Mestre, Esteticista e Docente, coordenadora do Curso de Graduação em Estética e Cosmética e da Pós-Graduação em Estética Avançada da <strong>URI Erechim</strong> — Universidade Regional Integrada do Alto Uruguai e das Missões.",
+    "bio2": "Sua atuação combina o cuidado clínico individualizado com o rigor do conhecimento científico. Autora de publicações em periódicos nacionais e palestrante em eventos de referência da estética brasileira — incluindo o Estetika, maior evento de estética da América Latina —, Nágila representa uma nova geração de profissionais que coloca a ciência como alicerce da prática estética.",
+    "bio3": "É também empresária e responsável pela <strong>NZ Beauty Clinic</strong>, em Erechim, Rio Grande do Sul, onde a experiência acadêmica e clínica se traduz em cuidado estético de excelência.",
+    "caption": "Nágila Bernarda Zortéa<br>Esteticista · Mestre · Coordenadora URI Erechim",
+    "imageAlt": "Nágila Bernarda Zortéa, Mestre, Esteticista e Coordenadora URI Erechim, no ambiente da NZ Beauty Clinic"
+  },
+  "role1": {
+    "title": "Profissional de Estética",
+    "desc": "Esteticista com formação científica sólida, atuando na interface entre cosmetologia, estética clínica e evidência científica. Especialista em estética facial e corporal."
+  },
+  "role2": {
+    "title": "Docente e Coordenadora",
+    "desc": "Professora Mestre e coordenadora do Curso de Estética e Cosmética e da Pós-Graduação em Estética Avançada da URI Erechim, contribuindo para a formação de profissionais de estética no Rio Grande do Sul.",
+    "link": "Ver atuação acadêmica",
+    "linkAriaLabel": "Saiba mais sobre a atuação acadêmica"
+  },
+  "role3": {
+    "title": "Pesquisadora",
+    "desc": "Autora de publicações científicas em periódicos nacionais indexados, incluindo a Revista Brasileira de Cirurgia Plástica (SciELO), com pesquisas sobre tecnologias em estética, acne, melasma e cosmetologia.",
+    "link": "Ver publicações",
+    "linkAriaLabel": "Ver publicações científicas"
+  },
+  "role4": {
+    "title": "Palestrante",
+    "desc": "Participação em eventos científicos e profissionais de referência na área de estética, incluindo o Estetika — o maior evento de estética da América Latina —, defendendo uma prática estética baseada em ciência e raciocínio clínico.",
+    "link": "Ver eventos",
+    "linkAriaLabel": "Ver palestras e eventos"
+  },
+  "role5": {
+    "title": "Empresária",
+    "desc": "Responsável pela NZ Beauty Clinic, clínica de estética localizada no Centro de Erechim, Rio Grande do Sul, onde a experiência acadêmica e clínica se traduz em atendimento de excelência.",
+    "link": "Conhecer a clínica",
+    "linkAriaLabel": "Conhecer a NZ Beauty Clinic"
+  },
+  "docencia": {
+    "label": "Atuação Acadêmica",
+    "title": "Docência e Coordenação",
+    "subtitle": "Formando profissionais de estética com base científica na Universidade Regional Integrada do Alto Uruguai e das Missões, Campus Erechim.",
+    "uriNote": "A <strong>Universidade Regional Integrada do Alto Uruguai e das Missões (URI)</strong> é uma universidade comunitária do Rio Grande do Sul, com campus em Erechim. Referência em ensino, pesquisa e extensão na região do Alto Uruguai.",
+    "uriBtn": "Conhecer a URI Erechim",
+    "card1": {
+      "badge": "Graduação",
+      "title": "Curso de Estética e Cosmética",
+      "institution": "URI Erechim — Coordenadora",
+      "desc": "Nágila Bernarda Zortéa atua como coordenadora do Curso de Graduação em Estética e Cosmética da URI Erechim. O curso forma profissionais com conhecimento técnico, científico e clínico para atuar em estética facial, corporal e cosmetologia.",
+      "link": "URI Erechim",
+      "linkAriaLabel": "Acessar site da URI Erechim (abre em nova aba)"
+    },
+    "card2": {
+      "badge": "Pós-Graduação",
+      "title": "Pós-Graduação em Estética Avançada",
+      "institution": "URI Erechim — Coordenadora",
+      "desc": "Coordenadora da Pós-Graduação em Estética Avançada da URI Erechim, programa voltado ao aprofundamento técnico e científico na área de estética clínica, com ênfase em protocolos avançados e fundamentação científica.",
+      "link": "URI Erechim",
+      "linkAriaLabel": "Acessar site da URI Erechim (abre em nova aba)"
+    },
+    "card3": {
+      "badge": "Pesquisa",
+      "title": "Produção Científica",
+      "institution": "URI Erechim — Docente e Pesquisadora",
+      "desc": "Como docente e pesquisadora, Nágila contribui com a produção científica nas áreas de estética clínica, cosmetologia e saúde. Suas pesquisas abordam temas como tecnologias em estética, microbiologia cosmética, acne e melasma.",
+      "link": "Ver publicações",
+      "linkAriaLabel": "Ver publicações científicas"
+    }
+  },
+  "pub": {
+    "label": "Pesquisa &amp; Publicações",
+    "title": "Produção Científica",
+    "subtitle": "Publicações verificadas em periódicos nacionais indexados. Links para as fontes originais.",
+    "featured": "Destaque"
+  },
+  "pub1": {
+    "year": "2026",
+    "journal": "Revista Brasileira de Cirurgia Plástica (RBCP)",
+    "title": "Diferenciação técnica e inovação na lipoaspiração contemporânea: Estudo crítico do pós-operatório frente a novas tecnologias",
+    "authors": "NB Zortéa",
+    "abstract": "Revisão crítica sobre inovações tecnológicas na lipoaspiração contemporânea, avaliando eficácia, segurança e manejo pós-operatório. Analisa VASER, Renuvion, BodyTite, Morpheus8 e Argoplasma, destacando a necessidade de protocolos clínicos baseados em evidências. Publicado na RBCP, periódico da Sociedade Brasileira de Cirurgia Plástica.",
+    "linkScielo": "Ler no SciELO",
+    "linkScieloAriaLabel": "Acessar artigo no SciELO (abre em nova aba)",
+    "linkThieme": "Ler no Thieme",
+    "linkThiemeAriaLabel": "Acessar artigo no Thieme (abre em nova aba)"
+  },
+  "pub2": {
+    "journal": "Brazilian Journal of Health Review",
+    "title": "Uso da radiofrequência para tratamentos estéticos: uma revisão sistemática",
+    "authors": "NB Zortéa, ABN de Mattos, CFG Neto et al.",
+    "abstract": "Revisão sistemática sobre o uso clínico da radiofrequência em tratamentos estéticos, com análise de 11 estudos sobre diferentes modalidades e indicações. Aborda a afecção estética mais evidenciada e a eficácia do recurso tecnológico.",
+    "link": "Acessar artigo",
+    "linkAriaLabel": "Acessar artigo no Academia.edu (abre em nova aba)"
+  },
+  "pub3": {
+    "journal": "Editora Científica",
+    "title": "Acne vulgaris provocada pela máscara",
+    "authors": "NB Zortéa, ABN Mattos et al.",
+    "abstract": "Estudo sobre o desenvolvimento de acne vulgaris associado ao uso contínuo de máscaras de proteção durante a pandemia de COVID-19, investigando os mecanismos patogênicos e abordagens de manejo estético e clínico.",
+    "link": "Baixar PDF",
+    "linkAriaLabel": "Baixar artigo em PDF (abre em nova aba)"
+  },
+  "pub4": {
+    "journal": "O Mundo da Saúde",
+    "citations": "12 citações",
+    "title": "Contaminação microbiológica em provadores de batons disponíveis aos consumidores",
+    "authors": "NB Zortéa, M Vassoler, LG Rossato-Grando et al.",
+    "abstract": "Investigação sobre a contaminação microbiológica em amostras de batons disponíveis para testagem em estabelecimentos comerciais, evidenciando riscos para a saúde pública e a importância de regulamentação sanitária para cosméticos de uso coletivo.",
+    "link": "Acessar no periódico",
+    "linkAriaLabel": "Acessar artigo no periódico O Mundo da Saúde (abre em nova aba)"
+  },
+  "pub5": {
+    "year": "URI Erechim",
+    "journal": "Anais do Seminário de Integração em Pesquisa e Extensão",
+    "title": "Fatores Bioquímicos do Melasma",
+    "authors": "DJ Wittzinski, NB Zortéa",
+    "abstract": "Estudo sobre os mecanismos bioquímicos do melasma, distúrbio de hiperpigmentação cutânea de alta recidiva, com impacto significativo na autoestima e qualidade de vida dos pacientes.",
+    "link": "Acessar publicação",
+    "linkAriaLabel": "Acessar publicação nos anais da URI Erechim (abre em nova aba)"
+  },
+  "livros": {
+    "label": "Autoria",
+    "title": "Livros",
+    "subtitle": "Produção bibliográfica de Nágila Bernarda Zortéa — publicações que unem prática clínica, fundamento científico e didática para a formação de profissionais de estética."
+  },
+  "book1": {
+    "type": "Livro",
+    "title": "Descomplicando a Eletroterapia Estética",
+    "authors": "Nágila Bernarda Zortéa",
+    "tag1": "Eletroterapia",
+    "tag2": "Estética Clínica",
+    "tag3": "URI Erechim",
+    "desc": "Manual dedicado à eletroterapia estética — área que aplica recursos eletrofísicos nos tratamentos estéticos faciais e corporais. Uma contribuição didática e científica para profissionais e estudantes de estética e cosmetologia.",
+    "cta": "Acessar na URI Erechim →",
+    "ctaAriaLabel": "Acessar publicações da URI Erechim (abre em nova aba) — link direto para o livro será atualizado",
+    "coverAlt": "Nágila Bernarda Zortéa — autora do livro Descomplicando a Eletroterapia Estética"
+  },
+  "palestras": {
+    "label": "Palestras &amp; Eventos",
+    "title": "Presença Científica e Profissional",
+    "subtitle": "Participação em eventos de referência da estética brasileira, levando conhecimento científico e promovendo uma prática estética baseada em evidências.",
+    "note": "Apenas eventos com fonte pública verificada são exibidos. Outros eventos poderão ser adicionados conforme disponibilidade de informações."
+  },
+  "event1": {
+    "eventName": "32ª Estetika · São Paulo Expo · SP",
+    "title": "“Olhar integrativo na saúde além da pele”",
+    "imageAlt": "Nágila Bernarda Zortéa palestrando no 32º Estetika, maior evento de estética da América Latina, São Paulo, 2026",
+    "location": "São Paulo Expo — São Paulo, SP · 31 jul – 2 ago de 2026",
+    "desc1": "Palestra apresentada no <strong>Simpósio de Estética Facial de Precisão</strong> da 32ª edição do Estetika — o maior evento de estética da América Latina, com 134 palestrantes, 89 horas de conteúdo e mais de 180 marcas expositoras. Nágila abordou a acne como possível manifestação de desequilíbrios sistêmicos, defendendo uma atuação estética baseada em ciência, avaliação individualizada e raciocínio clínico.",
+    "desc2": "Integrou também a mesa-redonda <strong>“Hot Topics na Estética Facial”</strong>, ao lado de João Tassinary, Lucas Portilho, Luiz Rabelo, Priscilla Sebbe e Daniela Moleiro.",
+    "quote": "“Estar no Estetika como palestrante representa não apenas uma conquista profissional, mas também a oportunidade de levar o nome da URI a um dos espaços mais relevantes da estética na América Latina e contribuir para o fortalecimento de uma prática cada vez mais científica e responsável.”",
+    "quoteSource": "Nágila Zortéa — URI Erechim, agosto de 2026",
+    "source": "Fonte: URI Erechim (05/08/2026)",
+    "sourceAriaLabel": "Ver notícia no site da URI Erechim (abre em nova aba)",
+    "tag1": "Estética Facial",
+    "tag2": "Ciência Clínica",
+    "tag3": "Saúde Sistêmica",
+    "tag4": "Acne"
+  },
+  "clinica": {
+    "label": "Clínica de Estética",
+    "brand": "NZ Beauty Clinic",
+    "tagline": "Excelência em Estética, Resultados que Transformam.",
+    "desc1": "A <strong>NZ Beauty Clinic</strong> é a clínica de estética de Nágila Bernarda Zortéa, localizada no Centro de Erechim, Rio Grande do Sul. A clínica une a experiência acadêmica e clínica da Profa. Mestre Nágila com o compromisso de oferecer um atendimento estético fundamentado em conhecimento científico e avaliação individualizada.",
+    "desc2": "Com avaliação máxima no Google Maps, a NZ Beauty Clinic reflete o compromisso com excelência e cuidado personalizado, alinhados com os princípios defendidos por Nágila em sua trajetória acadêmica e profissional.",
+    "enderecoLabel": "Endereço",
+    "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>CEP 99700-094",
+    "telLabel": "Telefone / WhatsApp",
+    "instLabel": "Instagram",
+    "cta1": "Agendar atendimento",
+    "cta1AriaLabel": "Acessar links da NZ Beauty Clinic (abre em nova aba)",
+    "cta2": "@nzbeautyclinic",
+    "cta2AriaLabel": "Seguir @nzbeautyclinic no Instagram (abre em nova aba)",
+    "servicosLabel": "Serviços",
+    "servicoFacial": "Estética Facial",
+    "servicoCorporal": "Estética Corporal",
+    "servicoLaser": "Depilação a Laser",
+    "servicoPosOp": "Pós-Operatório",
+    "servicoLipedema": "Lipedema",
+    "mapTitle": "Localização da NZ Beauty Clinic — Rua Cezária Matos, 82, Centro, Erechim/RS",
+    "mapAriaLabel": "Mapa mostrando a localização da NZ Beauty Clinic em Erechim, RS",
+    "ratingLabel": "5,0 — Google Maps",
+    "ratingAriaLabel": "Avaliação 5 de 5 estrelas"
+  },
+  "avaliacoes": {
+    "label": "Avaliações",
+    "title": "O que dizem sobre a NZ Beauty Clinic",
+    "ratingLabel": "Avaliação máxima no Google Maps<br><strong>NZ Beauty Clinic</strong> — Erechim, RS",
+    "cta": "Ver avaliações no Google",
+    "ctaAriaLabel": "Ver avaliações da NZ Beauty Clinic no Google Maps (abre em nova aba)"
+  },
+  "faq": {
+    "label": "Perguntas Frequentes",
+    "title": "Sobre Nágila Bernarda Zortéa"
+  },
+  "faq1": {
+    "q": "Quem é Nágila Bernarda Zortéa?",
+    "a": "Nágila Bernarda Zortéa é Mestre, Esteticista, Coordenadora do Curso de Estética e Cosmética e da Pós-Graduação em Estética Avançada da <a href=\"https://www.uricer.edu.br/\" target=\"_blank\" rel=\"noopener noreferrer\">URI Erechim</a>. É também pesquisadora, palestrante e responsável pela NZ Beauty Clinic, em Erechim, Rio Grande do Sul."
+  },
+  "faq2": {
+    "q": "Nágila Zortéa é coordenadora de qual curso?",
+    "a": "Nágila Bernarda Zortéa é coordenadora do Curso de Graduação em Estética e Cosmética e da Pós-Graduação em Estética Avançada da URI Erechim (Universidade Regional Integrada do Alto Uruguai e das Missões, Campus Erechim, Rio Grande do Sul)."
+  },
+  "faq3": {
+    "q": "Onde fica a NZ Beauty Clinic?",
+    "a": "A NZ Beauty Clinic está localizada na <strong>Rua Cezária Matos, 82, Centro, Erechim/RS, CEP 99700-094</strong>. Para contato e agendamentos: <a href=\"tel:+5554996516136\">(54) 99651-6136</a> ou pelo Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+  },
+  "faq4": {
+    "q": "Nágila Zortéa realiza palestras?",
+    "a": "Sim. Em 2026, Nágila apresentou a palestra “Olhar integrativo na saúde além da pele” na 32ª edição do Estetika — o maior evento de estética da América Latina —, realizado no São Paulo Expo. Também integrou a mesa-redonda “Hot Topics na Estética Facial”. Consulte a <a href=\"#palestras\">seção de eventos</a> para mais informações."
+  },
+  "faq5": {
+    "q": "Quais publicações científicas têm participação de Nágila Zortéa?",
+    "a": "Nágila Bernarda Zortéa (NB Zortéa) publicou trabalhos em periódicos nacionais, incluindo: “Diferenciação técnica e inovação na lipoaspiração contemporânea” (RBCP, 2026, DOI: 10.1055/s-0046-1820097); “Uso da radiofrequência para tratamentos estéticos: uma revisão sistemática” (2021); “Acne vulgaris provocada pela máscara” (2021); “Contaminação microbiológica em provadores de batons” (O Mundo da Saúde, 2020); e “Fatores Bioquímicos do Melasma” (URI Erechim). Veja a <a href=\"#publicacoes\">seção de publicações</a> para links diretos."
+  },
+  "faq6": {
+    "q": "Qual é a atuação de Nágila Zortéa na URI Erechim?",
+    "a": "Nágila Bernarda Zortéa é Professora Mestre na URI Erechim, onde atua como coordenadora do Curso de Graduação em Estética e Cosmética e da Pós-Graduação em Estética Avançada. Sua atuação abrange docência, pesquisa científica e extensão universitária, formando profissionais de estética com base científica sólida no Rio Grande do Sul."
+  },
+  "contato": {
+    "label": "Contato",
+    "title": "Entre em Contato",
+    "subtitle": "Para agendamentos na NZ Beauty Clinic, convites para palestras ou informações sobre os cursos da URI Erechim.",
+    "card1Label": "Agendamento",
+    "card2Label": "Instagram",
+    "card3Label": "Telefone / WhatsApp",
+    "card4Label": "Cursos — URI Erechim",
+    "card1AriaLabel": "Acessar links da NZ Beauty Clinic no Linktree (abre em nova aba)",
+    "card2AriaLabel": "Seguir @nzbeautyclinic no Instagram (abre em nova aba)",
+    "card3AriaLabel": "Ligar para (54) 99651-6136",
+    "card4AriaLabel": "Acessar site da URI Erechim para informações sobre os cursos (abre em nova aba)"
+  },
+  "footer": {
+    "tagline": "Estética · Ciência · Educação · Erechim, RS",
+    "copy": "© 2026 Nágila Bernarda Zortéa"
+  }
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "id": "descomplicando-eletroterapia-estetica",
+    "slug": "descomplicando-eletroterapia-estetica",
+    "title": "Descomplicando a Eletroterapia Estética",
+    "cover": "assets/images/Livro1.png",
+    "coverAlt": "Nágila Bernarda Zortéa — autora do livro Descomplicando a Eletroterapia Estética",
+    "authors": ["Nágila Bernarda Zortéa"],
+    "authorsNote": "TODO: verificar se há coautores",
+    "institution": "URI Erechim",
+    "institutionNote": "TODO: confirmar instituição/editora na publicação oficial",
+    "year": "TODO: verificar ano de publicação",
+    "description": "Manual dedicado à eletroterapia estética, abordando a aplicação de recursos eletrofísicos nos tratamentos estéticos faciais e corporais. Uma contribuição prática e científica para profissionais e estudantes da área de estética e cosmetologia.",
+    "descriptionNote": "TODO: confirmar descrição com base no conteúdo oficial do livro",
+    "url": "TODO: inserir URL oficial do PDF na biblioteca da URI (padrão: https://uricer.edu.br/site/publicacoes/[NUMERO].pdf)",
+    "urlNote": "URL do PDF disponível na biblioteca da URI Erechim — número da publicação precisa ser confirmado",
+    "type": "Livro",
+    "language": "pt-BR",
+    "featured": true
+  }
+]
