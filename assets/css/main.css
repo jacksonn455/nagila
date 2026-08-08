@@ -1927,6 +1927,7 @@ a {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  align-items: start;
   transition:
     border-color var(--dur) var(--ease),
     box-shadow var(--dur) var(--ease);
@@ -1936,7 +1937,6 @@ a {
   .event-featured {
     grid-template-columns: auto 1fr;
     gap: var(--sp-8);
-    align-items: start;
   }
 }
 
@@ -1947,10 +1947,9 @@ a {
 
 .event-featured__image {
   width: 100%;
-  max-width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 20% center;
+  object-position: 20% top;
   border-radius: var(--radius);
   display: block;
 }
@@ -1997,7 +1996,7 @@ a {
 
 .book-card {
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 1fr;
   gap: var(--sp-5);
   align-items: start;
   padding: var(--sp-6);
@@ -2007,6 +2006,12 @@ a {
   transition:
     border-color var(--dur) var(--ease),
     box-shadow var(--dur) var(--ease);
+}
+
+@media (min-width: 52rem) {
+  .book-card {
+    grid-template-columns: 14rem 1fr;
+  }
 }
 
 .book-card:hover {
@@ -2021,12 +2026,21 @@ a {
 
 .book-card__cover {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 3 / 2;
+  max-height: 22rem;
   object-fit: cover;
-  object-position: 65% top;
+  object-position: center 20%;
   border-radius: var(--radius-sm);
   display: block;
   box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 52rem) {
+  .book-card__cover {
+    aspect-ratio: 3 / 4;
+    max-height: none;
+    object-position: 65% top;
+  }
 }
 
 .book-card__body {
@@ -2073,28 +2087,10 @@ a {
   margin-block-start: var(--sp-2);
 }
 
-/* Layout compacto em mobile */
-@media (max-width: 40rem) {
-  .book-card {
-    grid-template-columns: 7rem 1fr;
-    gap: var(--sp-4);
-    padding: var(--sp-4);
-  }
-
-  .book-card__title {
-    font-size: var(--fs-lg);
-  }
-}
-
-/* Quando há apenas 1 livro: layout horizontal mais amplo */
-.books__grid:has(.book-card:only-child) .book-card {
-  grid-template-columns: 14rem 1fr;
-  max-width: 52rem;
-}
-
-@media (max-width: 40rem) {
+/* Quando há apenas 1 livro no desktop: limitar largura */
+@media (min-width: 52rem) {
   .books__grid:has(.book-card:only-child) .book-card {
-    grid-template-columns: 8rem 1fr;
+    max-width: 52rem;
   }
 }
 
@@ -2173,6 +2169,13 @@ a {
     aspect-ratio: 3 / 2;
     max-height: 22rem;
   }
+
+  .event-featured__image {
+    aspect-ratio: 3 / 2;
+    max-height: 22rem;
+  }
+
+
 }
 
 /* Cards — padding reduzido em mobile */
@@ -2208,11 +2211,9 @@ a {
   }
 }
 
-/* Livros — coluna de capa menor e padding reduzido em mobile estreito */
+/* Livros — padding reduzido em mobile estreito */
 @media (max-width: 30rem) {
-  .book-card,
-  .books__grid:has(.book-card:only-child) .book-card {
-    grid-template-columns: 5.5rem 1fr;
+  .book-card {
     padding: var(--sp-3);
     gap: var(--sp-3);
   }
