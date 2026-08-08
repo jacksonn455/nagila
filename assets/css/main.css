@@ -2097,3 +2097,241 @@ a {
     grid-template-columns: 8rem 1fr;
   }
 }
+
+/* ==========================================================================
+   26. Melhorias Mobile
+   Breakpoints principais: 30rem (≈480px) e 47.9rem (≈767px)
+   ========================================================================== */
+
+/* Container — padding lateral menor em telas muito estreitas */
+@media (max-width: 30rem) {
+  .container {
+    padding-inline: var(--sp-4);
+  }
+}
+
+/* Seções — padding vertical reduzido em mobile */
+@media (max-width: 47.9rem) {
+  .section {
+    padding-block: var(--sp-7);
+  }
+
+  .section__header {
+    margin-block-end: var(--sp-6);
+  }
+
+  .section__subtitle {
+    font-size: var(--fs-base);
+  }
+
+  .gold-divider {
+    margin-block: var(--sp-6);
+  }
+}
+
+/* Hero — reduz padding e tamanho do nome em mobile */
+@media (max-width: 47.9rem) {
+  .hero {
+    padding-block: calc(var(--nav-h) + var(--sp-7)) calc(var(--sp-7) + 2.5rem);
+  }
+
+  .hero__name {
+    font-size: clamp(2.4rem, 7vw + 1rem, 4rem);
+    margin-block-end: var(--sp-4);
+  }
+
+  .hero__eyebrow {
+    margin-block-end: var(--sp-4);
+  }
+
+  .hero__headline {
+    font-size: var(--fs-base);
+    margin-block-end: var(--sp-4);
+  }
+
+  .hero__roles {
+    margin-block-end: var(--sp-5);
+  }
+}
+
+/* Hero — botões em coluna em telas muito estreitas */
+@media (max-width: 30rem) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Sobre — imagem menos alta em mobile */
+@media (max-width: 51.9rem) {
+  .about__image {
+    aspect-ratio: 3 / 2;
+    max-height: 22rem;
+  }
+}
+
+/* Cards — padding reduzido em mobile */
+@media (max-width: 47.9rem) {
+  .role-card {
+    padding: var(--sp-4);
+  }
+
+  .academic-card {
+    padding: var(--sp-5);
+  }
+
+  .pub-card {
+    padding: var(--sp-5);
+  }
+
+  .event-featured {
+    padding: var(--sp-4);
+    gap: var(--sp-4);
+  }
+}
+
+/* Publicações — esconde pseudo-elemento "Destaque" que sobrepõe conteúdo;
+   a tag já aparece dentro de .pub-card__meta no HTML */
+@media (max-width: 47.9rem) {
+  .pub-card--featured::before {
+    display: none;
+  }
+
+  .pub-card__doi {
+    word-break: break-all;
+    max-width: 100%;
+  }
+}
+
+/* Livros — coluna de capa menor e padding reduzido em mobile estreito */
+@media (max-width: 30rem) {
+  .book-card,
+  .books__grid:has(.book-card:only-child) .book-card {
+    grid-template-columns: 5.5rem 1fr;
+    padding: var(--sp-3);
+    gap: var(--sp-3);
+  }
+
+  .book-card__title {
+    font-size: var(--fs-md);
+  }
+}
+
+/* Clínica — botões de ação em coluna e mapa mais curto */
+@media (max-width: 30rem) {
+  .clinic__actions {
+    flex-direction: column;
+  }
+
+  .clinic__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 51.9rem) {
+  .clinic__map {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+/* Serviços — 2 colunas compactas em mobile */
+@media (max-width: 30rem) {
+  .services__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+  }
+
+  .service-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-2);
+    padding: var(--sp-3);
+  }
+}
+
+/* Contato — 1 coluna em mobile estreito */
+@media (max-width: 30rem) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Nav mobile — sombra para destaque visual */
+@media (max-width: 47.9rem) {
+  .site-nav__menu {
+    z-index: 99;
+    box-shadow: var(--shadow);
+  }
+}
+
+/* Footer — padding reduzido em mobile */
+@media (max-width: 47.9rem) {
+  .site-footer {
+    padding-block: var(--sp-6);
+  }
+
+  .site-footer__links {
+    gap: var(--sp-2) var(--sp-4);
+  }
+}
+
+/* ==========================================================================
+   27. Contenção de overflow horizontal — correções estruturais
+   Root causes identificados:
+   (a) .book-card__body em grid sem min-width:0 → o 1fr expande até o min-content
+       do botão com white-space:nowrap, ultrapassando o container em 320–375 px.
+   (b) .btn sem max-width:100% → sem limite superior em containers restritos.
+   (c) Textos longos (URLs, fontes) sem overflow-wrap nos elementos corretos.
+   (d) .event-card__content sem min-width:0 no layout desktop (grid auto 1fr).
+   ========================================================================== */
+
+/* (a+b) Corrige o grid do card de livro e garante que o botão caiba */
+.book-card__body {
+  min-width: 0; /* permite que o 1fr seja menor que o min-content do filho */
+}
+
+.btn {
+  max-width: 100%; /* botão nunca pode ser mais largo que o container */
+}
+
+/* Botão de CTA do livro: full-width + texto com quebra em mobile */
+@media (max-width: 47.9rem) {
+  .book-card__action .btn {
+    width: 100%;
+    white-space: normal; /* permite quebra em telas estreitas */
+  }
+}
+
+/* (c) URLs e textos longos que não quebram automaticamente */
+.contact-card__value,
+.event-card__source,
+.pub-card__doi {
+  overflow-wrap: break-word;
+}
+
+/* (d) Flex/grid item de conteúdo de evento */
+.event-card__content {
+  min-width: 0;
+}
+
+/* Hero eyebrow: flex sem flex-wrap pode extravazar em < 320 px */
+.hero__eyebrow {
+  flex-wrap: wrap;
+}
+
+/* Brand da nav como flex item: permite encolher se necessário */
+.site-nav__brand {
+  min-width: 0;
+}
+
+/* Proteção de último recurso — aplicada após correção dos causadores reais.
+   Usa overflow-x: clip (não cria scroll container, preserva position:sticky/fixed). */
+body {
+  overflow-x: clip;
+}

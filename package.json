@@ -16,9 +16,12 @@
     "check:html": "html-validate index.html 404.html",
     "check:format": "prettier --check \"assets/**/*.{css,js}\" \"scripts/**/*.js\" \"data/**/*.json\" \"assets/i18n/**/*.json\" \"*.{json,md}\"",
     "format": "prettier --write \"assets/**/*.{css,js}\" \"scripts/**/*.js\" \"data/**/*.json\" \"assets/i18n/**/*.json\" \"*.{json,md}\"",
-    "check": "npm run check:html && npm run check:links"
+    "check": "npm run check:html && npm run check:links",
+    "test:mobile": "playwright test",
+    "test:mobile:install": "playwright install chromium"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "html-validate": "^8.24.2",
     "jsdom": "^25.0.1",
     "prettier": "^3.3.3"

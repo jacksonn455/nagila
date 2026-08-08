@@ -38,5 +38,31 @@
     "featured": true,
     "quote": "Estar no Estetika como palestrante representa não apenas uma conquista profissional, mas também a oportunidade de levar o nome da URI a um dos espaços mais relevantes da estética na América Latina e contribuir para o fortalecimento de uma prática cada vez mais científica e responsável.",
     "quoteSource": "Nágila Zortéa — URI Erechim, agosto de 2026"
+  },
+  {
+    "id": "esteticainsul-2026",
+    "slug": "esteticainsul-2026-intervencoes-pos-operatorio-fibrose",
+    "title": "Intervenções em Pós-operatório. Fibrose, como Manejar e Tratar",
+    "event": "Congresso de Estética — Estética in Sul 2026",
+    "type": "Palestra",
+    "role": "Palestrante",
+    "format": "Presencial",
+    "location": {
+      "venue": "VIASOFT EXPERIENCE",
+      "address": "Rua Prof. Pedro Viriato Parigot de Souza, 5300 — Cidade Industrial de Curitiba",
+      "city": "Curitiba",
+      "state": "PR",
+      "country": "Brasil"
+    },
+    "date": "2026-08-17",
+    "timeStart": "17:14",
+    "timeEnd": "17:54",
+    "description": "Palestra sobre intervenções estéticas no pós-operatório, com foco no manejo e tratamento da fibrose — tema de alta relevância clínica no contexto da estética corporal contemporânea.",
+    "speakerCredentials": "Me. Nágila Zortéa (RS) — Esteticista e Cosmetóloga, Pós-graduada em Estética Clínica Avançada, Especialista em Ortomolecular, Ozonioterapia e Docência do Ensino Superior, Mestre em Envelhecimento Humano.",
+    "topics": ["pós-operatório", "fibrose", "estética corporal", "manejo clínico"],
+    "source": "https://www.esteticainsul.com.br/congresso-estetica",
+    "sourceTitle": "Congresso de Estética — Estética in Sul",
+    "sourcePublisher": "Estética in Sul",
+    "featured": false
   }
 ]

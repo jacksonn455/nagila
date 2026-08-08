@@ -5,3 +5,22 @@ node_modules/
 Thumbs.db
 .claude/
 .github/
+
+# Playwright
+/playwright-report/
+/test-results/
+/blob-report/
+
+# Editores
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+desktop.ini
+ehthumbs.db
+
+# Env
+.env
+.env.local
