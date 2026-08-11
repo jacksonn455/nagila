@@ -209,6 +209,8 @@
     "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>CP 99700-094, Brasil",
     "telLabel": "Teléfono / WhatsApp",
     "instLabel": "Instagram",
+    "ctaWha": "WhatsApp",
+    "ctaWhaAriaLabel": "Reservar por WhatsApp — NZ Beauty Clinic (abre WhatsApp)",
     "cta1": "Reservar cita",
     "cta1AriaLabel": "Acceder a los enlaces de NZ Beauty Clinic (se abre en nueva pestaña)",
     "cta2": "@nzbeautyclinic",
@@ -264,6 +266,14 @@
     "q": "¿Cuál es la función de Nágila Zortéa en URI Erechim?",
     "a": "Nágila Bernarda Zortéa es Docente con Maestría en URI Erechim, donde coordina el Programa de Pregrado en Estética y Cosmetología y el Posgrado en Estética Avanzada. Su actividad abarca docencia, investigación científica y extensión universitaria, formando profesionales de estética con base científica sólida en Rio Grande do Sul."
   },
+  "faq7": {
+    "q": "¿Qué servicios ofrece NZ Beauty Clinic?",
+    "a": "NZ Beauty Clinic ofrece <strong>Estética Facial</strong>, <strong>Estética Corporal</strong>, <strong>Depilación Láser</strong>, <strong>Cuidados Postoperatorios</strong> y tratamiento de <strong>Lipedema</strong>. Los servicios son realizados por Nágila Bernarda Zortéa, Maestra y Esteticista, en Rua Cezária Matos, 82, Centro, Erechim/RS. Contacto: <a href=\"https://wa.me/5554996516136\">(54) 99651-6136</a> o Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+  },
+  "faq8": {
+    "q": "¿Cómo reservar cita en NZ Beauty Clinic?",
+    "a": "Para reservar cita en NZ Beauty Clinic, contacte por <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a> o visite <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. La clínica está en Rua Cezária Matos, 82, Centro, Erechim/RS."
+  },
   "artigos": {
     "label": "Conocimiento",
     "title": "Artículos y Contenido",
@@ -276,11 +286,11 @@
     "subtitle": "Para citas en NZ Beauty Clinic, invitaciones a conferencias o información sobre los programas de URI Erechim.",
     "card1Label": "Reservas",
     "card2Label": "Instagram",
-    "card3Label": "Teléfono / WhatsApp",
+    "card3Label": "WhatsApp",
     "card4Label": "Programas — URI Erechim",
     "card1AriaLabel": "Acceder a los enlaces de NZ Beauty Clinic en Linktree (se abre en nueva pestaña)",
     "card2AriaLabel": "Seguir @nzbeautyclinic en Instagram (se abre en nueva pestaña)",
-    "card3AriaLabel": "Llamar al (54) 99651-6136",
+    "card3AriaLabel": "Chatear por WhatsApp con NZ Beauty Clinic (abre WhatsApp)",
     "card4AriaLabel": "Visitar el sitio de URI Erechim para información sobre los programas (se abre en nueva pestaña)"
   },
   "footer": {

@@ -209,6 +209,8 @@
     "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>CEP 99700-094",
     "telLabel": "Telefone / WhatsApp",
     "instLabel": "Instagram",
+    "ctaWha": "WhatsApp",
+    "ctaWhaAriaLabel": "Agendar pelo WhatsApp — NZ Beauty Clinic (abre WhatsApp)",
     "cta1": "Agendar atendimento",
     "cta1AriaLabel": "Acessar links da NZ Beauty Clinic (abre em nova aba)",
     "cta2": "@nzbeautyclinic",
@@ -259,17 +261,25 @@
     "q": "Qual é a atuação de Nágila Zortéa na URI Erechim?",
     "a": "Nágila Bernarda Zortéa é Professora Mestre na URI Erechim, onde atua como coordenadora do Curso de Graduação em Estética e Cosmética e da Pós-Graduação em Estética Avançada. Sua atuação abrange docência, pesquisa científica e extensão universitária, formando profissionais de estética com base científica sólida no Rio Grande do Sul."
   },
+  "faq7": {
+    "q": "Quais serviços são oferecidos na NZ Beauty Clinic?",
+    "a": "A NZ Beauty Clinic oferece <strong>Estética Facial</strong>, <strong>Estética Corporal</strong>, <strong>Depilação a Laser</strong>, acompanhamento de <strong>Pós-Operatório</strong> e tratamento de <strong>Lipedema</strong>. Os atendimentos são realizados por Nágila Bernarda Zortéa, Mestre e Esteticista, na <a href=\"#clinica\">Rua Cezária Matos, 82, Centro, Erechim/RS</a>. Entre em contato pelo <a href=\"https://wa.me/5554996516136\">(54) 99651-6136</a> ou pelo Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+  },
+  "faq8": {
+    "q": "Como agendar atendimento na NZ Beauty Clinic?",
+    "a": "Para agendar atendimento na NZ Beauty Clinic, entre em contato pelo <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, pelo Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a> ou acesse <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. A clínica está localizada na Rua Cezária Matos, 82, Centro, Erechim/RS."
+  },
   "contato": {
     "label": "Contato",
     "title": "Entre em Contato",
     "subtitle": "Para agendamentos na NZ Beauty Clinic, convites para palestras ou informações sobre os cursos da URI Erechim.",
     "card1Label": "Agendamento",
     "card2Label": "Instagram",
-    "card3Label": "Telefone / WhatsApp",
+    "card3Label": "WhatsApp",
     "card4Label": "Cursos — URI Erechim",
     "card1AriaLabel": "Acessar links da NZ Beauty Clinic no Linktree (abre em nova aba)",
     "card2AriaLabel": "Seguir @nzbeautyclinic no Instagram (abre em nova aba)",
-    "card3AriaLabel": "Ligar para (54) 99651-6136",
+    "card3AriaLabel": "Falar pelo WhatsApp com a NZ Beauty Clinic (abre WhatsApp)",
     "card4AriaLabel": "Acessar site da URI Erechim para informações sobre os cursos (abre em nova aba)"
   },
   "footer": {

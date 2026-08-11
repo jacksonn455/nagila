@@ -9,7 +9,8 @@
   "type": "commonjs",
   "scripts": {
     "dev": "node scripts/serve.js",
-    "build": "npm run build:i18n && npm run build:sitemap",
+    "build": "npm run build:favicon && npm run build:i18n && npm run build:sitemap",
+    "build:favicon": "node scripts/generate-favicon.js",
     "build:i18n": "node scripts/build-i18n.js",
     "build:sitemap": "node scripts/build-sitemap.js",
     "check:links": "node scripts/check-links.js",

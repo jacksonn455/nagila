@@ -2174,8 +2174,6 @@ a {
     aspect-ratio: 3 / 2;
     max-height: 22rem;
   }
-
-
 }
 
 /* Cards — padding reduzido em mobile */
@@ -2335,4 +2333,60 @@ a {
    Usa overflow-x: clip (não cria scroll container, preserva position:sticky/fixed). */
 body {
   overflow-x: clip;
+}
+
+/* --------------------------------------------------------------------------
+   28. WhatsApp — botão flutuante e rodapé
+   -------------------------------------------------------------------------- */
+.whatsapp-float {
+  position: fixed;
+  inset-block-end: 1.5rem;
+  inset-inline-end: 1.5rem;
+  z-index: 90;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: #25d366;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgb(37 211 102 / 0.45);
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+  color: #fff;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgb(37 211 102 / 0.6);
+}
+
+.whatsapp-float:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.whatsapp-float svg {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   29. Rodapé — endereço NAP
+   -------------------------------------------------------------------------- */
+.site-footer__address {
+  font-style: normal;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin-block-start: var(--sp-2);
+}
+
+.site-footer__address a {
+  color: var(--text-muted);
+  transition: color var(--dur) var(--ease);
+  text-decoration: none;
+}
+
+.site-footer__address a:hover {
+  color: var(--accent);
 }
