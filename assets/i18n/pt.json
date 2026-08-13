@@ -11,6 +11,7 @@
     "publicacoes": "Publicações",
     "livros": "Livros",
     "palestras": "Palestras",
+    "premiacoes": "Premiações",
     "clinica": "NZ Beauty Clinic",
     "contato": "Contato"
   },
@@ -168,6 +169,20 @@
     "title": "Presença Científica e Profissional",
     "subtitle": "Participação em eventos de referência da estética brasileira, levando conhecimento científico e promovendo uma prática estética baseada em evidências.",
     "note": "Apenas eventos com fonte pública verificada são exibidos. Outros eventos poderão ser adicionados conforme disponibilidade de informações."
+  },
+  "premiacoes": {
+    "label": "Premiações",
+    "title": "Reconhecimento Profissional",
+    "subtitle": "Reconhecida pela excelência e credibilidade no mercado de saúde e estética.",
+    "award1": {
+      "title": "Prêmio Top of Mind Excellence Brasil",
+      "org": "Top of Mind Excellence Brasil",
+      "category": "Nacional",
+      "desc": "Foi agraciada com o prêmio nacional <strong>Top of Mind Excellence Brasil</strong>, que reconhece profissionais que são referência em credibilidade e excelência no mercado de saúde e estética no Brasil.",
+      "tag1": "Saúde &amp; Estética",
+      "tag2": "Credibilidade",
+      "tag3": "Excelência"
+    }
   },
   "event1": {
     "eventName": "32ª Estetika · São Paulo Expo · SP",
