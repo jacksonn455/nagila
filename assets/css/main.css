@@ -2514,3 +2514,255 @@ body {
     font-size: var(--fs-base);
   }
 }
+
+/* --------------------------------------------------------------------------
+   31. Materiais das Palestras
+   -------------------------------------------------------------------------- */
+.slides__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+  gap: var(--sp-6);
+}
+
+.slides-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.slides-card::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent-vivid), transparent);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.slides-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow);
+}
+
+.slides-card:hover::before {
+  opacity: 1;
+}
+
+.slides-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.slides-card__event {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.slides-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--text);
+  line-height: var(--lh-snug);
+  font-style: italic;
+}
+
+.slides-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin: 0;
+}
+
+.slides-card__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.slides-card__meta-item svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.slides-card__download {
+  margin-block-start: auto;
+  gap: var(--sp-2);
+  align-self: flex-start;
+}
+
+.slides-card__download svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 47.9rem) {
+  .slides-card {
+    padding: var(--sp-5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   32. Modal de Download — Materiais das Palestras
+   -------------------------------------------------------------------------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-5);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.modal__panel {
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-7);
+  max-width: 30rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  box-shadow: var(--shadow-lg);
+  max-height: 90svh;
+  overflow-y: auto;
+}
+
+.modal__close {
+  position: absolute;
+  inset-block-start: var(--sp-4);
+  inset-inline-end: var(--sp-4);
+}
+
+.modal__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--text);
+  line-height: var(--lh-snug);
+  padding-inline-end: var(--sp-6);
+}
+
+.modal__desc {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-normal);
+}
+
+.modal__profiles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.modal__profile-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.modal__profile-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.modal__profile-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.modal__profile-icon svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.modal__profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-width: 0;
+}
+
+.modal__profile-name {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modal__profile-handle {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.modal__actions {
+  padding-block-start: var(--sp-2);
+}
+
+.modal__actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 47.9rem) {
+  .modal__panel {
+    padding: var(--sp-5);
+  }
+}

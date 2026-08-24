@@ -228,8 +228,8 @@
     "ctaWhaAriaLabel": "Agendar pelo WhatsApp — NZ Beauty Clinic (abre WhatsApp)",
     "cta1": "Agendar atendimento",
     "cta1AriaLabel": "Acessar links da NZ Beauty Clinic (abre em nova aba)",
-    "cta2": "@nzbeautyclinic",
-    "cta2AriaLabel": "Seguir @nzbeautyclinic no Instagram (abre em nova aba)",
+    "cta2": "@nz_beautyclinic",
+    "cta2AriaLabel": "Seguir @nz_beautyclinic no Instagram (abre em nova aba)",
     "servicosLabel": "Serviços",
     "servicoFacial": "Estética Facial",
     "servicoCorporal": "Estética Corporal",
@@ -262,7 +262,7 @@
   },
   "faq3": {
     "q": "Onde fica a NZ Beauty Clinic?",
-    "a": "A NZ Beauty Clinic está localizada na <strong>Rua Cezária Matos, 82, Centro, Erechim/RS, CEP 99700-094</strong>. Para contato e agendamentos: <a href=\"tel:+5554996516136\">(54) 99651-6136</a> ou pelo Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+    "a": "A NZ Beauty Clinic está localizada na <strong>Rua Cezária Matos, 82, Centro, Erechim/RS, CEP 99700-094</strong>. Para contato e agendamentos: <a href=\"tel:+5554996516136\">(54) 99651-6136</a> ou pelo Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
   },
   "faq4": {
     "q": "Nágila Zortéa realiza palestras?",
@@ -278,11 +278,11 @@
   },
   "faq7": {
     "q": "Quais serviços são oferecidos na NZ Beauty Clinic?",
-    "a": "A NZ Beauty Clinic oferece <strong>Estética Facial</strong>, <strong>Estética Corporal</strong>, <strong>Depilação a Laser</strong>, acompanhamento de <strong>Pós-Operatório</strong> e tratamento de <strong>Lipedema</strong>. Os atendimentos são realizados por Nágila Bernarda Zortéa, Mestre e Esteticista, na <a href=\"#clinica\">Rua Cezária Matos, 82, Centro, Erechim/RS</a>. Entre em contato pelo <a href=\"https://wa.me/5554996516136\">(54) 99651-6136</a> ou pelo Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+    "a": "A NZ Beauty Clinic oferece <strong>Estética Facial</strong>, <strong>Estética Corporal</strong>, <strong>Depilação a Laser</strong>, acompanhamento de <strong>Pós-Operatório</strong> e tratamento de <strong>Lipedema</strong>. Os atendimentos são realizados por Nágila Bernarda Zortéa, Mestre e Esteticista, na <a href=\"#clinica\">Rua Cezária Matos, 82, Centro, Erechim/RS</a>. Entre em contato pelo <a href=\"https://wa.me/5554996516136\">(54) 99651-6136</a> ou pelo Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
   },
   "faq8": {
     "q": "Como agendar atendimento na NZ Beauty Clinic?",
-    "a": "Para agendar atendimento na NZ Beauty Clinic, entre em contato pelo <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, pelo Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a> ou acesse <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. A clínica está localizada na Rua Cezária Matos, 82, Centro, Erechim/RS."
+    "a": "Para agendar atendimento na NZ Beauty Clinic, entre em contato pelo <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, pelo Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a> ou acesse <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. A clínica está localizada na Rua Cezária Matos, 82, Centro, Erechim/RS."
   },
   "contato": {
     "label": "Contato",
@@ -293,12 +293,47 @@
     "card3Label": "WhatsApp",
     "card4Label": "Cursos — URI Erechim",
     "card1AriaLabel": "Acessar links da NZ Beauty Clinic no Linktree (abre em nova aba)",
-    "card2AriaLabel": "Seguir @nzbeautyclinic no Instagram (abre em nova aba)",
+    "card2AriaLabel": "Seguir @nz_beautyclinic no Instagram (abre em nova aba)",
     "card3AriaLabel": "Falar pelo WhatsApp com a NZ Beauty Clinic (abre WhatsApp)",
     "card4AriaLabel": "Acessar site da URI Erechim para informações sobre os cursos (abre em nova aba)"
   },
   "footer": {
     "tagline": "Estética · Ciência · Educação · Erechim, RS",
     "copy": "© 2026 Nágila Bernarda Zortéa"
+  },
+  "materiais": {
+    "label": "Materiais",
+    "title": "Materiais das Palestras",
+    "subtitle": "Acesse os materiais das palestras e aprofunde sua jornada de conhecimento.",
+    "slides1": {
+      "event": "32ª Estetika",
+      "talk": "\"Olhar integrativo na saúde além da pele\"",
+      "date": "31 jul – 2 ago de 2026",
+      "location": "São Paulo Expo — São Paulo, SP",
+      "format": "Apresentação",
+      "btnDownload": "Baixar apresentação",
+      "btnAriaLabel": "Baixar apresentação do Estetika (PDF)"
+    },
+    "slides2": {
+      "event": "Estética in Sul 2026",
+      "talk": "\"Intervenções em Pós-operatório. Fibrose, como Manejar e Tratar\"",
+      "date": "17 ago de 2026",
+      "location": "VIASOFT EXPERIENCE — Curitiba, PR",
+      "format": "Apresentação",
+      "btnDownload": "Baixar apresentação",
+      "btnAriaLabel": "Baixar apresentação do Estética in Sul (PPTX)"
+    }
+  },
+  "modal": {
+    "title": "Gostou do conteúdo?",
+    "desc": "Acompanhe a Nágila nas redes sociais e fique por dentro de novas palestras, conteúdos e novidades.",
+    "profile1Label": "NZ Beauty Clinic",
+    "profile1Handle": "@nz_beautyclinic",
+    "profile1AriaLabel": "Seguir @nz_beautyclinic no Instagram (abre em nova aba)",
+    "profile2Label": "Nágila Zortéa",
+    "profile2Handle": "@nagizortea_estetica",
+    "profile2AriaLabel": "Seguir @nagizortea_estetica no Instagram (abre em nova aba)",
+    "btnDownload": "Continuar para o download",
+    "closeAriaLabel": "Fechar modal"
   }
 }

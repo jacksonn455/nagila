@@ -228,8 +228,8 @@
     "ctaWhaAriaLabel": "Book via WhatsApp — NZ Beauty Clinic (opens WhatsApp)",
     "cta1": "Book an appointment",
     "cta1AriaLabel": "Access NZ Beauty Clinic links (opens in new tab)",
-    "cta2": "@nzbeautyclinic",
-    "cta2AriaLabel": "Follow @nzbeautyclinic on Instagram (opens in new tab)",
+    "cta2": "@nz_beautyclinic",
+    "cta2AriaLabel": "Follow @nz_beautyclinic on Instagram (opens in new tab)",
     "servicosLabel": "Services",
     "servicoFacial": "Facial Aesthetics",
     "servicoCorporal": "Body Aesthetics",
@@ -267,7 +267,7 @@
   },
   "faq3": {
     "q": "Where is NZ Beauty Clinic located?",
-    "a": "NZ Beauty Clinic is located at <strong>Rua Cezária Matos, 82, Centro, Erechim/RS, ZIP 99700-094</strong>. For contact and bookings: <a href=\"tel:+5554996516136\">(54) 99651-6136</a> or on Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+    "a": "NZ Beauty Clinic is located at <strong>Rua Cezária Matos, 82, Centro, Erechim/RS, ZIP 99700-094</strong>. For contact and bookings: <a href=\"tel:+5554996516136\">(54) 99651-6136</a> or on Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
   },
   "faq4": {
     "q": "Does Nágila Zortéa give lectures?",
@@ -283,11 +283,11 @@
   },
   "faq7": {
     "q": "What services does NZ Beauty Clinic offer?",
-    "a": "NZ Beauty Clinic offers <strong>Facial Aesthetics</strong>, <strong>Body Aesthetics</strong>, <strong>Laser Hair Removal</strong>, <strong>Post-operative Care</strong>, and <strong>Lipedema</strong> treatment. Services are provided by Nágila Bernarda Zortéa, Master's-level Aesthetician, at Rua Cezária Matos, 82, Centro, Erechim/RS. Contact via <a href=\"https://wa.me/5554996516136\">(54) 99651-6136</a> or Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>."
+    "a": "NZ Beauty Clinic offers <strong>Facial Aesthetics</strong>, <strong>Body Aesthetics</strong>, <strong>Laser Hair Removal</strong>, <strong>Post-operative Care</strong>, and <strong>Lipedema</strong> treatment. Services are provided by Nágila Bernarda Zortéa, Master's-level Aesthetician, at Rua Cezária Matos, 82, Centro, Erechim/RS. Contact via <a href=\"https://wa.me/5554996516136\">(54) 99651-6136</a> or Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
   },
   "faq8": {
     "q": "How to book an appointment at NZ Beauty Clinic?",
-    "a": "To book an appointment at NZ Beauty Clinic, contact via <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, Instagram <a href=\"https://www.instagram.com/nzbeautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nzbeautyclinic</a>, or visit <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. The clinic is located at Rua Cezária Matos, 82, Centro, Erechim/RS."
+    "a": "To book an appointment at NZ Beauty Clinic, contact via <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>, or visit <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. The clinic is located at Rua Cezária Matos, 82, Centro, Erechim/RS."
   },
   "artigos": {
     "label": "Knowledge",
@@ -304,12 +304,47 @@
     "card3Label": "WhatsApp",
     "card4Label": "Programs — URI Erechim",
     "card1AriaLabel": "Access NZ Beauty Clinic links on Linktree (opens in new tab)",
-    "card2AriaLabel": "Follow @nzbeautyclinic on Instagram (opens in new tab)",
+    "card2AriaLabel": "Follow @nz_beautyclinic on Instagram (opens in new tab)",
     "card3AriaLabel": "Chat on WhatsApp with NZ Beauty Clinic (opens WhatsApp)",
     "card4AriaLabel": "Visit URI Erechim website for program information (opens in new tab)"
   },
   "footer": {
     "tagline": "Aesthetics · Science · Education · Erechim, RS",
     "copy": "© 2026 Nágila Bernarda Zortéa"
+  },
+  "materiais": {
+    "label": "Materials",
+    "title": "Lecture Materials",
+    "subtitle": "Access the lecture materials and deepen your knowledge journey.",
+    "slides1": {
+      "event": "32nd Estetika",
+      "talk": "\"Integrative view on health beyond the skin\"",
+      "date": "Jul 31 – Aug 2, 2026",
+      "location": "São Paulo Expo — São Paulo, SP",
+      "format": "Presentation",
+      "btnDownload": "Download presentation",
+      "btnAriaLabel": "Download Estetika presentation (PDF)"
+    },
+    "slides2": {
+      "event": "Estética in Sul 2026",
+      "talk": "\"Post-operative Interventions. Fibrosis: How to Manage and Treat\"",
+      "date": "Aug 17, 2026",
+      "location": "VIASOFT EXPERIENCE — Curitiba, PR",
+      "format": "Presentation",
+      "btnDownload": "Download presentation",
+      "btnAriaLabel": "Download Estética in Sul presentation (PPTX)"
+    }
+  },
+  "modal": {
+    "title": "Enjoyed the content?",
+    "desc": "Follow Nágila on social media and stay up to date with new lectures, content, and news.",
+    "profile1Label": "NZ Beauty Clinic",
+    "profile1Handle": "@nz_beautyclinic",
+    "profile1AriaLabel": "Follow @nz_beautyclinic on Instagram (opens in new tab)",
+    "profile2Label": "Nágila Zortéa",
+    "profile2Handle": "@nagizortea_estetica",
+    "profile2AriaLabel": "Follow @nagizortea_estetica on Instagram (opens in new tab)",
+    "btnDownload": "Continue to download",
+    "closeAriaLabel": "Close modal"
   }
 }

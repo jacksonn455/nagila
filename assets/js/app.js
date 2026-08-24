@@ -408,6 +408,86 @@ function initSmoothScroll() {
 }
 
 /* --------------------------------------------------------------------------
+   Download Modal — Materiais das Palestras
+   -------------------------------------------------------------------------- */
+const DownloadModal = (() => {
+  let _file = null;
+  let _name = null;
+  let _trigger = null;
+
+  function getModal() {
+    return document.getElementById('modal-social');
+  }
+
+  function open(file, name, trigger) {
+    const modal = getModal();
+    if (!modal) return;
+    _file = file;
+    _name = name;
+    _trigger = trigger || null;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    const panel = modal.querySelector('.modal__panel');
+    if (panel) panel.focus();
+  }
+
+  function close() {
+    const modal = getModal();
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    const trigger = _trigger;
+    _file = null;
+    _name = null;
+    _trigger = null;
+    if (trigger) trigger.focus();
+  }
+
+  function triggerDownload() {
+    if (!_file) return;
+    if (window.location.protocol === 'file:') {
+      // download attribute is blocked on file://, open in new tab instead
+      window.open(_file, '_blank', 'noopener');
+    } else {
+      const a = document.createElement('a');
+      a.href = _file;
+      a.download = _name || '';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+    close();
+  }
+
+  function init() {
+    const modal = getModal();
+    if (!modal) return;
+
+    $$('[data-download-trigger]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        open(btn.dataset.downloadFile, btn.dataset.downloadName, btn);
+      });
+    });
+
+    $$('[data-modal-close]', modal).forEach((el) => {
+      el.addEventListener('click', close);
+    });
+
+    const confirmBtn = $('[data-modal-confirm]', modal);
+    if (confirmBtn) confirmBtn.addEventListener('click', triggerDownload);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hidden) {
+        e.preventDefault();
+        close();
+      }
+    });
+  }
+
+  return { init };
+})();
+
+/* --------------------------------------------------------------------------
    Init
    -------------------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
@@ -419,4 +499,5 @@ document.addEventListener('DOMContentLoaded', () => {
   RevealManager.init();
   FaqManager.init();
   initSmoothScroll();
+  DownloadModal.init();
 });
