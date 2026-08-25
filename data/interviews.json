@@ -1,0 +1,35 @@
+[
+  {
+    "id": "viver-com-saude",
+    "title": "VIVER COM SAÚDE 14/06/2024 • NAGILA ZORTEA",
+    "program": "TVErechim - VIVER COM SAÚDE",
+    "date": "2024-06-14",
+    "youtubeUrl": "https://www.youtube.com/watch?v=nSwZBlSijKk",
+    "youtubeId": "nSwZBlSijKk",
+    "thumbnail": "./assets/images/entrevista.png",
+    "description": "Entrevista na TV Erechim sobre o mês de conscientização do lipedema e a importância do alerta sobre a condição.",
+    "notes": "Vídeo validado via YouTube oEmbed. Título e canal confirmam a participação de Nágila Zortéa."
+  },
+  {
+    "id": "expressao-universitaria-717",
+    "title": "717 º EXPRESSÃO UNIVERSITÁRIA 18/06/25 - Lipedema",
+    "program": "URI Erechim - Expressão Universitária",
+    "date": "2025-06-18",
+    "youtubeUrl": "https://www.youtube.com/watch?v=SW1aZiLB4J8",
+    "youtubeId": "SW1aZiLB4J8",
+    "thumbnail": "./assets/images/entrevista.png",
+    "description": "Participação no programa universitário em torno do Dia Mundial de Conscientização do Lipedema.",
+    "notes": "Título indica a edição e o tema do programa. A participação da Nágila foi confirmada pelo material do projeto e pelo nome do vídeo."
+  },
+  {
+    "id": "quiz-uri",
+    "title": "URI Erechim - Estética e cosmetica com Prof. Nágila Zortea",
+    "program": "URI Erechim",
+    "date": null,
+    "youtubeUrl": "https://www.youtube.com/watch?v=Rds1KWwkJok",
+    "youtubeId": "Rds1KWwkJok",
+    "thumbnail": "./assets/images/entrevista.png",
+    "description": "Participação em conteúdo institucional da URI sobre formação e mercado profissional de estética e cosmética.",
+    "notes": "Título menciona diretamente o nome de Nágila Zortéa, indicando a sua participação. A data exata não foi retornada pelo oEmbed."
+  }
+]

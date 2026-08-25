@@ -1224,6 +1224,83 @@ a {
 }
 
 /* --------------------------------------------------------------------------
+   11b. Jornais & Mídia
+   -------------------------------------------------------------------------- */
+.jornais__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.jornal-card {
+  border-block-end: 1px solid var(--border);
+  padding-block-end: var(--sp-4);
+  transition: opacity var(--dur) var(--ease);
+}
+
+.jornal-card:last-child {
+  border-block-end: none;
+  padding-block-end: 0;
+}
+
+.jornal-card__link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  transition:
+    color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.jornal-card__link:hover {
+  transform: translateX(4px);
+}
+
+.jornal-card__link:hover .jornal-card__title {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.25rem;
+}
+
+.jornal-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text);
+  line-height: var(--lh-snug);
+  transition: color var(--dur) var(--ease);
+}
+
+.jornal-card__description {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-normal);
+  margin: 0;
+}
+
+.jornal-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-xs);
+}
+
+.jornal-card__source {
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.jornal-card__date {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
    12. Palestras & Eventos
    -------------------------------------------------------------------------- */
 .events__list {

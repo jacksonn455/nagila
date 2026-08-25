@@ -11,6 +11,7 @@
     "publicacoes": "Publicações",
     "livros": "Livros",
     "palestras": "Palestras",
+    "jornais": "Jornais",
     "premiacoes": "Premiações",
     "clinica": "NZ Beauty Clinic",
     "contato": "Contato"
@@ -146,6 +147,11 @@
     "abstract": "Estudo sobre os mecanismos bioquímicos do melasma, distúrbio de hiperpigmentação cutânea de alta recidiva, com impacto significativo na autoestima e qualidade de vida dos pacientes.",
     "link": "Acessar publicação",
     "linkAriaLabel": "Acessar publicação nos anais da URI Erechim (abre em nova aba)"
+  },
+  "jornais": {
+    "label": "Mídia",
+    "title": "Jornais e Publicações",
+    "subtitle": "Entrevistas, reportagens e participações de Nágila Zortéa em veículos de comunicação."
   },
   "livros": {
     "label": "Autoria",

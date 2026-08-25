@@ -333,33 +333,48 @@ const ScrollSpy = (() => {
    Scroll Reveal
    -------------------------------------------------------------------------- */
 const RevealManager = (() => {
-  function init() {
-    const els = document.querySelectorAll('[data-reveal]');
+  let observer = null;
+  let reduced = false;
+
+  /* Registra elementos no observer. Aceita conteúdo injetado depois do
+     DOMContentLoaded (ex.: cards renderizados por jornais.js/interviews.js). */
+  function observe(nodes) {
+    const els = Array.isArray(nodes) ? nodes : Array.from(nodes || []);
     if (!els.length) return;
 
-    // Respeitar prefers-reduced-motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (reduced || !observer) {
       els.forEach((el) => el.setAttribute('data-reveal', 'visible'));
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.setAttribute('data-reveal', 'visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.08 },
-    );
-
     els.forEach((el) => observer.observe(el));
   }
 
-  return { init };
+  function init() {
+    // Respeitar prefers-reduced-motion
+    reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduced && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.setAttribute('data-reveal', 'visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+    }
+
+    observe(document.querySelectorAll('[data-reveal]:not([data-reveal="visible"])'));
+  }
+
+  return { init, observe };
 })();
+
+window.RevealManager = RevealManager;
 
 /* --------------------------------------------------------------------------
    FAQ Accordion
