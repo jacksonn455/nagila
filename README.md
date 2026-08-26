@@ -1,171 +1,155 @@
-# Portfólio Profissional — Nágila Bernarda Zortéa
+# Professional Portfolio — Nágila Bernarda Zortéa
 
-Site estático (HTML + CSS + JS puro) do portfólio profissional de **Nágila Bernarda Zortéa** — Mestre, Esteticista, Coordenadora do Curso de Estética e Cosmética e da Pós-Graduação em Estética Avançada da URI Erechim, e responsável pela NZ Beauty Clinic em Erechim/RS.
+Static website (plain HTML + CSS + JS) for the professional portfolio of **Nágila Bernarda Zortéa** — Master's degree holder, Esthetician, Coordinator of the Esthetics and Cosmetics Course and of the Graduate Program in Advanced Esthetics at URI Erechim, and head of NZ Beauty Clinic in Erechim/RS.
 
 ---
 
 ## Stack
 
-- **HTML / CSS / JavaScript** — sem frameworks, sem bundlers, sem dependências em produção
-- **Fontes**: Google Fonts — Cormorant Garamond (serif) + DM Sans (sans-serif)
+- **HTML / CSS / JavaScript** — no frameworks, no bundlers, no production dependencies
+- **Fonts**: Google Fonts — Cormorant Garamond (serif) + DM Sans (sans-serif)
 - **Build**: Node.js scripts (`scripts/`)
-- **Dev**: servidor estático local (`npm run dev`)
-- **Qualidade**: html-validate + Prettier
+- **Dev**: local static server (`npm run dev`)
+- **Quality**: html-validate + Prettier
 
 ---
 
-## Como executar localmente
+## How to run locally
 
 ```bash
-# Instalar dependências de desenvolvimento
+# Install dev dependencies
 npm install
 
-# Iniciar servidor de desenvolvimento em http://localhost:4173
+# Start the development server at http://localhost:4173
 npm run dev
 ```
 
-O servidor espelha o comportamento do GitHub Pages (gzip, rota 404 customizada).
+The server mirrors GitHub Pages behavior (gzip, custom 404 route).
 
 ---
 
-## Como fazer o build
+## How to build
 
 ```bash
-# Gera o sitemap.xml a partir dos dados
+# Generates sitemap.xml from the data
 npm run build
 ```
 
 ---
 
-## Como atualizar os dados
+## How to update the data
 
-Todos os dados estão em `data/`. Edite os arquivos JSON e o site reflete as mudanças automaticamente:
+All data lives in `data/`. Edit the JSON files and the site reflects the changes automatically:
 
-| Arquivo                  | Conteúdo                                        |
-| ------------------------ | ----------------------------------------------- |
-| `data/profile.json`      | Informações pessoais e institucionais de Nágila |
-| `data/publications.json` | Publicações científicas                         |
-| `data/events.json`       | Palestras e eventos                             |
-| `data/clinic.json`       | Dados da NZ Beauty Clinic                       |
+| File                      | Content                                         |
+| ------------------------- | ------------------------------------------------ |
+| `data/profile.json`      | Nágila's personal and institutional information |
+| `data/publications.json` | Scientific publications                         |
+| `data/events.json`       | Talks and events                                |
+| `data/clinic.json`       | NZ Beauty Clinic data                           |
 
-**Regra fundamental**: só incluir informações que podem ser confirmadas por fontes públicas verificadas.
-
----
-
-## Como adicionar uma nova publicação
-
-1. Abra `data/publications.json`
-2. Adicione um novo objeto ao array seguindo a estrutura existente
-3. Campos obrigatórios: `id`, `title`, `authors`, `journal`, `year`, `abstract`
-4. Campos recomendados: `doi`, `url`, `urlPdf`
-5. Se a informação não estiver confirmada, adicione `"dataNote": "TODO: validar"`
-6. Adicione o card correspondente em `index.html` na seção `#publicacoes`
+**Fundamental rule**: only include information that can be confirmed by verified public sources.
 
 ---
 
-## Como adicionar um evento ou palestra
+## How to add a new publication
 
-1. Abra `data/events.json`
-2. Adicione um novo objeto ao array seguindo a estrutura existente
-3. Campos obrigatórios: `id`, `title`, `event`, `type`, `date`, `description`, `source`
-4. Adicione o card correspondente em `index.html` na seção `#palestras`
-
----
-
-## Como atualizar o SEO
-
-- **Título e description da home**: `index.html` — tags `<title>` e `<meta name="description">`
-- **Open Graph**: `index.html` — tags `og:*`
-- **JSON-LD**: `index.html` — bloco `<script type="application/ld+json">`
-- **Sitemap**: `sitemap.xml` (ou executar `npm run build` para gerar automaticamente)
-- **robots.txt**: arquivo raiz — já está configurado para permitir todos os crawlers
-- **llms.txt**: arquivo raiz — resumo legível por sistemas de IA
+1. Open `data/publications.json`
+2. Add a new object to the array following the existing structure
+3. Required fields: `id`, `title`, `authors`, `journal`, `year`, `abstract`
+4. Recommended fields: `doi`, `url`, `urlPdf`
+5. If the information is not confirmed, add `"dataNote": "TODO: validate"`
+6. Add the corresponding card in `index.html` in the `#publicacoes` section
 
 ---
 
-## Como fazer deploy
+## How to add an event or talk
+
+1. Open `data/events.json`
+2. Add a new object to the array following the existing structure
+3. Required fields: `id`, `title`, `event`, `type`, `date`, `description`, `source`
+4. Add the corresponding card in `index.html` in the `#palestras` section
+
+---
+
+## How to update SEO
+
+- **Home title and description**: `index.html` — `<title>` and `<meta name="description">` tags
+- **Open Graph**: `index.html` — `og:*` tags
+- **JSON-LD**: `index.html` — `<script type="application/ld+json">` block
+- **Sitemap**: `sitemap.xml` (or run `npm run build` to generate it automatically)
+- **robots.txt**: root file — already configured to allow all crawlers
+- **llms.txt**: root file — human/AI-readable summary
+
+---
+
+## How to deploy
 
 ### GitHub Pages
 
-1. Faça push do repositório para o GitHub
-2. Em **Settings → Pages**, selecione o branch `main` e a pasta raiz `/`
-3. Para domínio personalizado, adicione o domínio no arquivo `CNAME`
+1. Push the repository to GitHub
+2. In **Settings → Pages**, select the `main` branch and the root folder `/`
+3. For a custom domain, add the domain in the `CNAME` file
 
-### Outros serviços
+### Other services
 
-O site é 100% estático. Qualquer CDN ou serviço de hospedagem estática funciona:
+The site is 100% static. Any CDN or static hosting service works:
 
-- **Netlify**: arraste a pasta do projeto ou conecte via Git
-- **Vercel**: conecte o repositório, configuração automática
-- **Cloudflare Pages**: conecte o repositório Git
+- **Netlify**: drag and drop the project folder or connect via Git
+- **Vercel**: connect the repository, automatic configuration
+- **Cloudflare Pages**: connect the Git repository
 
 ---
 
-## Verificações antes do deploy
+## Pre-deploy checks
 
 ```bash
-# Validação HTML
+# HTML validation
 npm run check:html
 
-# Verificação de links externos
+# External link check
 npm run check:links
 
-# Formatação de código
+# Code formatting
 npm run check:format
-npm run format   # corrige automaticamente
+npm run format   # auto-fix
 ```
 
 ---
 
-## Estrutura de pastas
+## Folder structure
 
 ```
 nagila/
-├── index.html            # Página principal (single-page portfolio)
-├── 404.html              # Página de erro (GitHub Pages)
-├── robots.txt            # Permissões de crawling
-├── sitemap.xml           # Sitemap XML para SEO
-├── llms.txt              # Resumo para sistemas de IA (GEO)
+├── index.html            # Main page (single-page portfolio)
+├── 404.html              # Error page (GitHub Pages)
+├── robots.txt            # Crawling permissions
+├── sitemap.xml           # XML sitemap for SEO
+├── llms.txt              # Summary for AI systems (GEO)
 ├── package.json
 ├── data/
-│   ├── profile.json      # Dados da Nágila
-│   ├── publications.json # Publicações científicas
-│   ├── events.json       # Palestras e eventos
+│   ├── profile.json      # Nágila's data
+│   ├── publications.json # Scientific publications
+│   ├── events.json       # Talks and events
 │   └── clinic.json       # NZ Beauty Clinic
 ├── assets/
-│   ├── css/main.css      # Design system completo
-│   ├── js/app.js         # Tema, nav, FAQ, animações
-│   └── img/              # Imagens (adicionar WebP/AVIF)
+│   ├── css/main.css      # Full design system
+│   ├── js/app.js         # Theme, nav, FAQ, animations
+│   └── img/              # Images (add WebP/AVIF)
 ├── scripts/
-│   ├── serve.js          # Servidor de desenvolvimento
-│   ├── build-sitemap.js  # Gerador de sitemap
-│   └── check-links.js    # Verificador de links externos
+│   ├── serve.js          # Development server
+│   ├── build-sitemap.js  # Sitemap generator
+│   └── check-links.js    # External link checker
 └── README.md
 ```
 
 ---
 
-## Identidade visual
+## Visual identity
 
-| Variável         | Light Mode             | Dark Mode               |
-| ---------------- | ---------------------- | ----------------------- |
-| `--bg`           | `#fafaf7` (ivory)      | `#0a0a0a` (black)       |
-| `--text`         | `#1a1714` (warm black) | `#f5f0e8` (ivory)       |
-| `--accent`       | `#8b6914` (dark gold)  | `#c9a84c` (gold)        |
-| `--accent-vivid` | `#c9a84c` (gold)       | `#d4b55a` (bright gold) |
-
----
-
-## TODO — Pendente de validação
-
-- [ ] Foto profissional de Nágila (substituir placeholder)
-- [ ] Imagens da NZ Beauty Clinic
-- [ ] Imagens do Estetika 2026
-- [ ] Favicon personalizado
-- [ ] OG image (1200×630px)
-- [ ] Domínio personalizado (`CNAME`)
-- [ ] Horário completo de funcionamento da clínica
-- [ ] Lista completa de serviços da clínica
-- [ ] Ano exato da publicação "Fatores Bioquímicos do Melasma"
-- [ ] Nome completo do periódico da revisão sobre radiofrequência (2021)
-- [ ] Verificar outras palestras e eventos que possam ter ocorrido
+| Variable         | Light Mode              | Dark Mode                |
+| ---------------- | ------------------------ | ------------------------- |
+| `--bg`           | `#fafaf7` (ivory)        | `#0a0a0a` (black)         |
+| `--text`         | `#1a1714` (warm black)   | `#f5f0e8` (ivory)         |
+| `--accent`       | `#8b6914` (dark gold)    | `#c9a84c` (gold)          |
+| `--accent-vivid` | `#c9a84c` (gold)         | `#d4b55a` (bright gold)   |
