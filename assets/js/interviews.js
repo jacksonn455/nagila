@@ -62,16 +62,18 @@
 
     const description = item.description ? `<p class="event-card__desc">${item.description}</p>` : '';
     const dateMarkup = item.date ? `<p class="event-card__location"><span>${item.date}</span></p>` : '';
+    const watchLabel = window.I18n?.t('entrevistas.watchBtn') || 'Assistir entrevista';
+    const altPrefix = window.I18n?.t('entrevistas.label') || 'Entrevista';
 
     article.innerHTML = `
-      <img src="${INTERVIEW_IMAGE}" alt="Entrevista — ${item.title}" width="780" height="438" class="event-featured__image" loading="lazy">
+      <img src="${INTERVIEW_IMAGE}" alt="${altPrefix} — ${item.title}" width="780" height="438" class="event-featured__image" loading="lazy">
       <div class="event-card__content">
         <p class="event-card__event-name">${item.program}</p>
         <h3 id="interview-${item.id}-title" class="event-card__title">${item.title}</h3>
         ${dateMarkup}
         ${description}
         <div class="tags">
-          <a class="btn btn--primary" href="${item.youtubeUrl}" target="_blank" rel="noopener noreferrer">Assistir entrevista</a>
+          <a class="btn btn--primary" href="${item.youtubeUrl}" target="_blank" rel="noopener noreferrer">${watchLabel}</a>
         </div>
       </div>
     `;
@@ -84,7 +86,7 @@
     if(!list) return;
     const data = await fetchInterviews();
     if(!Array.isArray(data) || !data.length){
-      list.innerHTML = '<p style="color:var(--text-muted)">Nenhuma entrevista disponível no momento.</p>';
+      list.innerHTML = `<p style="color:var(--text-muted)">${window.I18n?.t('entrevistas.empty') || 'Nenhuma entrevista disponível no momento.'}</p>`;
       return;
     }
 
@@ -97,4 +99,6 @@
   } else {
     init();
   }
+
+  document.addEventListener('languagechange', init);
 })();

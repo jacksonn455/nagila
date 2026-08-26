@@ -24,8 +24,8 @@
   "googleRatingSource": "Google Maps — verificado em agosto de 2026",
   "tagline": "Excelência em Estética, Resultados que Transformam",
   "hours": {
-    "note": "TODO: validar horário completo de funcionamento",
-    "partial": "Fecha às 12:00 (horário parcial confirmado via Google Maps)"
+    "weekdays": "08:00 – 18:00",
+    "days": "Segunda a Sexta-feira"
   },
   "serviceArea": {
     "city": "Erechim",

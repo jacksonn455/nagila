@@ -1,6 +1,6 @@
 {
-  "metaTitle": "Nágila Bernarda Zortéa | Estética, Ciencia y Educación en Erechim",
-  "metaDescription": "Nágila Bernarda Zortéa — Máster, Esteticista, Coordinadora del Programa de Estética y Cosmetología y del Posgrado en Estética Avanzada de URI Erechim. Investigadora, conferencista y propietaria de NZ Beauty Clinic en Erechim, RS, Brasil.",
+  "metaTitle": "Nágila Zortéa | NZ Beauty Clinic Erechim — Estética y Postoperatorio",
+  "metaDescription": "Clínica de estética y postoperatorio en Erechim/RS, Brasil — NZ Beauty Clinic. Estética Facial y Corporal, Drenaje Linfático Posquirúrgico, Postoperatorio de Cirugía Plástica, Depilación Láser y Lipedema. Nágila Zortéa, Máster. (54) 99651-6136.",
   "skipToContent": "Saltar al contenido principal",
   "openMenu": "Abrir menú de navegación",
   "changeLanguage": "Cambiar idioma",
@@ -11,6 +11,7 @@
     "publicacoes": "Publicaciones",
     "livros": "Libros",
     "palestras": "Conferencias",
+    "entrevistas": "Entrevistas",
     "jornais": "Medios",
     "premiacoes": "Premios",
     "clinica": "NZ Beauty Clinic",
@@ -106,7 +107,7 @@
   "pub1": {
     "year": "2026",
     "journal": "Revista Brasileña de Cirugía Plástica (RBCP)",
-    "title": "Technical Differentiation and Innovation in Contemporary Liposuction: A Critical Study of the Postoperative Period in Light of New Technologies",
+    "title": "Diferenciación técnica e innovación en la liposucción contemporánea: Estudio crítico del postoperatorio frente a las nuevas tecnologías",
     "authors": "NB Zortéa",
     "abstract": "Revisión crítica de las innovaciones tecnológicas en la liposucción contemporánea, evaluando eficacia, seguridad y manejo postoperatorio. Analiza VASER, Renuvion, BodyTite, Morpheus8 y Argoplasma, destacando la necesidad de protocolos clínicos basados en evidencias. Publicado en RBCP, revista de la Sociedad Brasileña de Cirugía Plástica.",
     "linkScielo": "Leer en SciELO",
@@ -147,6 +148,13 @@
     "abstract": "Estudio sobre los mecanismos bioquímicos del melasma, trastorno de hiperpigmentación cutánea de alta recidiva, con impacto significativo en la autoestima y calidad de vida de los pacientes.",
     "link": "Acceder a la publicación",
     "linkAriaLabel": "Acceder a la publicación en las actas de URI Erechim (se abre en nueva pestaña)"
+  },
+  "entrevistas": {
+    "label": "Entrevistas",
+    "title": "Entrevistas y participaciones",
+    "subtitle": "Selección de entrevistas y participaciones en programas y canales relevantes.",
+    "watchBtn": "Ver entrevista",
+    "empty": "No hay entrevistas disponibles en este momento."
   },
   "jornais": {
     "label": "Medios",
@@ -221,11 +229,11 @@
     "tag4": "Ciencia Clínica"
   },
   "clinica": {
-    "label": "Clínica de Estética",
+    "label": "Clínica de Estética y Postoperatorio",
     "brand": "NZ Beauty Clinic",
     "tagline": "Excelencia en Estética, Resultados que Transforman.",
-    "desc1": "<strong>NZ Beauty Clinic</strong> es la clínica de estética de Nágila Bernarda Zortéa, ubicada en el centro de Erechim, Rio Grande do Sul. La clínica une la experiencia académica y clínica de la Prof. Máster Nágila con el compromiso de ofrecer atención estética fundamentada en conocimiento científico y evaluación individualizada.",
-    "desc2": "Con calificación máxima en Google Maps, NZ Beauty Clinic refleja el compromiso con la excelencia y el cuidado personalizado, alineados con los principios que Nágila ha defendido a lo largo de su trayectoria académica y profesional.",
+    "desc1": "<strong>NZ Beauty Clinic</strong> es referencia en <strong>estética y postoperatorio en Erechim/RS</strong>, liderada por la Prof. Máster Nágila Bernarda Zortéa. Especializada en <strong>postoperatorio de cirugía plástica</strong>, la clínica ofrece drenaje linfático posquirúrgico, manejo de fibrosis y recuperación estética — además de estética facial, estética corporal, depilación láser y tratamiento de lipedema.",
+    "desc2": "Con calificación máxima en Google Maps, NZ Beauty Clinic une la formación científica de la Prof. Máster Nágila con el cuidado individualizado de cada paciente — ya sea en el <strong>postoperatorio de liposucción, abdominoplastia u otras cirugías plásticas</strong>, ya sea en tratamientos estéticos. Ubicada en el Centro de Erechim, Rio Grande do Sul.",
     "enderecoLabel": "Dirección",
     "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>CP 99700-094, Brasil",
     "telLabel": "Teléfono / WhatsApp",
@@ -281,7 +289,7 @@
   },
   "faq5": {
     "q": "¿Qué publicaciones científicas incluyen a Nágila Zortéa?",
-    "a": "Nágila Bernarda Zortéa (NB Zortéa) ha publicado trabajos en revistas nacionales, incluyendo: \"Technical Differentiation and Innovation in Contemporary Liposuction\" (RBCP, 2026, DOI: 10.1055/s-0046-1820097); \"Uso de la radiofrecuencia para tratamientos estéticos: una revisión sistemática\" (2021); \"Acné vulgaris provocado por mascarilla\" (2021); \"Contaminación microbiológica en probadores de labiales\" (O Mundo da Saúde, 2020); y \"Factores Bioquímicos del Melasma\" (URI Erechim). Vea la <a href=\"#publicacoes\">sección de publicaciones</a> para enlaces directos."
+    "a": "Nágila Bernarda Zortéa (NB Zortéa) ha publicado trabajos en revistas nacionales, incluyendo: \"Diferenciación técnica e innovación en la liposucción contemporánea\" (RBCP, 2026, DOI: 10.1055/s-0046-1820097); \"Uso de la radiofrecuencia para tratamientos estéticos: una revisión sistemática\" (2021); \"Acné vulgaris provocado por mascarilla\" (2021); \"Contaminación microbiológica en probadores de labiales\" (O Mundo da Saúde, 2020); y \"Factores Bioquímicos del Melasma\" (URI Erechim). Vea la <a href=\"#publicacoes\">sección de publicaciones</a> para enlaces directos."
   },
   "faq6": {
     "q": "¿Cuál es la función de Nágila Zortéa en URI Erechim?",
@@ -294,6 +302,18 @@
   "faq8": {
     "q": "¿Cómo reservar cita en NZ Beauty Clinic?",
     "a": "Para reservar cita en NZ Beauty Clinic, contacte por <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a> o visite <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. La clínica está en Rua Cezária Matos, 82, Centro, Erechim/RS."
+  },
+  "faq9": {
+    "q": "¿NZ Beauty Clinic realiza seguimiento postoperatorio de cirugía plástica en Erechim?",
+    "a": "Sí. El <strong>postoperatorio de cirugía plástica en Erechim</strong> es uno de los servicios principales de NZ Beauty Clinic. Nágila Bernarda Zortéa, Máster y Esteticista, atiende pacientes de liposucción, abdominoplastia, mamoplastia y otras cirugías, con enfoque en drenaje linfático posquirúrgico, manejo de fibrosis y recuperación funcional. Reservas: <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>."
+  },
+  "faq10": {
+    "q": "¿Dónde hacer drenaje linfático posquirúrgico en Erechim?",
+    "a": "El <strong>drenaje linfático posquirúrgico en Erechim</strong> se realiza en NZ Beauty Clinic, ubicada en Rua Cezária Matos, 82, Centro de Erechim/RS. La atención es conducida por Nágila Bernarda Zortéa, Máster y Esteticista especializada en postoperatorio. Para reservas: <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a> o <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
+  },
+  "faq11": {
+    "q": "¿Cuál es la diferencia entre el postoperatorio estético y el seguimiento médico?",
+    "a": "El seguimiento médico se ocupa de la cicatrización y complicaciones clínicas — realizado por el cirujano. El <strong>postoperatorio estético</strong> es conducido por la esteticista e incluye drenaje linfático posquirúrgico, reducción de edema, manejo de fibrosis, cuidados de la piel y recuperación funcional. En NZ Beauty Clinic, el protocolo está basado en evidencias científicas y es personalizado para cada tipo de cirugía: liposucción, abdominoplastia, mamoplastia y otras."
   },
   "artigos": {
     "label": "Conocimiento",

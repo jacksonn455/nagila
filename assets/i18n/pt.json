@@ -1,6 +1,6 @@
 {
-  "metaTitle": "Nágila Bernarda Zortéa | Estética, Ciência e Educação em Erechim",
-  "metaDescription": "Nágila Bernarda Zortéa — Mestre, Esteticista, Coordenadora do Curso de Estética e Cosmética e da Pós-Graduação em Estética Avançada da URI Erechim. Pesquisadora, palestrante e responsável pela NZ Beauty Clinic, em Erechim/RS.",
+  "metaTitle": "Nágila Zortéa | NZ Beauty Clinic Erechim — Estética e Pós-Operatório",
+  "metaDescription": "Clínica de estética e pós-operatório em Erechim/RS — NZ Beauty Clinic. Estética Facial, Corporal, Drenagem Linfática Pós-Cirúrgica, Pós-Operatório de Cirurgia Plástica, Depilação a Laser e Lipedema. Nágila Zortéa, Mestre. Rua Cezária Matos, 82 — (54) 99651-6136.",
   "skipToContent": "Pular para o conteúdo principal",
   "openMenu": "Abrir menu de navegação",
   "changeLanguage": "Mudar idioma",
@@ -11,6 +11,7 @@
     "publicacoes": "Publicações",
     "livros": "Livros",
     "palestras": "Palestras",
+    "entrevistas": "Entrevistas",
     "jornais": "Jornais",
     "premiacoes": "Premiações",
     "clinica": "NZ Beauty Clinic",
@@ -148,6 +149,13 @@
     "link": "Acessar publicação",
     "linkAriaLabel": "Acessar publicação nos anais da URI Erechim (abre em nova aba)"
   },
+  "entrevistas": {
+    "label": "Entrevistas",
+    "title": "Entrevistas e participações",
+    "subtitle": "Seleção de entrevistas e participações em programas e canais relevantes.",
+    "watchBtn": "Assistir entrevista",
+    "empty": "Nenhuma entrevista disponível no momento."
+  },
   "jornais": {
     "label": "Mídia",
     "title": "Jornais e Publicações",
@@ -221,11 +229,11 @@
     "tag4": "Ciência Clínica"
   },
   "clinica": {
-    "label": "Clínica de Estética",
+    "label": "Clínica de Estética e Pós-Operatório",
     "brand": "NZ Beauty Clinic",
     "tagline": "Excelência em Estética, Resultados que Transformam.",
-    "desc1": "A <strong>NZ Beauty Clinic</strong> é a clínica de estética de Nágila Bernarda Zortéa, localizada no Centro de Erechim, Rio Grande do Sul. A clínica une a experiência acadêmica e clínica da Profa. Mestre Nágila com o compromisso de oferecer um atendimento estético fundamentado em conhecimento científico e avaliação individualizada.",
-    "desc2": "Com avaliação máxima no Google Maps, a NZ Beauty Clinic reflete o compromisso com excelência e cuidado personalizado, alinhados com os princípios defendidos por Nágila em sua trajetória acadêmica e profissional.",
+    "desc1": "A <strong>NZ Beauty Clinic</strong> é referência em <strong>estética e pós-operatório em Erechim/RS</strong>, liderada pela Profa. Mestre Nágila Bernarda Zortéa. Especializada em <strong>pós-operatório de cirurgia plástica</strong>, a clínica oferece drenagem linfática pós-cirúrgica, manejo de fibrose e recuperação estética — além de estética facial, estética corporal, depilação a laser e tratamento de lipedema.",
+    "desc2": "Com avaliação máxima no Google Maps, a NZ Beauty Clinic une a formação científica da Profa. Mestre Nágila com o cuidado individualizado de cada paciente — seja no <strong>pós-operatório de lipoaspiração, abdominoplastia ou outras cirurgias plásticas</strong>, seja em tratamentos estéticos. Localizada no Centro de Erechim, Rio Grande do Sul.",
     "enderecoLabel": "Endereço",
     "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>CEP 99700-094",
     "telLabel": "Telefone / WhatsApp",
@@ -246,6 +254,11 @@
     "mapAriaLabel": "Mapa mostrando a localização da NZ Beauty Clinic em Erechim, RS",
     "ratingLabel": "5,0 — Google Maps",
     "ratingAriaLabel": "Avaliação 5 de 5 estrelas"
+  },
+  "galeria": {
+    "label": "Galeria",
+    "title": "Momentos Profissionais",
+    "placeholder": "Galeria em construção. Fotos de eventos, da clínica, congressos e palestras serão adicionadas em breve."
   },
   "avaliacoes": {
     "label": "Avaliações",
@@ -289,6 +302,24 @@
   "faq8": {
     "q": "Como agendar atendimento na NZ Beauty Clinic?",
     "a": "Para agendar atendimento na NZ Beauty Clinic, entre em contato pelo <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, pelo Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a> ou acesse <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. A clínica está localizada na Rua Cezária Matos, 82, Centro, Erechim/RS."
+  },
+  "faq9": {
+    "q": "A NZ Beauty Clinic realiza acompanhamento pós-operatório de cirurgia plástica em Erechim?",
+    "a": "Sim. O acompanhamento de <strong>pós-operatório de cirurgia plástica em Erechim</strong> é um dos serviços centrais da NZ Beauty Clinic. Nágila Bernarda Zortéa, Mestre e Esteticista, atende pacientes de lipoaspiração, abdominoplastia, mamoplastia e outras cirurgias, com foco em drenagem linfática pós-cirúrgica, manejo de fibrose e recuperação funcional. Agendamentos: <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>."
+  },
+  "faq10": {
+    "q": "Onde fazer drenagem linfática pós-cirúrgica em Erechim?",
+    "a": "A <strong>drenagem linfática pós-cirúrgica em Erechim</strong> é realizada na NZ Beauty Clinic, localizada na Rua Cezária Matos, 82, Centro de Erechim/RS. O atendimento é conduzido por Nágila Bernarda Zortéa, Mestre e Esteticista especializada em pós-operatório. Para agendamento: <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a> ou <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
+  },
+  "faq11": {
+    "q": "Qual a diferença entre o pós-operatório estético e o acompanhamento médico?",
+    "a": "O acompanhamento médico cuida da cicatrização e de complicações clínicas — realizado pelo cirurgião. Já o <strong>pós-operatório estético</strong> é conduzido pela esteticista e inclui drenagem linfática pós-cirúrgica, recursos para reduzir edema, manejo de fibrose, cuidados com a pele e recuperação funcional. Na NZ Beauty Clinic, o protocolo é baseado em evidências científicas e personalizado para cada tipo de cirurgia: lipoaspiração, abdominoplastia, mamoplastia e outras."
+  },
+  "artigos": {
+    "label": "Conhecimento",
+    "title": "Artigos e Conteúdo",
+    "subtitle": "Em breve: artigos sobre estética baseada em evidências, cosmetologia, cuidados com a pele, inovação e educação em estética.",
+    "placeholder": "Seção de artigos em preparação. Conteúdo educativo e científico será publicado em breve."
   },
   "contato": {
     "label": "Contato",

@@ -1,6 +1,6 @@
 {
-  "metaTitle": "Nágila Bernarda Zortéa | Aesthetics, Science and Education in Erechim",
-  "metaDescription": "Nágila Bernarda Zortéa — Master's degree, Aesthetician, Coordinator of the Aesthetics and Cosmetology Program and Advanced Aesthetics Postgraduate at URI Erechim. Researcher, speaker, and owner of NZ Beauty Clinic in Erechim, RS, Brazil.",
+  "metaTitle": "Nágila Zortéa | NZ Beauty Clinic Erechim — Aesthetics & Post-operative Care",
+  "metaDescription": "Aesthetics and post-operative clinic in Erechim/RS, Brazil — NZ Beauty Clinic. Facial & Body Aesthetics, Post-surgical Lymphatic Drainage, Post-operative Care for Plastic Surgery, Laser Hair Removal and Lipedema. Nágila Zortéa, MSc. (54) 99651-6136.",
   "skipToContent": "Skip to main content",
   "openMenu": "Open navigation menu",
   "changeLanguage": "Change language",
@@ -11,6 +11,7 @@
     "publicacoes": "Publications",
     "livros": "Books",
     "palestras": "Lectures",
+    "entrevistas": "Interviews",
     "jornais": "Media",
     "premiacoes": "Awards",
     "clinica": "NZ Beauty Clinic",
@@ -148,6 +149,13 @@
     "link": "Access publication",
     "linkAriaLabel": "Access publication in URI Erechim proceedings (opens in new tab)"
   },
+  "entrevistas": {
+    "label": "Interviews",
+    "title": "Interviews and Appearances",
+    "subtitle": "Selection of interviews and appearances in relevant programs and channels.",
+    "watchBtn": "Watch interview",
+    "empty": "No interviews available at the moment."
+  },
   "jornais": {
     "label": "Media",
     "title": "Newspapers and Publications",
@@ -221,11 +229,11 @@
     "tag4": "Clinical Science"
   },
   "clinica": {
-    "label": "Aesthetics Clinic",
+    "label": "Aesthetics & Post-operative Clinic",
     "brand": "NZ Beauty Clinic",
     "tagline": "Excellence in Aesthetics, Results that Transform.",
-    "desc1": "<strong>NZ Beauty Clinic</strong> is Nágila Bernarda Zortéa's aesthetics clinic, located in the center of Erechim, Rio Grande do Sul. The clinic combines Prof. Master Nágila's academic and clinical expertise with a commitment to providing aesthetic care grounded in scientific knowledge and individualized assessment.",
-    "desc2": "With a top rating on Google Maps, NZ Beauty Clinic reflects the commitment to excellence and personalized care, aligned with the principles Nágila has championed throughout her academic and professional journey.",
+    "desc1": "<strong>NZ Beauty Clinic</strong> is the reference for <strong>aesthetics and post-operative care in Erechim/RS</strong>, led by Prof. Master Nágila Bernarda Zortéa. Specialized in <strong>post-operative care for plastic surgery</strong>, the clinic offers post-surgical lymphatic drainage, fibrosis management and aesthetic recovery — as well as facial aesthetics, body aesthetics, laser hair removal and lipedema treatment.",
+    "desc2": "With a top rating on Google Maps, NZ Beauty Clinic combines Prof. Master Nágila's scientific expertise with individualized patient care — whether in <strong>post-operative recovery from liposuction, abdominoplasty or other plastic surgery procedures</strong>, or in aesthetic treatments. Located in the center of Erechim, Rio Grande do Sul.",
     "enderecoLabel": "Address",
     "enderecoValue": "Rua Cezária Matos, 82 — Centro, Erechim/RS<br>ZIP 99700-094, Brazil",
     "telLabel": "Phone / WhatsApp",
@@ -294,6 +302,18 @@
   "faq8": {
     "q": "How to book an appointment at NZ Beauty Clinic?",
     "a": "To book an appointment at NZ Beauty Clinic, contact via <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>, Instagram <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>, or visit <a href=\"https://linktr.ee/nagi_estetica\" target=\"_blank\" rel=\"noopener noreferrer\">linktr.ee/nagi_estetica</a>. The clinic is located at Rua Cezária Matos, 82, Centro, Erechim/RS."
+  },
+  "faq9": {
+    "q": "Does NZ Beauty Clinic provide post-operative care for plastic surgery in Erechim?",
+    "a": "Yes. <strong>Post-operative care for plastic surgery in Erechim</strong> is one of NZ Beauty Clinic's core services. Nágila Bernarda Zortéa, MSc Aesthetician, treats patients recovering from liposuction, abdominoplasty, breast surgery and other procedures, focusing on post-surgical lymphatic drainage, fibrosis management and functional recovery. Book via <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a>."
+  },
+  "faq10": {
+    "q": "Where to get post-surgical lymphatic drainage in Erechim?",
+    "a": "<strong>Post-surgical lymphatic drainage in Erechim</strong> is performed at NZ Beauty Clinic, located at Rua Cezária Matos, 82, Centro, Erechim/RS. Treatments are conducted by Nágila Bernarda Zortéa, MSc Aesthetician specialized in post-operative care. To book: <a href=\"https://wa.me/5554996516136\">WhatsApp (54) 99651-6136</a> or <a href=\"https://www.instagram.com/nz_beautyclinic/\" target=\"_blank\" rel=\"noopener noreferrer\">@nz_beautyclinic</a>."
+  },
+  "faq11": {
+    "q": "What is the difference between aesthetic and medical post-operative care?",
+    "a": "Medical follow-up handles healing and clinical complications — performed by the surgeon. <strong>Aesthetic post-operative care</strong> is provided by the aesthetician and includes post-surgical lymphatic drainage, edema reduction, fibrosis management, skin care and functional recovery. At NZ Beauty Clinic, protocols are evidence-based and tailored to each surgery type: liposuction, abdominoplasty, breast surgery and others."
   },
   "artigos": {
     "label": "Knowledge",

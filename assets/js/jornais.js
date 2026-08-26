@@ -95,8 +95,11 @@
   function formatDate(dateStr) {
     if (!dateStr) return '';
     try {
+      const lang = window.I18n?.lang || 'pt';
+      const localeMap = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
+      const locale = localeMap[lang] || 'pt-BR';
       const date = new Date(dateStr + 'T00:00:00');
-      return new Intl.DateTimeFormat('pt-BR', {
+      return new Intl.DateTimeFormat(locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -158,6 +161,7 @@
     const jornais = await fetchJornais();
     if (jornais.length === 0) return;
 
+    container.innerHTML = '';
     const sorted = sortByDate(jornais);
     const fragment = document.createDocumentFragment();
     const cards = [];
@@ -186,4 +190,6 @@
   } else {
     renderJornais();
   }
+
+  document.addEventListener('languagechange', renderJornais);
 })();
