@@ -168,15 +168,15 @@
   },
   "book1": {
     "type": "Book",
-    "title": "Descomplicando a Eletroterapia Estética",
+    "title": "Demystifying Aesthetic Electrotherapy",
     "authors": "Nágila Bernarda Zortéa",
     "tag1": "Electrotherapy",
     "tag2": "Clinical Aesthetics",
     "tag3": "URI Erechim",
     "desc": "A practical manual dedicated to aesthetic electrotherapy — a field that applies electrophysical resources to facial and body aesthetic treatments. A didactic and scientific contribution for aesthetics professionals and students.",
     "cta": "Download PDF",
-    "ctaAriaLabel": "Download PDF of the book Descomplicando a Eletroterapia Estética",
-    "coverAlt": "Nágila Bernarda Zortéa — author of the book Descomplicando a Eletroterapia Estética"
+    "ctaAriaLabel": "Download PDF of the book Demystifying Aesthetic Electrotherapy",
+    "coverAlt": "Nágila Bernarda Zortéa — author of the book Demystifying Aesthetic Electrotherapy"
   },
   "palestras": {
     "label": "Lectures &amp; Events",
@@ -227,6 +227,19 @@
     "tag2": "Body Aesthetics",
     "tag3": "Fibrosis",
     "tag4": "Clinical Science"
+  },
+  "event3": {
+    "eventName": "Beauty Fair International · IBRAMED · São Paulo, SP",
+    "title": "\"How Photobiomodulation Can Revolutionize Aesthetic and Post-operative Care\"",
+    "imageAlt": "Nágila Bernarda Zortéa speaking at the IBRAMED stand at Beauty Fair International 2026, São Paulo",
+    "location": "Beauty Fair International — São Paulo, SP · Sep 7, 2026 · 1:00 PM",
+    "desc1": "Lecture presented at the <strong>IBRAMED</strong> stand at Beauty Fair International 2026, from September 5–8, in São Paulo. Nágila addressed how photobiomodulation can revolutionize aesthetic and post-operative care, exploring the scientific foundations and clinical applications of this technology in advanced aesthetics.",
+    "source": "Source: @ibramedbrasil (Instagram)",
+    "sourceAriaLabel": "Access IBRAMED's Instagram profile (opens in new tab)",
+    "tag1": "Photobiomodulation",
+    "tag2": "Post-operative Care",
+    "tag3": "Aesthetics",
+    "tag4": "IBRAMED"
   },
   "clinica": {
     "label": "Aesthetics & Post-operative Clinic",

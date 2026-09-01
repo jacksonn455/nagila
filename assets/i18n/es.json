@@ -168,15 +168,15 @@
   },
   "book1": {
     "type": "Libro",
-    "title": "Descomplicando a Eletroterapia Estética",
+    "title": "Descomplicando la Electroterapia Estética",
     "authors": "Nágila Bernarda Zortéa",
     "tag1": "Electroterapia",
     "tag2": "Estética Clínica",
     "tag3": "URI Erechim",
     "desc": "Manual dedicado a la electroterapia estética — área que aplica recursos electrofísicos en los tratamientos estéticos faciales y corporales. Una contribución didáctica y científica para profesionales y estudiantes de estética y cosmetología.",
     "cta": "Descargar PDF",
-    "ctaAriaLabel": "Descargar PDF del libro Descomplicando a Eletroterapia Estética",
-    "coverAlt": "Nágila Bernarda Zortéa — autora del libro Descomplicando a Eletroterapia Estética"
+    "ctaAriaLabel": "Descargar PDF del libro Descomplicando la Electroterapia Estética",
+    "coverAlt": "Nágila Bernarda Zortéa — autora del libro Descomplicando la Electroterapia Estética"
   },
   "palestras": {
     "label": "Conferencias &amp; Eventos",
@@ -227,6 +227,19 @@
     "tag2": "Estética Corporal",
     "tag3": "Fibrosis",
     "tag4": "Ciencia Clínica"
+  },
+  "event3": {
+    "eventName": "Beauty Fair International · IBRAMED · São Paulo, SP",
+    "title": "\"Cómo la Fotobiomodulación puede revolucionar la atención Estética y Postoperatoria\"",
+    "imageAlt": "Nágila Bernarda Zortéa hablando en el stand de IBRAMED en la Beauty Fair International 2026, São Paulo",
+    "location": "Beauty Fair International — São Paulo, SP · 7 sep de 2026 · 13h00",
+    "desc1": "Conferencia presentada en el stand de <strong>IBRAMED</strong> en la Beauty Fair International 2026, del 5 al 8 de septiembre, en São Paulo. Nágila abordó cómo la fotobiomodulación puede revolucionar la atención estética y postoperatoria, explorando los fundamentos científicos y las aplicaciones clínicas de esta tecnología en la estética avanzada.",
+    "source": "Fuente: @ibramedbrasil (Instagram)",
+    "sourceAriaLabel": "Acceder al perfil de IBRAMED en Instagram (se abre en nueva pestaña)",
+    "tag1": "Fotobiomodulación",
+    "tag2": "Postoperatorio",
+    "tag3": "Estética",
+    "tag4": "IBRAMED"
   },
   "clinica": {
     "label": "Clínica de Estética y Postoperatorio",

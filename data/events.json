@@ -40,6 +40,31 @@
     "quoteSource": "Nágila Zortéa — URI Erechim, agosto de 2026"
   },
   {
+    "id": "beauty-fair-ibramed-2026",
+    "slug": "beauty-fair-international-2026-fotobiomodulacao",
+    "title": "Como a Fotobiomodulação pode revolucionar o atendimento Estético e Pós Operatório",
+    "event": "Beauty Fair International",
+    "type": "Palestra",
+    "role": "Palestrante",
+    "format": "Presencial",
+    "location": {
+      "venue": "Beauty Fair International",
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "Brasil"
+    },
+    "date": "2026-09-07",
+    "timeStart": "13:00",
+    "organizer": "IBRAMED",
+    "organizerInstagram": "ibramedbrasil",
+    "description": "Palestra no stand da IBRAMED na Beauty Fair International 2026, abordando como a fotobiomodulação pode revolucionar o atendimento estético e pós-operatório.",
+    "topics": ["fotobiomodulação", "pós-operatório", "estética", "laser terapêutico"],
+    "source": "https://www.instagram.com/ibramedbrasil/",
+    "sourceTitle": "IBRAMED — @ibramedbrasil no Instagram",
+    "sourcePublisher": "IBRAMED",
+    "featured": false
+  },
+  {
     "id": "esteticainsul-2026",
     "slug": "esteticainsul-2026-intervencoes-pos-operatorio-fibrose",
     "title": "Intervenções em Pós-operatório. Fibrose, como Manejar e Tratar",
