@@ -373,6 +373,16 @@
       "btnDownload": "Download presentation",
       "btnAriaLabel": "Download Estética in Sul presentation (PPTX)"
     }
+    ,
+    "slides3": {
+      "event": "Beauty Fair International 2026",
+      "talk": "\"How Photobiomodulation Can Revolutionize Aesthetic and Post-operative Care\"",
+      "date": "Sep 7, 2026",
+      "location": "Beauty Fair International — São Paulo, SP",
+      "format": "Presentation",
+      "btnDownload": "Download presentation",
+      "btnAriaLabel": "Download Photobiomodulation presentation (PPTX)"
+    }
   },
   "modal": {
     "title": "Enjoyed the content?",
