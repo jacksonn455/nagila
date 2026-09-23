@@ -6,6 +6,18 @@ const ME_BASE_URL =
     ? 'https://sandbox.melhorenvio.com.br'
     : 'https://www.melhorenvio.com.br';
 
+// Serviços oferecidos ao comprador (ids do Melhor Envio). MELHOR_ENVIO_SERVICES permite trocar sem deploy de código.
+// 1 Correios PAC · 2 Correios SEDEX · 3 Jadlog .Package · 12 LATAM Cargo éFácil
+// 16 Azul Cargo Express e-commerce · 31 Loggi Express · 35 Total Express Standard
+const DEFAULT_SERVICES = '1,2,3,12,16,31,35';
+
+function allowedServices() {
+  return (process.env.MELHOR_ENVIO_SERVICES || DEFAULT_SERVICES)
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 // Erro com mensagem segura para exibir ao comprador
 class ShippingError extends Error {
   constructor(message, status) {
@@ -38,7 +50,8 @@ async function quoteShipping(destinationCep, quantity, book) {
         quantity
       }
     ],
-    options: { receipt: false, own_hand: false }
+    options: { receipt: false, own_hand: false },
+    services: allowedServices().join(',')
   };
 
   const res = await fetch(`${ME_BASE_URL}/api/v2/me/shipment/calculate`, {
@@ -59,8 +72,9 @@ async function quoteShipping(destinationCep, quantity, book) {
   }
 
   const services = await res.json();
+  const allowed = new Set(allowedServices());
   return (Array.isArray(services) ? services : [])
-    .filter((s) => !s.error && Number(s.custom_price || s.price) > 0)
+    .filter((s) => allowed.has(String(s.id)) && !s.error && Number(s.custom_price || s.price) > 0)
     .map((s) => ({
       id: String(s.id),
       service: s.name,
