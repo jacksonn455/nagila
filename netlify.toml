@@ -10,6 +10,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Valores públicos (CEP da clínica aparece no site; NODE_ENV é uma palavra comum).
+  # Tokens e chaves continuam sendo verificados pelo secrets scanning.
+  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_CEP,NODE_ENV"
 
 # Não expõe código-fonte e arquivos de desenvolvimento como páginas públicas
 [[redirects]]
