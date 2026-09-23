@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Livro — NOME DO LIVRO NOVO (NAO SEI AINDA) — NEEDS_CONFIRMATION</title>
+  <meta name="description" content="Página de venda do livro. NEEDS_CONFIRMATION">
+  <meta name="author" content="Nágila Bernarda Zortéa">
+  <link rel="canonical" href="https://nagilazortea.com.br/livro.html">
+
+  <!-- Open Graph — espelha title/description atuais (NEEDS_CONFIRMATION).
+       og:image omitido de propósito: os mockups SVG não servem para redes sociais;
+       adicionar a fotografia oficial do livro (PNG/JPG 1200×630) quando existir. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nágila Bernarda Zortéa">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://nagilazortea.com.br/livro.html">
+  <meta property="og:title" content="Livro — NOME DO LIVRO NOVO (NAO SEI AINDA) — NEEDS_CONFIRMATION">
+  <meta property="og:description" content="Página de venda do livro. NEEDS_CONFIRMATION">
+
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+
+  <!-- JSON-LD (Book/Product) propositalmente ausente: título, preço, ISBN e demais
+       dados ainda são NEEDS_CONFIRMATION. Não publicar dados estruturados inventados. -->
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&amp;display=swap">
+
+  <link rel="preload" as="image" href="assets/images/book/book-cover-mock.svg">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/book.css">
+
+  <!-- Aplica o tema antes da primeira pintura (mesmo comportamento do index) -->
+  <script>
+    (() => {
+      try {
+        const t = localStorage.getItem('nz-preferred-theme');
+        if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="book-page">
+  <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
+
+  <!-- ===== NAVEGAÇÃO (mesmo componente do site) ===== -->
+  <nav class="site-nav" aria-label="Navegação principal">
+    <div class="container">
+      <div class="site-nav__inner">
+        <a href="/" class="site-nav__brand" aria-label="Página inicial — Nágila Bernarda Zortéa">
+          <span class="site-nav__brand-name">Nágila Zortéa</span>
+          <span class="site-nav__brand-tag">NZ Beauty Clinic</span>
+        </a>
+
+        <ul class="site-nav__menu" id="nav-menu" data-nav-menu="">
+          <li><a class="site-nav__link" href="#sobre-livro">O livro</a></li>
+          <li><a class="site-nav__link" href="#conteudo">Conteúdo</a></li>
+          <li><a class="site-nav__link" href="#detalhes">Detalhes</a></li>
+          <li><a class="site-nav__link" href="#autora">A autora</a></li>
+          <li><a class="site-nav__link" href="/">Site principal</a></li>
+        </ul>
+
+        <div class="site-nav__actions">
+          <a href="#comprar" class="btn btn--primary btn--sm book-nav__cta">Comprar</a>
+
+          <button type="button" class="icon-btn" data-theme-toggle="" aria-label="Alternar modo escuro">
+            <svg data-theme-icon="light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg data-theme-icon="dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <button type="button" class="icon-btn nav-toggle" data-nav-toggle="" aria-expanded="false" aria-label="Abrir menu de navegação" aria-controls="nav-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Faixa de modo preview — só aparece com ?preview=1 (ou abrindo via file://) -->
+  <div class="preview-bar" data-preview-only="" hidden>
+    <div class="container preview-bar__inner">
+      <span class="preview-bar__dot" aria-hidden="true"></span>
+      <p><strong>Modo preview</strong> — preço, frete e pedido são <strong>dados de demonstração</strong>. Nenhuma API é chamada.</p>
+      <a href="#preview-panel" class="preview-bar__link">Estados do checkout</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="book-hero" aria-labelledby="product-title">
+      <div class="container book-hero__inner">
+
+        <!-- Galeria -->
+        <div class="book-gallery" data-reveal="">
+          <div class="book-gallery__stage" id="gallery-main" data-fit="cover-art">
+            <img id="main-image" class="book-gallery__image" src="assets/images/book/book-cover-mock.svg" alt="Mockup ilustrativo da capa do livro (não é a capa oficial)" width="400" height="600" fetchpriority="high">
+            <span class="book-gallery__badge">Mockup ilustrativo</span>
+          </div>
+
+          <div class="book-gallery__thumbs" role="group" aria-label="Imagens do livro">
+            <button type="button" class="thumb is-active" aria-pressed="true" data-src="assets/images/book/book-cover-mock.svg" data-fit="cover-art" data-alt="Mockup ilustrativo da capa do livro (não é a capa oficial)" aria-label="Ver capa">
+              <img src="assets/images/book/book-cover-mock.svg" alt="" width="400" height="600">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-perspective-mock.svg" data-fit="object" data-alt="Mockup ilustrativo do livro em perspectiva" aria-label="Ver livro em perspectiva">
+              <img src="assets/images/book/book-perspective-mock.svg" alt="" width="1000" height="1000" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-open-mock.svg" data-fit="object" data-alt="Mockup ilustrativo do livro aberto com páginas de exemplo" aria-label="Ver livro aberto">
+              <img src="assets/images/book/book-open-mock.svg" alt="" width="1000" height="1000" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-lifestyle-mock.svg" data-fit="scene" data-alt="Ilustração de ambientação com o livro sobre uma mesa" aria-label="Ver ambientação">
+              <img src="assets/images/book/book-lifestyle-mock.svg" alt="" width="1000" height="1000" loading="lazy">
+            </button>
+          </div>
+        </div>
+
+        <!-- Informações -->
+        <div class="book-hero__info">
+          <div class="book-hero__eyebrow" data-reveal="">
+            <span class="hero__line" aria-hidden="true"></span>
+            <span class="hero__label">Livro · Lançamento</span>
+          </div>
+
+          <h1 id="product-title" class="book-hero__title" data-reveal="" data-delay="1">Título do livro</h1>
+          <p class="book-hero__subtitle" data-reveal="" data-delay="1">
+            <span class="ph-text">Subtítulo do livro</span>
+          </p>
+
+          <p id="product-author" class="book-hero__author" data-reveal="" data-delay="2">por <strong>Nágila Bernarda Zortéa</strong></p>
+
+          <p id="product-desc" class="book-hero__desc" data-reveal="" data-delay="2">Descrição curta do livro — resumo em 2 ou 3 frases apresentando o tema e para quem ele é.</p>
+
+          <div class="book-price" data-reveal="" data-delay="3">
+            <p class="book-price__label">Livro físico</p>
+            <p class="book-price__value"><span id="product-price" data-price-display="">R$ —</span> <span class="ph" data-price-flag="">Preço a definir</span></p>
+            <p class="book-price__note">Parcelamento e formas de pagamento <span class="ph">A confirmar</span></p>
+          </div>
+
+          <div class="book-hero__actions" data-reveal="" data-delay="3">
+            <a href="#comprar" class="btn btn--primary btn--lg" id="hero-cta">Comprar agora</a>
+            <a href="#sobre-livro" class="btn btn--ghost btn--lg">Conhecer o livro</a>
+          </div>
+
+          <ul class="book-hero__perks" data-reveal="" data-delay="4">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              Envio para todo o Brasil
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Pagamento seguro
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SOBRE O LIVRO ===== -->
+    <section id="sobre-livro" class="section section--alt book-about" aria-labelledby="sobre-livro-heading">
+      <div class="container book-about__grid">
+        <div class="book-about__text">
+          <span class="section__label" data-reveal="">Sobre o livro</span>
+          <h2 id="sobre-livro-heading" class="section__title book-about__title" data-reveal="" data-delay="1">Frase de <em>destaque</em> do livro</h2>
+          <p class="book-about__lead" data-reveal="" data-delay="2">Parágrafo de abertura — apresentação do livro.</p>
+          <p class="book-about__body" data-reveal="" data-delay="2">Texto sobre o livro: proposta, conteúdo e diferencial da abordagem.</p>
+          <p class="book-about__body " data-reveal="" data-delay="3">Texto complementar (opcional): público-alvo, contexto ou motivação da autora.</p>
+        </div>
+
+        <figure class="book-about__figure" data-reveal="" data-delay="2">
+          <img src="assets/images/book/book-open-mock.svg" alt="Mockup ilustrativo do livro aberto com páginas de exemplo" width="1000" height="1000" loading="lazy">
+          <figcaption>Mockup ilustrativo — páginas de exemplo</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== CONTEÚDO ===== -->
+    <section id="conteudo" class="section book-contents" aria-labelledby="conteudo-heading">
+      <div class="container">
+        <header class="section__header book-contents__header">
+          <span class="section__label" data-reveal="">No livro</span>
+          <h2 id="conteudo-heading" class="section__title" data-reveal="" data-delay="1">O que você vai encontrar</h2>
+          <p class="section__subtitle" data-reveal="" data-delay="2">Resumo do conteúdo do livro.</p>
+        </header>
+
+        <!-- PLACEHOLDER: substituir cada item pelo tema real do livro -->
+        <ol class="book-contents__list">
+          <li class="book-topic" data-reveal="">
+            <span class="book-topic__num" aria-hidden="true">01</span>
+            <div>
+              <h3 class="book-topic__title">Tema / capítulo 01</h3>
+              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+            </div>
+          </li>
+          <li class="book-topic" data-reveal="" data-delay="1">
+            <span class="book-topic__num" aria-hidden="true">02</span>
+            <div>
+              <h3 class="book-topic__title">Tema / capítulo 02</h3>
+              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+            </div>
+          </li>
+          <li class="book-topic" data-reveal="" data-delay="2">
+            <span class="book-topic__num" aria-hidden="true">03</span>
+            <div>
+              <h3 class="book-topic__title">Tema / capítulo 03</h3>
+              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+            </div>
+          </li>
+          <li class="book-topic" data-reveal="" data-delay="3">
+            <span class="book-topic__num" aria-hidden="true">04</span>
+            <div>
+              <h3 class="book-topic__title">Tema / capítulo 04</h3>
+              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== DETALHES DO PRODUTO ===== -->
+    <section id="detalhes" class="section section--alt book-details" aria-labelledby="detalhes-heading">
+      <div class="container book-details__grid">
+        <div class="book-details__intro">
+          <span class="section__label" data-reveal="">Ficha técnica</span>
+          <h2 id="detalhes-heading" class="section__title" data-reveal="" data-delay="1">Detalhes do produto</h2>
+          <p class="book-details__note" data-reveal="" data-delay="2">Itens marcados como <span class="ph">A confirmar</span> serão preenchidos com os dados oficiais da edição.</p>
+          <img class="book-details__image" src="assets/images/book/book-perspective-mock.svg" alt="Mockup ilustrativo do livro em perspectiva" width="1000" height="1000" loading="lazy" data-reveal="" data-delay="2">
+        </div>
+
+        <dl class="book-specs" data-reveal="" data-delay="1">
+          <div class="book-specs__row">
+            <dt>Autora</dt>
+            <dd>Nágila Bernarda Zortéa</dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Formato</dt>
+            <dd>Livro físico <span class="ph">Tipo de capa a confirmar</span></dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Páginas</dt>
+            <dd><span class="ph">A confirmar</span></dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Acabamento</dt>
+            <dd><span class="ph">A confirmar</span></dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Dimensões</dt>
+            <dd><span class="ph">A confirmar</span></dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Peso</dt>
+            <dd><span class="ph">A confirmar</span></dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Edição</dt>
+            <dd><span class="ph">A confirmar</span></dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Envio</dt>
+            <dd>Para todo o Brasil <span class="book-specs__hint">frete calculado pelo CEP</span></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===== AUTORA ===== -->
+    <section id="autora" class="section book-author" aria-labelledby="autora-heading">
+      <div class="container book-author__grid">
+        <div class="book-author__image-wrap" data-reveal="">
+          <img class="book-author__image" src="assets/images/Livro1.png" alt="Nágila Bernarda Zortéa segurando um livro, em seu consultório" width="1729" height="910" loading="lazy">
+        </div>
+        <div class="book-author__content">
+          <span class="section__label" data-reveal="">A autora</span>
+          <h2 id="autora-heading" class="section__title" data-reveal="" data-delay="1">Nágila Bernarda Zortéa</h2>
+          <p class="book-author__bio" data-reveal="" data-delay="2">Mestre em Estética e Cosmetologia, esteticista e docente. Coordena o Curso de Graduação em Estética e Cosmética e a Pós-Graduação em Estética Avançada da URI Erechim. Pesquisadora, palestrante e responsável pela NZ Beauty Clinic, em Erechim/RS.</p>
+          <ul class="tags" data-reveal="" data-delay="3">
+            <li class="tag tag--accent">Mestre em Estética e Cosmetologia</li>
+            <li class="tag tag--accent">Coordenadora — URI Erechim</li>
+            <li class="tag">NZ Beauty Clinic</li>
+          </ul>
+          <p class="book-author__award" data-reveal="" data-delay="3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+            Prêmio Top of Mind Excellence Brasil 2026
+          </p>
+          <a href="/#sobre" class="role-card__link" data-reveal="" data-delay="4">Conheça a trajetória
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPRA ===== -->
+    <section id="comprar" class="section section--alt book-buy" aria-labelledby="comprar-heading">
+      <div class="container book-buy__grid">
+
+        <aside class="book-buy__aside" aria-label="Resumo do produto">
+          <span class="section__label">Compra online</span>
+          <h2 id="comprar-heading" class="section__title">Compre seu exemplar</h2>
+
+          <div class="book-buy__product">
+            <img src="assets/images/book/book-cover-mock.svg" alt="" width="400" height="600" loading="lazy">
+            <div>
+              <p class="book-buy__product-title">Título do livro</p>
+              <p class="book-buy__product-author">Nágila Bernarda Zortéa</p>
+              <p class="book-buy__product-price"><span data-price-display="">R$ —</span> <span class="ph" data-price-flag="">Preço a definir</span></p>
+            </div>
+          </div>
+
+          <!-- Confiança — sem selos/certificações inventados -->
+          <ul class="book-trust">
+            <li class="book-trust__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <div><strong>Pagamento seguro</strong><span>Concluído na plataforma de pagamento, fora deste site.</span></div>
+            </li>
+            <li class="book-trust__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              <div><strong>Envio para todo o Brasil</strong><span>Frete e prazo calculados pelo seu CEP.</span></div>
+            </li>
+            <li class="book-trust__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 10h20"></path></svg>
+              <div><strong>Compra online</strong><span>Pedido feito direto nesta página.</span></div>
+            </li>
+            <li class="book-trust__item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              <div><strong>Suporte</strong><span>Dúvidas pelo <a href="https://wa.me/5554996516136" target="_blank" rel="noopener noreferrer">WhatsApp da clínica</a>.</span></div>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="book-buy__main">
+          <!-- Painel de estados — somente em modo preview -->
+          <details class="preview-panel" id="preview-panel" data-preview-only="" hidden open>
+            <summary>Preview · estados do checkout</summary>
+            <p class="preview-panel__hint">Visualização sem backend. Os botões abaixo apenas trocam a aparência do cartão.</p>
+            <div class="preview-panel__states" role="group" aria-label="Escolher estado de preview">
+              <button type="button" data-preview-state="initial">1 · Inicial</button>
+              <button type="button" data-preview-state="loading">2 · Calculando frete</button>
+              <button type="button" data-preview-state="shipping">3 · Opções de frete</button>
+              <button type="button" data-preview-state="form">4 · Dados do comprador</button>
+              <button type="button" data-preview-state="summary">5 · Resumo</button>
+              <button type="button" data-preview-state="processing">6 · Processando</button>
+              <button type="button" data-preview-state="success">7 · Sucesso</button>
+              <button type="button" data-preview-state="error">8 · Erro</button>
+            </div>
+          </details>
+
+          <div class="buy-card" id="purchase-panel" data-state="initial">
+            <div class="buy-card__flow">
+
+              <!-- Etapa 1 — Entrega -->
+              <fieldset class="buy-step" data-step="1">
+                <legend class="buy-step__legend"><span class="buy-step__num" aria-hidden="true">1</span> Entrega</legend>
+
+                <div class="buy-field buy-field--inline">
+                  <label for="quantity">Quantidade</label>
+                  <div class="qty">
+                    <button type="button" class="qty__btn" id="qty-decrease" aria-label="Diminuir quantidade">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" inputmode="numeric" class="qty__input">
+                    <button type="button" class="qty__btn" id="qty-increase" aria-label="Aumentar quantidade">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="buy-field">
+                  <label for="cep">CEP de entrega</label>
+                  <div class="cep-row">
+                    <input id="cep" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}-?[0-9]{3}" maxlength="9" placeholder="00000-000" class="input">
+                    <button type="button" id="calc-shipping" class="btn btn--ghost">Calcular frete</button>
+                  </div>
+                </div>
+
+                <div id="shipping-options" class="shipping-options" aria-live="polite"></div>
+              </fieldset>
+
+              <!-- Etapa 2 — Dados do comprador -->
+              <fieldset class="buy-step" data-step="2">
+                <legend class="buy-step__legend"><span class="buy-step__num" aria-hidden="true">2</span> Seus dados</legend>
+
+                <div class="buy-grid">
+                  <div class="buy-field buy-field--full">
+                    <label for="name">Nome completo</label>
+                    <input id="name" name="name" type="text" autocomplete="name" class="input">
+                  </div>
+                  <div class="buy-field buy-field--half">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" autocomplete="email" class="input">
+                  </div>
+                  <div class="buy-field buy-field--half">
+                    <label for="phone">Telefone</label>
+                    <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000" class="input">
+                  </div>
+                </div>
+
+                <p class="buy-step__sub">Endereço de entrega</p>
+                <div class="buy-grid">
+                  <div class="buy-field">
+                    <label for="address-cep">CEP</label>
+                    <input id="address-cep" name="address-cep" type="text" readonly tabindex="-1" class="input input--readonly" placeholder="Preencha acima" aria-describedby="address-cep-hint">
+                    <span class="buy-field__hint" id="address-cep-hint">Usa o CEP informado na entrega.</span>
+                  </div>
+                  <div class="buy-field buy-field--wide">
+                    <label for="street">Rua</label>
+                    <input id="street" name="street" type="text" autocomplete="address-line1" class="input">
+                  </div>
+                  <div class="buy-field">
+                    <label for="number">Número</label>
+                    <input id="number" name="number" type="text" inputmode="numeric" class="input">
+                  </div>
+                  <div class="buy-field buy-field--wide">
+                    <label for="complement">Complemento <span class="buy-field__optional">opcional</span></label>
+                    <input id="complement" name="complement" type="text" autocomplete="address-line2" class="input">
+                  </div>
+                  <div class="buy-field buy-field--full">
+                    <label for="neighborhood">Bairro</label>
+                    <input id="neighborhood" name="neighborhood" type="text" autocomplete="address-level3" class="input">
+                  </div>
+                  <div class="buy-field buy-field--wide">
+                    <label for="city">Cidade</label>
+                    <input id="city" name="city" type="text" autocomplete="address-level2" class="input">
+                  </div>
+                  <div class="buy-field">
+                    <label for="state">Estado</label>
+                    <select id="state" name="state" autocomplete="address-level1" class="input">
+                      <option value="">UF</option>
+                      <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Etapa 3 — Resumo -->
+              <div class="buy-step buy-step--summary" data-step="3">
+                <p class="buy-step__legend"><span class="buy-step__num" aria-hidden="true">3</span> Resumo</p>
+                <div id="order-summary" class="order-summary" aria-live="polite" aria-atomic="true" aria-label="Resumo do pedido">
+                  <p class="order-summary__row"><span>Produto</span> <span id="summary-product">Título do livro</span></p>
+                  <p class="order-summary__row"><span>Quantidade</span> <span id="summary-qty">1</span></p>
+                  <p class="order-summary__row"><span>Livro</span> <span id="summary-subtotal">—</span></p>
+                  <p class="order-summary__row"><span>Frete</span> <span id="summary-shipping">—</span></p>
+                  <p class="order-summary__row order-summary__row--total"><span>Total</span> <span id="summary-total">—</span></p>
+                </div>
+
+                <button type="button" id="buy" class="btn btn--primary btn--lg btn--block">Comprar agora</button>
+
+                <p class="buy-card__secure">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Pagamento seguro — você será direcionado à plataforma de pagamento para concluir.
+                </p>
+
+                <div id="messages" role="status" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <!-- Resultado (processando / sucesso / erro) — preenchido por book-ui.js no preview -->
+            <div class="buy-card__result" id="checkout-result" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER (mesmo componente do site) ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__inner">
+        <div>
+          <p class="site-footer__brand">
+            Nágila Bernarda Zortéa
+            <span class="site-footer__brand-tag">Estética · Ciência · Educação · Erechim, RS</span>
+          </p>
+          <address class="site-footer__address">
+            <a href="https://www.google.com/maps/place/N%C3%A1gila+Zortea+-+Nz+Beauty+Clinic/@-27.6394501,-52.2749179,17z" target="_blank" rel="noopener noreferrer" aria-label="Ver NZ Beauty Clinic no Google Maps">NZ Beauty Clinic — Rua Cezária Matos, 82, Centro, Erechim/RS</a>
+          </address>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Links do rodapé">
+          <a href="/" class="site-footer__link">Início</a>
+          <a href="/#sobre" class="site-footer__link">Sobre</a>
+          <a href="/#livros" class="site-footer__link">Livros</a>
+          <a href="/#clinica" class="site-footer__link">NZ Beauty Clinic</a>
+          <a href="/#contato" class="site-footer__link">Contato</a>
+        </nav>
+
+        <p class="site-footer__copy">
+          <span>© <time datetime="2026">2026</time> Nágila Bernarda Zortéa</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CTA fixo — mobile/tablet; aparece fora do hero e da área de compra -->
+  <div class="buy-sticky" id="buy-sticky" aria-hidden="true">
+    <div class="buy-sticky__inner">
+      <div class="buy-sticky__info">
+        <span class="buy-sticky__title">Livro físico</span>
+        <span class="buy-sticky__price" data-price-display="">R$ —</span>
+      </div>
+      <a href="#comprar" class="btn btn--primary" tabindex="-1">Comprar</a>
+    </div>
+  </div>
+
+  <a href="https://wa.me/5554996516136" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp com a NZ Beauty Clinic">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+  </a>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/book.js"></script>
+  <script src="assets/js/book-ui.js"></script>
+</body>
+</html>

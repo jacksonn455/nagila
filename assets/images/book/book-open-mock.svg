@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-labelledby="t">
+  <title id="t">Mockup ilustrativo do livro aberto — conteúdo das páginas é apenas ilustrativo</title>
+  <!--
+    MOCKUP — LIVRO ABERTO (placeholder)
+    As barras cinzas representam texto; não há conteúdo real do livro aqui.
+    CONFIGURAÇÃO: cores no <style>; textos nos elementos data-field.
+  -->
+  <style>
+    :root {
+      --board: #16130f;   /* capa dura */
+      --page: #fbf8f1;    /* papel */
+      --page-edge: #e7dfcf;
+      --ink: #1a1714;
+      --line: #d8cfbf;    /* linhas de texto simuladas */
+      --gold: #b08d3a;
+    }
+    .serif { font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; }
+    .sans { font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <defs>
+    <linearGradient id="gutterL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0.72" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.16"/>
+    </linearGradient>
+    <linearGradient id="gutterR" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0.72" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.16"/>
+    </linearGradient>
+    <filter id="blur" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- Sombra -->
+  <ellipse cx="500" cy="790" rx="420" ry="40" fill="#1a1714" opacity="0.25" filter="url(#blur)"/>
+
+  <!-- Capa dura (bordas) -->
+  <path d="M82 296 C 240 262 420 268 500 318 C 580 268 760 262 918 296 L 918 772 C 760 740 580 742 500 792 C 420 742 240 740 82 772 Z" style="fill: var(--board)"/>
+
+  <!-- Bloco de páginas (bordas empilhadas) -->
+  <g style="fill: var(--page-edge)">
+    <path d="M96 290 C 250 258 420 264 500 312 L 500 782 C 420 734 250 730 96 760 Z"/>
+    <path d="M904 290 C 750 258 580 264 500 312 L 500 782 C 580 734 750 730 904 760 Z"/>
+  </g>
+
+  <!-- Página esquerda -->
+  <path d="M104 280 C 255 248 422 254 500 302 L 500 772 C 422 724 255 720 104 750 Z" style="fill: var(--page)"/>
+  <path d="M104 280 C 255 248 422 254 500 302 L 500 772 C 422 724 255 720 104 750 Z" fill="url(#gutterL)"/>
+
+  <!-- Página direita -->
+  <path d="M896 280 C 745 248 578 254 500 302 L 500 772 C 578 724 745 720 896 750 Z" style="fill: var(--page)"/>
+  <path d="M896 280 C 745 248 578 254 500 302 L 500 772 C 578 724 745 720 896 750 Z" fill="url(#gutterR)"/>
+
+  <!-- Conteúdo esquerdo: abertura de capítulo (placeholder) -->
+  <g>
+    <text data-field="chapter" class="sans" x="170" y="352" font-size="12" letter-spacing="3.5" style="fill: var(--gold)">CAPÍTULO 01</text>
+    <line x1="170" y1="368" x2="206" y2="368" style="stroke: var(--gold)" stroke-width="1"/>
+    <text data-field="chapter-title" class="serif" x="170" y="410" font-size="30" style="fill: var(--ink)">Título do capítulo</text>
+    <text class="serif" x="170" y="442" font-size="17" font-style="italic" fill="#8c8375">subtítulo do capítulo</text>
+    <g style="fill: var(--line)">
+      <rect x="170" y="492" width="270" height="6" rx="3"/>
+      <rect x="170" y="514" width="258" height="6" rx="3"/>
+      <rect x="170" y="536" width="266" height="6" rx="3"/>
+      <rect x="170" y="558" width="240" height="6" rx="3"/>
+      <rect x="170" y="580" width="262" height="6" rx="3"/>
+      <rect x="170" y="602" width="180" height="6" rx="3"/>
+      <rect x="170" y="636" width="264" height="6" rx="3"/>
+      <rect x="170" y="658" width="250" height="6" rx="3"/>
+    </g>
+    <text class="sans" x="300" y="722" text-anchor="middle" font-size="11" fill="#a39a8a">12</text>
+  </g>
+
+  <!-- Conteúdo direito (placeholder) -->
+  <g>
+    <text class="serif" x="566" y="378" font-size="64" style="fill: var(--gold)">A</text>
+    <g style="fill: var(--line)">
+      <rect x="616" y="336" width="214" height="6" rx="3"/>
+      <rect x="616" y="358" width="206" height="6" rx="3"/>
+      <rect x="566" y="392" width="264" height="6" rx="3"/>
+      <rect x="566" y="414" width="252" height="6" rx="3"/>
+      <rect x="566" y="436" width="262" height="6" rx="3"/>
+      <rect x="566" y="458" width="230" height="6" rx="3"/>
+    </g>
+    <!-- Citação destacada -->
+    <line x1="566" y1="496" x2="566" y2="562" style="stroke: var(--gold)" stroke-width="2"/>
+    <text class="serif" x="584" y="520" font-size="19" font-style="italic" fill="#5a5248">“Trecho em destaque</text>
+    <text class="serif" x="584" y="548" font-size="19" font-style="italic" fill="#5a5248">do livro.”</text>
+    <g style="fill: var(--line)">
+      <rect x="566" y="594" width="262" height="6" rx="3"/>
+      <rect x="566" y="616" width="248" height="6" rx="3"/>
+      <rect x="566" y="638" width="258" height="6" rx="3"/>
+      <rect x="566" y="660" width="196" height="6" rx="3"/>
+    </g>
+    <text class="sans" x="700" y="722" text-anchor="middle" font-size="11" fill="#a39a8a">13</text>
+  </g>
+
+  <!-- Marcação de mockup -->
+  <text class="sans" x="500" y="880" text-anchor="middle" font-size="13" letter-spacing="3" fill="#8a7440">MOCKUP ILUSTRATIVO · PÁGINAS DE EXEMPLO</text>
+</svg>

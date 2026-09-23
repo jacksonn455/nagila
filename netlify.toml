@@ -1,0 +1,31 @@
+# Site estático publicado a partir da raiz do repositório + Netlify Functions.
+# Os arquivos gerados (i18n, sitemap, favicon) já ficam versionados, então não há build.
+
+[build]
+  publish = "."
+  functions = "functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Não expõe código-fonte e arquivos de desenvolvimento como páginas públicas
+[[redirects]]
+  from = "/functions/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tests/*"
+  to = "/404.html"
+  status = 404
+  force = true

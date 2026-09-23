@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-labelledby="t">
+  <title id="t">Mockup ilustrativo do livro em perspectiva — não é foto do produto</title>
+  <!--
+    MOCKUP — LIVRO EM PERSPECTIVA (placeholder)
+    CONFIGURAÇÃO: cores no <style>; textos nos elementos data-field.
+  -->
+  <style>
+    :root {
+      --cover-a: #1c1814;
+      --cover-b: #0e0c0a;
+      --spine: #0b0907;
+      --pages: #f4eee2;
+      --gold: #c9a84c;
+      --gold-soft: #8a7440;
+    }
+    .serif { font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; }
+    .sans { font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <defs>
+    <linearGradient id="front" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color: var(--cover-a)"/>
+      <stop offset="1" style="stop-color: var(--cover-b)"/>
+    </linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.35" stop-color="#fff" stop-opacity="0.02"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="spineG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity="0.35"/>
+      <stop offset="0.7" stop-color="#fff" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="pagesG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color: var(--pages)"/>
+      <stop offset="1" stop-color="#d9d0bd"/>
+    </linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="blurSm" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <!-- Sombra no chão -->
+  <ellipse cx="520" cy="905" rx="300" ry="34" fill="#1a1714" opacity="0.28" filter="url(#blur)"/>
+  <path d="M300 884 L650 926 L710 910 L360 870 Z" fill="#1a1714" opacity="0.25" filter="url(#blurSm)"/>
+
+  <!-- Miolo (páginas) — visível na base -->
+  <path d="M290 880 L630 920 L646 908 L306 868 Z" fill="url(#pagesG)"/>
+  <g stroke="#c8bea9" stroke-width="0.8" opacity="0.8">
+    <line x1="296" y1="872" x2="634" y2="916"/>
+    <line x1="300" y1="869" x2="639" y2="912"/>
+  </g>
+
+  <!-- Lombada -->
+  <path d="M232 178 L290 160 L290 880 L232 862 Z" style="fill: var(--spine)"/>
+  <path d="M232 178 L290 160 L290 880 L232 862 Z" fill="url(#spineG)"/>
+  <g transform="matrix(0 1 -1 0 255 0)">
+    <text class="serif" x="520" y="0" text-anchor="middle" font-size="18" letter-spacing="4" style="fill: var(--gold)" data-field="spine">TÍTULO DO LIVRO</text>
+  </g>
+
+  <!-- Capa frontal (face inclinada) -->
+  <path d="M290 160 L630 200 L630 920 L290 880 Z" fill="url(#front)"/>
+
+  <!-- Conteúdo da capa mapeado na face (transformação afim) -->
+  <g transform="matrix(0.85 0.1 0 1.2 290 160)">
+    <rect x="34" y="30" width="342" height="540" fill="none" style="stroke: var(--gold)" stroke-opacity="0.55" stroke-width="1"/>
+    <text data-field="author" class="sans" x="205" y="92" text-anchor="middle" font-size="11" letter-spacing="3.2" style="fill: var(--gold)">NÁGILA BERNARDA ZORTÉA</text>
+    <g transform="translate(205 206)" style="stroke: var(--gold)" fill="none">
+      <line x1="-58" y1="0" x2="-12" y2="0" stroke-width="0.8"/>
+      <line x1="12" y1="0" x2="58" y2="0" stroke-width="0.8"/>
+      <rect x="-5" y="-5" width="10" height="10" transform="rotate(45)" stroke-width="0.9"/>
+    </g>
+    <text data-field="title-1" class="serif" x="205" y="262" text-anchor="middle" font-size="27" font-style="italic" style="fill: var(--gold)"></text>
+    <text data-field="title-2" class="serif" x="205" y="306" text-anchor="middle" font-size="31" letter-spacing="2.5" style="fill: var(--gold)">TÍTULO DO</text>
+    <text data-field="title-3" class="serif" x="205" y="346" text-anchor="middle" font-size="31" letter-spacing="2.5" style="fill: var(--gold)">LIVRO</text>
+    <line x1="185" y1="378" x2="225" y2="378" style="stroke: var(--gold)" stroke-opacity="0.6" stroke-width="0.8"/>
+    <text data-field="subtitle" class="serif" x="205" y="408" text-anchor="middle" font-size="15" font-style="italic" style="fill: var(--gold-soft)">Subtítulo do livro</text>
+    <g transform="translate(205 488)">
+      <circle r="21" fill="none" style="stroke: var(--gold)" stroke-opacity="0.6" stroke-width="0.8"/>
+      <text class="serif" y="6" text-anchor="middle" font-size="17" style="fill: var(--gold)">NZ</text>
+    </g>
+  </g>
+
+  <!-- Luz sobre a capa -->
+  <path d="M290 160 L630 200 L630 920 L290 880 Z" fill="url(#light)"/>
+  <!-- Aresta da dobradiça -->
+  <path d="M290 160 L298 161 L298 881 L290 880 Z" fill="#000" opacity="0.35"/>
+  <line x1="302" y1="162" x2="302" y2="882" stroke="#fff" stroke-opacity="0.08" stroke-width="1.5"/>
+
+  <!-- Marcação de mockup -->
+  <text class="sans" x="500" y="975" text-anchor="middle" font-size="13" letter-spacing="3" fill="#8a7440">MOCKUP ILUSTRATIVO</text>
+</svg>

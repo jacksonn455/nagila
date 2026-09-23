@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-labelledby="t">
+  <title id="t">Ilustração de ambientação com o livro sobre uma mesa — mockup, não é fotografia</title>
+  <!--
+    MOCKUP — AMBIENTAÇÃO / LIFESTYLE (placeholder vetorial)
+    Ilustração propositalmente estilizada; substituir por fotografia real quando existir.
+    CONFIGURAÇÃO: cores no <style>.
+  -->
+  <style>
+    :root {
+      --wall-a: #f1e9dc;
+      --wall-b: #e4d6c1;
+      --table: #f7f3ec;
+      --vein: #ddd2c1;
+      --cover: #16130f;
+      --gold: #c9a84c;
+      --blush: #e8c9bb;
+      --leaf: #b9b28f;
+    }
+    .serif { font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; }
+    .sans { font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif; }
+  </style>
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" style="stop-color: var(--wall-a)"/>
+      <stop offset="1" style="stop-color: var(--wall-b)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.18" r="0.7">
+      <stop offset="0" stop-color="#fff6e3" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fff6e3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tableG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color: var(--table)"/>
+      <stop offset="1" stop-color="#ebe3d6"/>
+    </linearGradient>
+    <linearGradient id="coverSheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="blurLg" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+
+  <!-- Parede -->
+  <rect width="1000" height="1000" fill="url(#wall)"/>
+  <rect width="1000" height="1000" fill="url(#glow)"/>
+
+  <!-- Prateleira ao fundo (abstrata) -->
+  <g opacity="0.55">
+    <rect x="640" y="150" width="300" height="6" fill="#d3c3a8"/>
+    <rect x="662" y="80" width="18" height="70" rx="2" fill="#cdb99a"/>
+    <rect x="684" y="92" width="14" height="58" rx="2" fill="#e2d2b8"/>
+    <rect x="702" y="74" width="20" height="76" rx="2" fill="#bfae92"/>
+    <rect x="880" y="104" width="30" height="46" rx="14" fill="#e6d7c0"/>
+  </g>
+
+  <!-- Mesa -->
+  <path d="M0 560 L1000 530 L1000 1000 L0 1000 Z" fill="url(#tableG)"/>
+  <path d="M0 560 L1000 530" stroke="#e0d5c4" stroke-width="2"/>
+  <g fill="none" style="stroke: var(--vein)" stroke-width="1.6" opacity="0.9">
+    <path d="M40 700 C 180 660 260 760 420 720 S 700 640 820 700"/>
+    <path d="M120 900 C 260 840 380 900 520 860 S 820 800 980 850"/>
+    <path d="M600 980 C 660 920 760 940 860 890"/>
+  </g>
+
+  <!-- Vaso com flores (estilizado) -->
+  <ellipse cx="820" cy="660" rx="80" ry="14" fill="#1a1714" opacity="0.14" filter="url(#blur)"/>
+  <g>
+    <path d="M790 520 C 780 560 790 640 800 660 L 840 660 C 850 640 860 560 850 520 Z" fill="#d9a88c" opacity="0.9"/>
+    <path d="M800 520 C 796 560 800 620 808 656" stroke="#fff" stroke-opacity="0.35" stroke-width="4" fill="none"/>
+    <g stroke="#a39b76" stroke-width="3" fill="none">
+      <path d="M820 520 C 816 470 800 440 780 420"/>
+      <path d="M822 520 C 826 460 846 430 868 410"/>
+      <path d="M820 520 C 820 470 824 430 826 392"/>
+    </g>
+    <ellipse cx="770" cy="470" rx="16" ry="8" transform="rotate(-35 770 470)" style="fill: var(--leaf)"/>
+    <ellipse cx="866" cy="462" rx="16" ry="8" transform="rotate(30 866 462)" style="fill: var(--leaf)"/>
+    <circle cx="778" cy="414" r="24" style="fill: var(--blush)"/>
+    <circle cx="872" cy="404" r="22" fill="#f1dcd0"/>
+    <circle cx="826" cy="384" r="26" style="fill: var(--blush)"/>
+    <circle cx="826" cy="384" r="10" fill="#dcb3a2"/>
+    <circle cx="778" cy="414" r="9" fill="#dcb3a2"/>
+    <circle cx="872" cy="404" r="8" fill="#e6c7b8"/>
+  </g>
+
+  <!-- Sombra do livro -->
+  <path d="M250 640 L620 590 L700 880 L320 940 Z" fill="#1a1714" opacity="0.3" filter="url(#blurLg)"/>
+
+  <!-- Miolo (espessura) -->
+  <path d="M232 618 L604 566 L684 858 L680 874 L310 928 L306 912 Z" fill="#ece4d5"/>
+  <path d="M306 912 L684 858 L680 874 L310 928 Z" fill="#d8ceba"/>
+
+  <!-- Capa (livro deitado, levemente rotacionado) -->
+  <path d="M228 604 L600 552 L680 844 L306 898 Z" style="fill: var(--cover)"/>
+  <path d="M228 604 L600 552 L680 844 L306 898 Z" fill="url(#coverSheen)"/>
+  <path d="M228 604 L240 602 L318 896 L306 898 Z" fill="#000" opacity="0.4"/>
+
+  <!-- Tipografia da capa, mapeada na face (afim) -->
+  <g transform="matrix(0.93 -0.13 0.13 0.49 228 604)">
+    <rect x="34" y="30" width="342" height="540" fill="none" style="stroke: var(--gold)" stroke-opacity="0.5" stroke-width="1.4"/>
+    <text class="sans" x="205" y="92" text-anchor="middle" font-size="12" letter-spacing="3" style="fill: var(--gold)">NÁGILA BERNARDA ZORTÉA</text>
+    <text class="serif" x="205" y="262" text-anchor="middle" font-size="28" font-style="italic" style="fill: var(--gold)"></text>
+    <text class="serif" x="205" y="306" text-anchor="middle" font-size="31" letter-spacing="2.5" style="fill: var(--gold)">TÍTULO DO</text>
+    <text class="serif" x="205" y="346" text-anchor="middle" font-size="31" letter-spacing="2.5" style="fill: var(--gold)">LIVRO</text>
+    <circle cx="205" cy="488" r="21" fill="none" style="stroke: var(--gold)" stroke-opacity="0.6" stroke-width="1.2"/>
+    <text class="serif" x="205" y="494" text-anchor="middle" font-size="17" style="fill: var(--gold)">NZ</text>
+  </g>
+
+  <!-- Óculos / caneta (detalhe) -->
+  <g transform="rotate(-18 190 820)">
+    <rect x="80" y="812" width="230" height="10" rx="5" fill="#c9a84c"/>
+    <rect x="80" y="812" width="40" height="10" rx="5" fill="#1a1714"/>
+  </g>
+
+  <!-- Marcação de mockup -->
+  <rect x="36" y="36" width="238" height="34" rx="17" fill="#fbf8f1" opacity="0.85"/>
+  <text class="sans" x="155" y="58" text-anchor="middle" font-size="12" letter-spacing="2.4" fill="#8a7440">MOCKUP ILUSTRATIVO</text>
+</svg>
