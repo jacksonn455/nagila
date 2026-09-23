@@ -10,9 +10,9 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Valores públicos (CEP da clínica aparece no site; NODE_ENV é uma palavra comum).
-  # Tokens e chaves continuam sendo verificados pelo secrets scanning.
-  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_CEP,NODE_ENV"
+  # Valores públicos: aparecem no próprio site (CEP e endereço da clínica, dados do livro)
+  # ou são palavras comuns. Tokens e chaves continuam sendo verificados pelo secrets scanning.
+  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_CEP,NODE_ENV,BOOK_TITLE,BOOK_PRICE_CENTS,BOOK_WEIGHT_GRAMS,BOOK_LENGTH_CM,BOOK_WIDTH_CM,BOOK_HEIGHT_CM,BOOK_MAX_QUANTITY,PICKUP_ENABLED,PICKUP_ADDRESS,MELHOR_ENVIO_SERVICES,MELHOR_ENVIO_ENV,SITE_URL,PAYMENT_WEBHOOK_URL"
 
 # Não expõe código-fonte e arquivos de desenvolvimento como páginas públicas
 [[redirects]]
