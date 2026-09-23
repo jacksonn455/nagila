@@ -28,6 +28,7 @@
     neighborhood: '#neighborhood',
     city: '#city',
     state: '#state',
+    deliveryAddress: '#delivery-address',
     buy: '#buy',
     messages: '#messages',
     card: '#purchase-panel',
@@ -49,6 +50,7 @@
     priceCents: null,
     maxQuantity: null,
     options: [],
+    pickup: null,
     clientToken: null
   };
 
@@ -104,10 +106,25 @@
     return { ok: res.ok, data };
   }
 
+  function allOptions() {
+    return state.pickup ? [state.pickup, ...state.options] : state.options;
+  }
+
   function selectedOption() {
     const radio = document.querySelector('input[name="shippingOption"]:checked');
     if (!radio) return null;
-    return state.options.find((o) => o.id === radio.getAttribute('data-option-id')) || null;
+    return allOptions().find((o) => o.id === radio.getAttribute('data-option-id')) || null;
+  }
+
+  function isPickup() {
+    const opt = selectedOption();
+    return !!(opt && state.pickup && opt.id === state.pickup.id);
+  }
+
+  // Na retirada no local o endereço de entrega não é necessário
+  function updateDeliveryMode() {
+    const block = $q('deliveryAddress');
+    if (block) block.hidden = isPickup();
   }
 
   function updateSummary() {
@@ -115,15 +132,16 @@
     const subtotal = state.priceCents != null ? state.priceCents * qty : null;
     const ship = selectedOption();
     $q('summarySubtotal').textContent = formatCurrency(subtotal);
-    $q('summaryShipping').textContent = ship ? formatCurrency(ship.price_cents) : '—';
+    $q('summaryShipping').textContent = ship ? (ship.price_cents === 0 ? 'Grátis' : formatCurrency(ship.price_cents)) : '—';
     $q('summaryTotal').textContent = subtotal != null && ship ? formatCurrency(subtotal + ship.price_cents) : '—';
   }
 
   // Frete depende do CEP e da quantidade: qualquer mudança invalida a cotação
   function resetShipping() {
     if (!state.options.length) return;
+    const keepPickup = isPickup();
     state.options = [];
-    $q('shippingOptions').innerHTML = '';
+    renderOptions(keepPickup ? state.pickup.id : null);
     updateSummary();
   }
 
@@ -136,6 +154,8 @@
       if (data.price_cents == null) return;
       state.priceCents = data.price_cents;
       state.maxQuantity = data.max_quantity || null;
+      state.pickup = data.pickup || null;
+      if (!state.options.length) renderOptions(null);
       document.querySelectorAll('[data-price-display]').forEach((el) => (el.textContent = formatCurrency(data.price_cents)));
       document.querySelectorAll('[data-price-flag]').forEach((el) => (el.hidden = true));
       if (state.maxQuantity) $q('quantity').max = state.maxQuantity;
@@ -146,22 +166,36 @@
   }
 
   // Shipping calculation
-  function renderOptions(options) {
+  // Retirada no local (se houver) + opções cotadas; checkedId marca a opção selecionada
+  function renderOptions(checkedId) {
+    const options = allOptions();
+    if (!options.length) {
+      $q('shippingOptions').innerHTML = '';
+      updateDeliveryMode();
+      return;
+    }
     $q('shippingOptions').innerHTML = `
-      <div class="shipping-options__head"><span>Opções de envio</span></div>
+      <div class="shipping-options__head"><span>Opções de entrega</span></div>
       ${options
-        .map(
-          (o, idx) => `
+        .map((o) => {
+          const pickup = state.pickup && o.id === state.pickup.id;
+          const detail = pickup
+            ? escapeHtml(o.address)
+            : o.estimated_days
+              ? `Até ${o.estimated_days} dias úteis`
+              : '';
+          return `
         <label>
-          <input type="radio" name="shippingOption" data-option-id="${escapeHtml(o.id)}" ${idx === 0 ? 'checked' : ''}>
+          <input type="radio" name="shippingOption" data-option-id="${escapeHtml(o.id)}" ${o.id === checkedId ? 'checked' : ''}>
           <span class="ship-opt__main">
             <span class="ship-opt__name">${escapeHtml(o.service)}${o.carrier ? ` <span class="ship-opt__eta">· ${escapeHtml(o.carrier)}</span>` : ''}</span>
-            ${o.estimated_days ? `<span class="ship-opt__eta">Até ${o.estimated_days} dias úteis</span>` : ''}
+            ${detail ? `<span class="ship-opt__eta">${detail}</span>` : ''}
           </span>
-          <span class="ship-opt__price">${formatCurrency(o.price_cents)}</span>
-        </label>`
-        )
+          <span class="ship-opt__price">${pickup ? 'Grátis' : formatCurrency(o.price_cents)}</span>
+        </label>`;
+        })
         .join('')}`;
+    updateDeliveryMode();
   }
 
   async function calculateShipping() {
@@ -181,16 +215,16 @@
     try {
       const { ok, data } = await postJson('calculateShipping', { cep, quantity: qty });
       if (!ok || !data || !Array.isArray(data.options) || !data.options.length) {
-        $q('shippingOptions').innerHTML = '';
+        renderOptions(null);
         return setMessage((data && data.error) || 'Erro ao calcular o frete. Tente novamente.', 'error');
       }
       state.options = data.options;
-      renderOptions(data.options);
+      renderOptions(data.options[0].id);
       updateSummary();
       setMessage('Frete calculado. Preencha seus dados para prosseguir.', 'success');
     } catch (err) {
       console.error(err);
-      $q('shippingOptions').innerHTML = '';
+      renderOptions(null);
       setMessage('Erro ao calcular o frete. Verifique sua conexão e tente novamente.', 'error');
     } finally {
       btn.disabled = false;
@@ -211,12 +245,14 @@
       state: value('state')
     };
 
-    if (!value('name') || !value('email') || address.cep.length !== 8) {
-      return setMessage('Preencha nome, email e CEP.', 'error');
+    const pickup = isPickup();
+
+    if (!value('name') || !value('email') || (!pickup && address.cep.length !== 8)) {
+      return setMessage(pickup ? 'Preencha nome e email.' : 'Preencha nome, email e CEP.', 'error');
     }
     if (!qty) return setMessage('Quantidade inválida.', 'error');
-    if (!ship) return setMessage('Calcule e escolha uma opção de frete.', 'error');
-    if (!address.street || !address.number || !address.neighborhood || !address.city || !address.state) {
+    if (!ship) return setMessage('Calcule o frete ou escolha retirar no local.', 'error');
+    if (!pickup && (!address.street || !address.number || !address.neighborhood || !address.city || !address.state)) {
       return setMessage('Preencha o endereço de entrega completo.', 'error');
     }
 
@@ -232,7 +268,7 @@
         email: value('email'),
         phone: value('phone'),
         quantity: qty,
-        address,
+        address: pickup ? {} : address,
         shipping_option_id: ship.id
       });
 
@@ -257,13 +293,15 @@
       error: false,
       label: 'Pagamento aprovado',
       title: 'Pedido recebido!',
-      lead: 'Obrigada pela compra! Você vai receber a confirmação do Mercado Pago no seu e-mail. Assim que o exemplar for postado, enviaremos o código de rastreio.'
+      lead: 'Obrigada pela compra! Você vai receber a confirmação do Mercado Pago no seu e-mail. Assim que o exemplar for postado, enviaremos o código de rastreio.',
+      pickupLead: 'Obrigada pela compra! Você vai receber a confirmação do Mercado Pago no seu e-mail. Combine a retirada do seu exemplar pelo WhatsApp da clínica.'
     },
     pendente: {
       error: false,
       label: 'Pagamento em análise',
       title: 'Aguardando pagamento',
-      lead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, o exemplar será separado para envio.'
+      lead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, o exemplar será separado para envio.',
+      pickupLead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, combine a retirada pelo WhatsApp da clínica.'
     },
     falhou: {
       error: true,
@@ -276,6 +314,7 @@
     const key = params.get('pagamento');
     const info = RETURN_STATES[key];
     if (!info) return;
+    const pickup = params.get('entrega') === 'retirada';
 
     const card = $q('card');
     const result = $q('result');
@@ -288,11 +327,11 @@
         <span class="checkout-result__icon">${icon}</span>
         ${info.label ? `<span class="section__label" style="margin:0">${info.label}</span>` : ''}
         <h3 class="checkout-result__title" tabindex="-1">${info.title}</h3>
-        <p class="checkout-result__lead">${info.lead}</p>
+        <p class="checkout-result__lead">${(pickup && info.pickupLead) || info.lead}</p>
         <div class="checkout-result__actions">
           ${info.error ? '<button type="button" class="btn btn--primary" data-checkout-retry>Tentar novamente</button>' : '<a href="/" class="btn btn--ghost">Voltar ao site</a>'}
         </div>
-        <a class="checkout-result__link" href="https://wa.me/5554996516136" target="_blank" rel="noopener noreferrer">Dúvidas? Fale pelo WhatsApp</a>
+        <a class="checkout-result__link" href="https://wa.me/5554996516136" target="_blank" rel="noopener noreferrer">${pickup && !info.error ? 'Combinar retirada pelo WhatsApp' : 'Dúvidas? Fale pelo WhatsApp'}</a>
       </div>`;
     result.hidden = false;
     card.dataset.state = info.error ? 'error' : 'success';
@@ -349,7 +388,10 @@
       resetShipping();
       updateSummary();
     });
-    $q('shippingOptions').addEventListener('change', updateSummary);
+    $q('shippingOptions').addEventListener('change', () => {
+      updateSummary();
+      updateDeliveryMode();
+    });
 
     loadProduct();
     showReturnState();

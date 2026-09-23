@@ -20,6 +20,10 @@ ATENÇÃO: nunca commitar `.env`. Em produção as variáveis ficam no painel do
 - `MELHOR_ENVIO_TOKEN`: Integrações → Permissões de acesso → gerar token (escopo mínimo `shipping-calculate`).
 - `ORIGIN_CEP`: CEP de onde os livros saem.
 - Opcional: `MELHOR_ENVIO_ENV=sandbox` para testes; `MELHOR_ENVIO_USER_AGENT="Nome do app (email técnico)"`.
+- Transportadoras oferecidas: Correios PAC (1), SEDEX (2) e Jadlog .Package (3). Para mudar, `MELHOR_ENVIO_SERVICES=1,2,3`.
+- Retirada no local (frete grátis, sem endereço): ativa por padrão na NZ Beauty Clinic.
+  `PICKUP_ADDRESS` troca o endereço exibido; `PICKUP_ENABLED=false` desativa.
+  Pedidos de retirada ficam em `shipments` com `provider = pickup` e `status = awaiting_pickup`.
 
 ## 4. Livro
 - `BOOK_TITLE`, `BOOK_PRICE_CENTS` (ex.: `8990` = R$ 89,90), `BOOK_WEIGHT_GRAMS`,

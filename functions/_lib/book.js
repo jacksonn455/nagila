@@ -34,4 +34,21 @@ function missingBookConfig(book) {
   return Object.keys(required).filter((k) => !required[k]);
 }
 
-module.exports = { getBook, missingBookConfig };
+// Retirada no local (sem frete). PICKUP_ENABLED=false desativa.
+const PICKUP_ID = 'pickup';
+
+function getPickup() {
+  if (process.env.PICKUP_ENABLED === 'false') return null;
+  return {
+    id: PICKUP_ID,
+    service: 'Retirar no local',
+    carrier: null,
+    price_cents: 0,
+    estimated_days: null,
+    address:
+      (process.env.PICKUP_ADDRESS || '').trim() ||
+      'NZ Beauty Clinic — Rua Cezária Matos, 82, Centro, Erechim/RS'
+  };
+}
+
+module.exports = { getBook, missingBookConfig, getPickup, PICKUP_ID };

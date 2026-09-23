@@ -7,7 +7,7 @@
 
 const { json, readBody } = require('../_lib/http');
 const { sb } = require('../_lib/supabase');
-const { getBook, missingBookConfig } = require('../_lib/book');
+const { getBook, missingBookConfig, getPickup, PICKUP_ID } = require('../_lib/book');
 const { quoteShipping, normalizeCep, ShippingError } = require('../_lib/shipping');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,7 +53,12 @@ exports.handler = async (event) => {
   const phone = clean(p.phone, 30);
   if (!name || !EMAIL_RE.test(email)) return json(400, { error: 'Informe nome e e-mail válidos.' });
 
-  // Somente os campos conhecidos do endereço são aceitos
+  const pickup = String(p.shipping_option_id) === PICKUP_ID ? getPickup() : null;
+  if (String(p.shipping_option_id) === PICKUP_ID && !pickup) {
+    return json(400, { error: 'Retirada no local indisponível.' });
+  }
+
+  // Somente os campos conhecidos do endereço são aceitos (dispensado na retirada)
   const a = p.address || {};
   const address = {
     cep: normalizeCep(a.cep),
@@ -65,7 +70,7 @@ exports.handler = async (event) => {
     state: clean(a.state, 2).toUpperCase(),
     country: 'BR'
   };
-  if (!address.cep || !address.street || !address.number || !address.neighborhood || !address.city || !UFS.has(address.state)) {
+  if (!pickup && (!address.cep || !address.street || !address.number || !address.neighborhood || !address.city || !UFS.has(address.state))) {
     return json(400, { error: 'Endereço de entrega incompleto.' });
   }
 
@@ -99,8 +104,11 @@ exports.handler = async (event) => {
     }
 
     // Recalcula o frete e confere se a opção escolhida ainda existe
-    const options = await quoteShipping(address.cep, quantity, book);
-    const shipping = options.find((o) => o.id === String(p.shipping_option_id));
+    let shipping = pickup;
+    if (!shipping) {
+      const options = await quoteShipping(address.cep, quantity, book);
+      shipping = options.find((o) => o.id === String(p.shipping_option_id));
+    }
     if (!shipping) {
       return json(409, { error: 'A opção de frete escolhida não está mais disponível. Calcule o frete novamente.' });
     }
@@ -137,41 +145,47 @@ exports.handler = async (event) => {
         subtotal_cents: subtotal
       }
     });
-    await sb('addresses', { method: 'POST', body: { order_id: order.id, ...address } });
-    // Guarda o serviço de entrega escolhido (PAC, SEDEX...) para a postagem
+    if (!pickup) await sb('addresses', { method: 'POST', body: { order_id: order.id, ...address } });
+    // Guarda o serviço de entrega escolhido (PAC, SEDEX, retirada...) para a postagem
     await sb('shipments', {
       method: 'POST',
-      body: { order_id: order.id, provider: 'melhorenvio', status: 'quoted', raw: shipping }
+      body: {
+        order_id: order.id,
+        provider: pickup ? 'pickup' : 'melhorenvio',
+        status: pickup ? 'awaiting_pickup' : 'quoted',
+        raw: shipping
+      }
     });
 
-    const shippingLabel = shipping.carrier ? `${shipping.carrier} ${shipping.service}` : shipping.service;
+    const items = [
+      {
+        id: book.productId,
+        title: book.title,
+        quantity,
+        unit_price: book.priceCents / 100,
+        currency_id: 'BRL'
+      }
+    ];
+    // O Mercado Pago não aceita item com valor zero: a retirada não gera item de frete
+    if (shipping.price_cents > 0) {
+      items.push({
+        id: `frete-${shipping.id}`,
+        title: `Frete — ${shipping.carrier ? `${shipping.carrier} ${shipping.service}` : shipping.service}`,
+        quantity: 1,
+        unit_price: shipping.price_cents / 100,
+        currency_id: 'BRL'
+      });
+    }
+
     const base = siteUrl();
-    const pref = {
-      items: [
-        {
-          id: book.productId,
-          title: book.title,
-          quantity,
-          unit_price: book.priceCents / 100,
-          currency_id: 'BRL'
-        },
-        {
-          id: `frete-${shipping.id}`,
-          title: `Frete — ${shippingLabel}`,
-          quantity: 1,
-          unit_price: shipping.price_cents / 100,
-          currency_id: 'BRL'
-        }
-      ],
-      payer: { name, email },
-      external_reference: order.id
-    };
+    const pref = { items, payer: { name, email }, external_reference: order.id };
     if (process.env.PAYMENT_WEBHOOK_URL) pref.notification_url = process.env.PAYMENT_WEBHOOK_URL;
     if (base) {
+      const extra = pickup ? '&entrega=retirada' : '';
       pref.back_urls = {
-        success: `${base}/livro.html?pagamento=aprovado#comprar`,
-        pending: `${base}/livro.html?pagamento=pendente#comprar`,
-        failure: `${base}/livro.html?pagamento=falhou#comprar`
+        success: `${base}/livro.html?pagamento=aprovado${extra}#comprar`,
+        pending: `${base}/livro.html?pagamento=pendente${extra}#comprar`,
+        failure: `${base}/livro.html?pagamento=falhou${extra}#comprar`
       };
       pref.auto_return = 'approved';
     }

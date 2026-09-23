@@ -4,7 +4,7 @@ All requests/responses are JSON. Error responses are `{ error: string }` with a 
 Shared helpers live in `functions/_lib/` (not a function).
 
 bookInfo — GET /.netlify/functions/bookInfo
-- Response 200: { title, price_cents, max_quantity, available }
+- Response 200: { title, price_cents, max_quantity, available, pickup: { id: 'pickup', service, price_cents: 0, address } | null }
 
 calculateShipping — POST /.netlify/functions/calculateShipping
 - Request: { cep: string, quantity: integer }
@@ -18,8 +18,10 @@ createOrder — POST /.netlify/functions/createOrder
     name, email, phone?,
     quantity: integer,
     address: { cep, street, number, complement?, neighborhood, city, state },
-    shipping_option_id: string       // id returned by calculateShipping
+    shipping_option_id: string       // id returned by calculateShipping, or 'pickup'
   }
+- With shipping_option_id = 'pickup' the address is not required, no shipping item is added to the preference
+  and the back_urls include `&entrega=retirada`.
 - Response 200: { init_point, order_id }
 - 400 validation · 409 shipping option no longer available / order already registered · 502 Mercado Pago error · 503 config missing
 - Price and shipping are recalculated server-side; the Mercado Pago preference contains the book and the shipping as items,
