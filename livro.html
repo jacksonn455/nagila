@@ -376,6 +376,26 @@
                   </div>
                 </div>
 
+                <!-- Forma de entrega — exibida por book.js quando a retirada no local está ativa -->
+                <div class="shipping-options delivery-mode" id="delivery-mode" role="radiogroup" aria-label="Forma de entrega" hidden>
+                  <label>
+                    <input type="radio" name="deliveryMode" value="delivery" checked>
+                    <span class="ship-opt__main">
+                      <span class="ship-opt__name">Receber em casa</span>
+                      <span class="ship-opt__eta">Correios ou Jadlog · frete calculado pelo CEP</span>
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="deliveryMode" value="pickup">
+                    <span class="ship-opt__main">
+                      <span class="ship-opt__name">Retirar no local</span>
+                      <span class="ship-opt__eta" id="pickup-address"></span>
+                    </span>
+                    <span class="ship-opt__price">Grátis</span>
+                  </label>
+                </div>
+
+                <div id="delivery-shipping">
                 <div class="buy-field">
                   <label for="cep">CEP de entrega</label>
                   <div class="cep-row">
@@ -385,6 +405,7 @@
                 </div>
 
                 <div id="shipping-options" class="shipping-options" aria-live="polite"></div>
+                </div>
               </fieldset>
 
               <!-- Etapa 2 — Dados do comprador -->

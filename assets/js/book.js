@@ -28,7 +28,10 @@
     neighborhood: '#neighborhood',
     city: '#city',
     state: '#state',
+    deliveryMode: '#delivery-mode',
+    deliveryShipping: '#delivery-shipping',
     deliveryAddress: '#delivery-address',
+    pickupAddress: '#pickup-address',
     buy: '#buy',
     messages: '#messages',
     card: '#purchase-panel',
@@ -106,25 +109,23 @@
     return { ok: res.ok, data };
   }
 
-  function allOptions() {
-    return state.pickup ? [state.pickup, ...state.options] : state.options;
+  function isPickup() {
+    return !!state.pickup && document.querySelector('input[name="deliveryMode"]:checked')?.value === 'pickup';
   }
 
   function selectedOption() {
+    if (isPickup()) return state.pickup;
     const radio = document.querySelector('input[name="shippingOption"]:checked');
     if (!radio) return null;
-    return allOptions().find((o) => o.id === radio.getAttribute('data-option-id')) || null;
+    return state.options.find((o) => o.id === radio.getAttribute('data-option-id')) || null;
   }
 
-  function isPickup() {
-    const opt = selectedOption();
-    return !!(opt && state.pickup && opt.id === state.pickup.id);
-  }
-
-  // Na retirada no local o endereço de entrega não é necessário
+  // Na retirada no local não há CEP, frete nem endereço de entrega
   function updateDeliveryMode() {
-    const block = $q('deliveryAddress');
-    if (block) block.hidden = isPickup();
+    const pickup = isPickup();
+    $q('deliveryShipping').hidden = pickup;
+    $q('deliveryAddress').hidden = pickup;
+    updateSummary();
   }
 
   function updateSummary() {
@@ -139,9 +140,8 @@
   // Frete depende do CEP e da quantidade: qualquer mudança invalida a cotação
   function resetShipping() {
     if (!state.options.length) return;
-    const keepPickup = isPickup();
     state.options = [];
-    renderOptions(keepPickup ? state.pickup.id : null);
+    renderOptions(null);
     updateSummary();
   }
 
@@ -155,7 +155,10 @@
       state.priceCents = data.price_cents;
       state.maxQuantity = data.max_quantity || null;
       state.pickup = data.pickup || null;
-      if (!state.options.length) renderOptions(null);
+      if (state.pickup) {
+        $q('pickupAddress').textContent = state.pickup.address;
+        $q('deliveryMode').hidden = false;
+      }
       document.querySelectorAll('[data-price-display]').forEach((el) => (el.textContent = formatCurrency(data.price_cents)));
       document.querySelectorAll('[data-price-flag]').forEach((el) => (el.hidden = true));
       if (state.maxQuantity) $q('quantity').max = state.maxQuantity;
@@ -166,36 +169,28 @@
   }
 
   // Shipping calculation
-  // Retirada no local (se houver) + opções cotadas; checkedId marca a opção selecionada
+  // Opções cotadas; checkedId marca a opção selecionada
   function renderOptions(checkedId) {
-    const options = allOptions();
+    const options = state.options;
     if (!options.length) {
       $q('shippingOptions').innerHTML = '';
-      updateDeliveryMode();
       return;
     }
     $q('shippingOptions').innerHTML = `
-      <div class="shipping-options__head"><span>Opções de entrega</span></div>
+      <div class="shipping-options__head"><span>Opções de envio</span></div>
       ${options
-        .map((o) => {
-          const pickup = state.pickup && o.id === state.pickup.id;
-          const detail = pickup
-            ? escapeHtml(o.address)
-            : o.estimated_days
-              ? `Até ${o.estimated_days} dias úteis`
-              : '';
-          return `
+        .map(
+          (o) => `
         <label>
           <input type="radio" name="shippingOption" data-option-id="${escapeHtml(o.id)}" ${o.id === checkedId ? 'checked' : ''}>
           <span class="ship-opt__main">
             <span class="ship-opt__name">${escapeHtml(o.service)}${o.carrier ? ` <span class="ship-opt__eta">· ${escapeHtml(o.carrier)}</span>` : ''}</span>
-            ${detail ? `<span class="ship-opt__eta">${detail}</span>` : ''}
+            ${o.estimated_days ? `<span class="ship-opt__eta">Até ${o.estimated_days} dias úteis</span>` : ''}
           </span>
-          <span class="ship-opt__price">${pickup ? 'Grátis' : formatCurrency(o.price_cents)}</span>
-        </label>`;
-        })
+          <span class="ship-opt__price">${formatCurrency(o.price_cents)}</span>
+        </label>`
+        )
         .join('')}`;
-    updateDeliveryMode();
   }
 
   async function calculateShipping() {
@@ -251,7 +246,7 @@
       return setMessage(pickup ? 'Preencha nome e email.' : 'Preencha nome, email e CEP.', 'error');
     }
     if (!qty) return setMessage('Quantidade inválida.', 'error');
-    if (!ship) return setMessage('Calcule o frete ou escolha retirar no local.', 'error');
+    if (!ship) return setMessage('Calcule o frete e escolha uma opção de envio.', 'error');
     if (!pickup && (!address.street || !address.number || !address.neighborhood || !address.city || !address.state)) {
       return setMessage('Preencha o endereço de entrega completo.', 'error');
     }
@@ -300,8 +295,8 @@
       error: false,
       label: 'Pagamento em análise',
       title: 'Aguardando pagamento',
-      lead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, o exemplar será separado para envio.',
-      pickupLead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, combine a retirada pelo WhatsApp da clínica.'
+      lead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, o exemplar será separado para envio. Esta página se atualiza sozinha quando o pagamento for confirmado.',
+      pickupLead: 'Seu pedido foi registrado. Se você escolheu Pix ou boleto, conclua o pagamento — assim que ele for confirmado, combine a retirada pelo WhatsApp da clínica. Esta página se atualiza sozinha quando o pagamento for confirmado.'
     },
     falhou: {
       error: true,
@@ -310,10 +305,52 @@
     }
   };
 
+  // O Mercado Pago pode devolver o comprador como "pendente" (ex.: Pix) antes de confirmar
+  // o pagamento. Consulta o status real do pedido e atualiza a tela quando ele mudar.
+  const STATUS_TO_RETURN = { paid: 'aprovado', failed: 'falhou', cancelled: 'falhou' };
+  const POLL_INTERVAL_MS = 5000;
+  const POLL_MAX_TRIES = 36; // ~3 minutos
+
+  async function fetchOrderStatus() {
+    const orderId = params.get('external_reference');
+    if (!orderId) return null;
+    const qs = new URLSearchParams({ order_id: orderId });
+    const paymentId = params.get('payment_id') || params.get('collection_id');
+    if (paymentId && paymentId !== 'null') qs.set('payment_id', paymentId);
+    try {
+      const res = await fetch(`${API}/orderStatus?${qs}`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data.status || null;
+    } catch {
+      return null;
+    }
+  }
+
+  // Só "pendente" fica consultando; "aprovado"/"falhou" conferem uma vez
+  async function watchReturnState(key) {
+    if (!params.get('external_reference')) return;
+    for (let i = 0; i < POLL_MAX_TRIES; i++) {
+      if ($q('card').dataset.state === 'initial') return; // comprador clicou em "Tentar novamente"
+      const next = STATUS_TO_RETURN[await fetchOrderStatus()];
+      if (next) {
+        if (next !== key) renderReturnState(next);
+        return;
+      }
+      if (key !== 'pendente') return;
+      await new Promise((r) => setTimeout(r, POLL_INTERVAL_MS));
+    }
+  }
+
   function showReturnState() {
     const key = params.get('pagamento');
+    if (!RETURN_STATES[key]) return;
+    renderReturnState(key);
+    watchReturnState(key);
+  }
+
+  function renderReturnState(key) {
     const info = RETURN_STATES[key];
-    if (!info) return;
     const pickup = params.get('entrega') === 'retirada';
 
     const card = $q('card');
@@ -388,8 +425,9 @@
       resetShipping();
       updateSummary();
     });
-    $q('shippingOptions').addEventListener('change', () => {
-      updateSummary();
+    $q('shippingOptions').addEventListener('change', updateSummary);
+    $q('deliveryMode').addEventListener('change', () => {
+      clearMessage();
       updateDeliveryMode();
     });
 

@@ -1319,12 +1319,20 @@ select.input {
 }
 
 /* Opções de frete — estiliza tanto o markup do book.js quanto o do preview */
-.shipping-options:empty {
+.shipping-options:empty,
+.shipping-options[hidden],
+#delivery-shipping[hidden],
+#delivery-address[hidden] {
   display: none;
 }
 
 .shipping-options {
   margin-block-start: var(--sp-5);
+}
+
+/* Forma de entrega fica logo abaixo da quantidade, antes do CEP */
+.delivery-mode {
+  margin-block: var(--sp-4) var(--sp-5);
 }
 
 .shipping-options__head {

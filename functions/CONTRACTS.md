@@ -27,6 +27,12 @@ createOrder — POST /.netlify/functions/createOrder
 - Price and shipping are recalculated server-side; the Mercado Pago preference contains the book and the shipping as items,
   so the charged amount equals orders.total_cents.
 
+orderStatus — GET /.netlify/functions/orderStatus?order_id=<uuid>[&payment_id=<id>]
+- Response 200: { status } (pending, paid, failed, cancelled, shipped). Read-only.
+- If the order is still pending and payment_id is given, checks the payment on Mercado Pago (must match
+  external_reference and amount) so the return page can show "aprovado" before the webhook arrives.
+- Used by livro.html when the buyer returns with ?pagamento=pendente (polls every 5 s for ~3 min).
+
 paymentWebhook — POST /.netlify/functions/paymentWebhook
 - Receives Mercado Pago Webhooks (`?data.id=...&type=payment`) and IPN (`?topic=payment&id=...`).
 - Validates `x-signature` when MERCADOPAGO_WEBHOOK_SECRET is set (401 if invalid).

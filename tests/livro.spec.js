@@ -67,8 +67,7 @@ test.describe('Livro page', () => {
     await page.click('#calc-shipping');
     await expect(page.locator('#shipping-options')).toContainText('PAC');
     await page.fill('#cep', '01001-000');
-    await expect(page.locator('#shipping-options')).not.toContainText('PAC');
-    await expect(page.locator('#shipping-options')).toContainText('Retirar no local');
+    await expect(page.locator('#shipping-options')).toBeEmpty();
     await expect(page.locator('#summary-shipping')).toHaveText('—');
   });
 
@@ -105,7 +104,10 @@ test.describe('Livro page', () => {
     await page.route('https://www.mercadopago.com/mock', (route) => route.fulfill({ status: 200, body: 'ok' }));
 
     await page.goto('/livro.html');
-    await page.locator('input[data-option-id="pickup"]').check();
+    await expect(page.locator('#delivery-mode')).toContainText('NZ Beauty Clinic');
+    await page.locator('input[name="deliveryMode"][value="pickup"]').check();
+    await expect(page.locator('#cep')).toBeHidden();
+    await expect(page.locator('#calc-shipping')).toBeHidden();
     await expect(page.locator('#delivery-address')).toBeHidden();
     await expect(page.locator('#summary-shipping')).toHaveText('Grátis');
     await expect(page.locator('#summary-total')).toHaveText('R$ 89,90');
@@ -117,16 +119,36 @@ test.describe('Livro page', () => {
     expect(sent.address).toEqual({});
   });
 
-  test('pickup stays available after calculating shipping', async ({ page }) => {
+  test('switching between delivery and pickup', async ({ page }) => {
     await mockApi(page);
     await page.goto('/livro.html');
     await page.fill('#cep', '99000-000');
     await page.click('#calc-shipping');
     await expect(page.locator('#shipping-options')).toContainText('PAC');
-    await expect(page.locator('#shipping-options')).toContainText('Retirar no local');
+    await expect(page.locator('#summary-shipping')).toHaveText('R$ 18,50');
+
+    await page.locator('input[name="deliveryMode"][value="pickup"]').check();
+    await expect(page.locator('#cep')).toBeHidden();
+    await expect(page.locator('#shipping-options')).toBeHidden();
+    await expect(page.locator('#summary-shipping')).toHaveText('Grátis');
+
+    await page.locator('input[name="deliveryMode"][value="delivery"]').check();
+    await expect(page.locator('#cep')).toBeVisible();
     await expect(page.locator('#delivery-address')).toBeVisible();
-    await page.locator('input[data-option-id="pickup"]').check();
-    await expect(page.locator('#delivery-address')).toBeHidden();
+    await expect(page.locator('#summary-shipping')).toHaveText('R$ 18,50');
+  });
+
+  test('pending return switches to approved when payment is confirmed', async ({ page }) => {
+    await mockApi(page);
+    let calls = 0;
+    await page.route('**/.netlify/functions/orderStatus?*', (route) => {
+      calls += 1;
+      route.fulfill({ status: 200, body: JSON.stringify({ status: calls < 2 ? 'pending' : 'paid' }) });
+    });
+    await page.goto('/livro.html?pagamento=pendente&entrega=retirada&external_reference=bed2a9b6-78f6-47be-8fe0-b799105bec87&payment_id=123');
+    await expect(page.locator('#checkout-result')).toContainText('Aguardando pagamento');
+    await expect(page.locator('#checkout-result')).toContainText('Pedido recebido', { timeout: 12000 });
+    await expect(page.locator('#checkout-result')).toContainText('Combine a retirada');
   });
 
   test('requires address before creating order', async ({ page }) => {
