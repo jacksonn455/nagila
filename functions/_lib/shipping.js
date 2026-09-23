@@ -7,9 +7,8 @@ const ME_BASE_URL =
     : 'https://www.melhorenvio.com.br';
 
 // Serviços oferecidos ao comprador (ids do Melhor Envio). MELHOR_ENVIO_SERVICES permite trocar sem deploy de código.
-// 1 Correios PAC · 2 Correios SEDEX · 3 Jadlog .Package · 12 LATAM Cargo éFácil
-// 16 Azul Cargo Express e-commerce · 31 Loggi Express · 35 Total Express Standard
-const DEFAULT_SERVICES = '1,2,3,12,16,31,35';
+// 1 Correios PAC · 2 Correios SEDEX · 3 Jadlog .Package
+const DEFAULT_SERVICES = '1,2,3';
 
 function allowedServices() {
   return (process.env.MELHOR_ENVIO_SERVICES || DEFAULT_SERVICES)
