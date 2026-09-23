@@ -138,6 +138,15 @@ test.describe('Livro page', () => {
     await expect(page.locator('#summary-shipping')).toHaveText('R$ 18,50');
   });
 
+  test('reads Mercado Pago params appended after the hash', async ({ page }) => {
+    await mockApi(page);
+    await page.route('**/.netlify/functions/orderStatus?*', (route) =>
+      route.fulfill({ status: 200, body: JSON.stringify({ status: 'paid' }) })
+    );
+    await page.goto('/livro.html?pagamento=pendente&entrega=retirada#comprar&collection_status=pending&payment_id=179552484031&external_reference=eeebda14-42bb-454e-9554-c25fc7f636d2');
+    await expect(page.locator('#checkout-result')).toContainText('Pedido recebido');
+  });
+
   test('pending return switches to approved when payment is confirmed', async ({ page }) => {
     await mockApi(page);
     let calls = 0;

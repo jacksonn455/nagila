@@ -46,6 +46,9 @@
   const value = (k) => ($q(k)?.value || '').trim();
 
   const params = new URLSearchParams(location.search);
+  // Pedidos antigos voltavam com os dados do Mercado Pago depois do "#" (ex.: #comprar&external_reference=...)
+  const hashQuery = location.hash.replace(/^#[^&?]*[&?]?/, '');
+  if (hashQuery) new URLSearchParams(hashQuery).forEach((v, k) => !params.has(k) && params.set(k, v));
   const PREVIEW =
     params.get('preview') === '0' ? false : params.has('preview') || location.protocol === 'file:';
 

@@ -181,11 +181,13 @@ exports.handler = async (event) => {
     const pref = { items, payer: { name, email }, external_reference: order.id };
     if (process.env.PAYMENT_WEBHOOK_URL) pref.notification_url = process.env.PAYMENT_WEBHOOK_URL;
     if (base) {
+      // Sem "#": o Mercado Pago acrescenta external_reference/payment_id no fim da URL,
+      // e depois de um "#" eles não chegariam como parâmetros de query
       const extra = pickup ? '&entrega=retirada' : '';
       pref.back_urls = {
-        success: `${base}/livro.html?pagamento=aprovado${extra}#comprar`,
-        pending: `${base}/livro.html?pagamento=pendente${extra}#comprar`,
-        failure: `${base}/livro.html?pagamento=falhou${extra}#comprar`
+        success: `${base}/livro.html?pagamento=aprovado${extra}`,
+        pending: `${base}/livro.html?pagamento=pendente${extra}`,
+        failure: `${base}/livro.html?pagamento=falhou${extra}`
       };
       pref.auto_return = 'approved';
     }
