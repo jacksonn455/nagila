@@ -322,12 +322,19 @@
       error: true,
       title: 'O pagamento não foi concluído.',
       lead: 'Nenhuma cobrança foi feita. Você pode tentar novamente com outro meio de pagamento.'
+    },
+    // Só chega pelo status do pedido (estorno ou chargeback depois de aprovado)
+    estornado: {
+      error: true,
+      retry: false,
+      title: 'Pagamento estornado',
+      lead: 'O pagamento deste pedido foi estornado e o pedido foi cancelado. Se você tiver dúvidas sobre o estorno ou não o reconhecer, fale com a gente pelo WhatsApp.'
     }
   };
 
   // O Mercado Pago pode devolver o comprador como "pendente" (ex.: Pix) antes de confirmar
   // o pagamento. Consulta o status real do pedido e atualiza a tela quando ele mudar.
-  const STATUS_TO_RETURN = { paid: 'aprovado', failed: 'falhou', cancelled: 'falhou' };
+  const STATUS_TO_RETURN = { paid: 'aprovado', failed: 'falhou', cancelled: 'falhou', refunded: 'estornado' };
   const POLL_INTERVAL_MS = 5000;
   const POLL_MAX_TRIES = 36; // ~3 minutos
 
@@ -386,7 +393,7 @@
         <h3 class="checkout-result__title" tabindex="-1">${info.title}</h3>
         <p class="checkout-result__lead">${(pickup && info.pickupLead) || info.lead}</p>
         <div class="checkout-result__actions">
-          ${info.error ? '<button type="button" class="btn btn--primary" data-checkout-retry>Tentar novamente</button>' : '<a href="/" class="btn btn--ghost">Voltar ao site</a>'}
+          ${info.error && info.retry !== false ? '<button type="button" class="btn btn--primary" data-checkout-retry>Tentar novamente</button>' : '<a href="/" class="btn btn--ghost">Voltar ao site</a>'}
         </div>
         <a class="checkout-result__link" href="https://wa.me/5554996516136" target="_blank" rel="noopener noreferrer">${pickup && !info.error ? 'Combinar retirada pelo WhatsApp' : 'Dúvidas? Fale pelo WhatsApp'}</a>
       </div>`;

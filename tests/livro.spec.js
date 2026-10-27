@@ -202,4 +202,26 @@ test.describe('Livro page', () => {
     await page.goto('/livro.html?pagamento=falhou');
     await expect(page.locator('#checkout-result')).toContainText('não foi concluído');
   });
+
+  test('refunded order shows its own message, without retry', async ({ page }) => {
+    await mockApi(page);
+    await page.route('**/.netlify/functions/orderStatus?*', (route) =>
+      route.fulfill({ status: 200, body: JSON.stringify({ status: 'refunded' }) })
+    );
+    await page.goto('/livro.html?pagamento=aprovado&external_reference=eeebda14-42bb-454e-9554-c25fc7f636d2&payment_id=123');
+    await expect(page.locator('#checkout-result')).toContainText('Pagamento estornado');
+    await expect(page.locator('#checkout-result')).not.toContainText('Nenhuma cobrança foi feita');
+    await expect(page.locator('[data-checkout-retry]')).toHaveCount(0);
+    await expect(page.locator('#checkout-result')).toContainText('Dúvidas? Fale pelo WhatsApp');
+  });
+
+  test('cancelled order (no charge) keeps the failure message', async ({ page }) => {
+    await mockApi(page);
+    await page.route('**/.netlify/functions/orderStatus?*', (route) =>
+      route.fulfill({ status: 200, body: JSON.stringify({ status: 'cancelled' }) })
+    );
+    await page.goto('/livro.html?pagamento=pendente&external_reference=eeebda14-42bb-454e-9554-c25fc7f636d2&payment_id=123');
+    await expect(page.locator('#checkout-result')).toContainText('Nenhuma cobrança foi feita');
+    await expect(page.locator('[data-checkout-retry]')).toHaveCount(1);
+  });
 });

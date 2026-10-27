@@ -30,7 +30,8 @@ createOrder — POST /.netlify/functions/createOrder
   so the charged amount equals orders.total_cents.
 
 orderStatus — GET /.netlify/functions/orderStatus?order_id=<uuid>[&payment_id=<id>]
-- Response 200: { status } (pending, paid, failed, cancelled, shipped). Read-only.
+- Response 200: { status } (pending, paid, failed, cancelled, refunded, shipped). Read-only.
+- "refunded" is derived: the order is cancelled and a payment was refunded or charged back.
 - If the order is still pending and payment_id is given, checks the payment on Mercado Pago (must match
   external_reference and amount) so the return page can show "aprovado" before the webhook arrives.
 - Used by livro.html when the buyer returns with ?pagamento=pendente (polls every 5 s for ~3 min).

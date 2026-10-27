@@ -1,6 +1,7 @@
 /*
  Netlify Function: orderStatus
  GET ?order_id=<uuid>[&payment_id=<id>] -> { status }
+ status "refunded" = pedido cancelado por estorno ou chargeback (derivado de payments)
  Usado pela página de retorno do Mercado Pago para mostrar o status real do pedido.
  Somente leitura: quem atualiza o pedido é o paymentWebhook.
 */
@@ -39,6 +40,11 @@ exports.handler = async (event) => {
     let status = order.status;
     if ((status === 'pending' || status === 'failed') && q.payment_id) {
       status = (await paymentStatus(String(q.payment_id), order)) || status;
+    }
+    // "cancelled" junta cancelamento sem cobrança e estorno/chargeback; o pagamento diz qual foi
+    if (status === 'cancelled') {
+      const [refund] = await sb(`payments?order_id=eq.${order.id}&status=in.(refunded,charged_back)&select=id&limit=1`);
+      if (refund) status = 'refunded';
     }
     return json(200, { status });
   } catch (err) {
