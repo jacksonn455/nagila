@@ -12,7 +12,26 @@ const profile = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/profile.json'),
 const ORIGIN = profile.site.origin;
 const LASTMOD = profile.site.lastmod;
 
-const pages = [{ loc: '/', priority: '1.0', changefreq: 'monthly' }];
+const pages = [
+  {
+    loc: '/',
+    priority: '1.0',
+    changefreq: 'monthly',
+    image: {
+      loc: '/assets/images/nagila-hero.png',
+      title: 'Nágila Bernarda Zortéa — Esteticista e Coordenadora URI Erechim, NZ Beauty Clinic, Erechim/RS'
+    }
+  },
+  {
+    loc: '/livro.html',
+    priority: '0.8',
+    changefreq: 'monthly',
+    image: {
+      loc: '/assets/images/book/book-capa-contracapa.jpg',
+      title: 'Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica'
+    }
+  }
+];
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -27,8 +46,8 @@ ${pages
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>
     <image:image>
-      <image:loc>${ORIGIN}/assets/images/nagila-hero.png</image:loc>
-      <image:title>Nágila Bernarda Zortéa — Esteticista e Coordenadora URI Erechim, NZ Beauty Clinic, Erechim/RS</image:title>
+      <image:loc>${ORIGIN}${p.image.loc}</image:loc>
+      <image:title>${p.image.title}</image:title>
     </image:image>
   </url>`,
   )

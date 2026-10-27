@@ -2118,6 +2118,8 @@ a {
 
 .book-card__cover {
   width: 100%;
+  /* sem height:auto, o atributo height da <img> vence o aspect-ratio (imagem com ~1000px) */
+  height: auto;
   aspect-ratio: 3 / 2;
   max-height: 22rem;
   object-fit: cover;
@@ -2127,11 +2129,21 @@ a {
   box-shadow: var(--shadow-sm);
 }
 
+/* Foto com capa e contracapa lado a lado: no celular aparecem as duas; no recorte
+   em retrato do desktop, só a capa (metade esquerda) */
+.book-card__cover--front {
+  object-position: center;
+}
+
 @media (min-width: 52rem) {
   .book-card__cover {
     aspect-ratio: 3 / 4;
     max-height: none;
     object-position: 65% top;
+  }
+
+  .book-card__cover--front {
+    object-position: left center;
   }
 }
 

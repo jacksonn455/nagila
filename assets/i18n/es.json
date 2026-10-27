@@ -166,6 +166,18 @@
     "title": "Libros",
     "subtitle": "Producción bibliográfica de Nágila Bernarda Zortéa — publicaciones que combinan práctica clínica, fundamento científico y didáctica para la formación de profesionales de estética."
   },
+  "book2": {
+    "type": "Libro · Lanzamiento",
+    "title": "Pós-operatório e o raciocínio diante da cirurgia plástica",
+    "authors": "Me. Nágila Zortéa",
+    "tag1": "Posoperatorio",
+    "tag2": "Cirugía plástica",
+    "tag3": "Editora Lux",
+    "desc": "Fundamentos de la recuperación posquirúrgica y razonamiento clínico para individualizar el posoperatorio de la cirugía plástica. Para estudiantes y profesionales de la salud y la estética. Publicado en portugués.",
+    "cta": "Conocer el libro",
+    "ctaAriaLabel": "Conocer el libro Pós-operatório e o raciocínio diante da cirurgia plástica (en portugués)",
+    "coverAlt": "Portada y contraportada del libro Pós-operatório e o raciocínio diante da cirurgia plástica"
+  },
   "book1": {
     "type": "Libro",
     "title": "Descomplicando la Electroterapia Estética",
@@ -372,8 +384,7 @@
       "format": "Presentación",
       "btnDownload": "Descargar presentación",
       "btnAriaLabel": "Descargar presentación del Estética in Sul (PPTX)"
-    }
-    ,
+    },
     "slides3": {
       "event": "Beauty Fair International 2026",
       "talk": "\"Cómo la Fotobiomodulación puede revolucionar la atención Estética y Postoperatoria\"",

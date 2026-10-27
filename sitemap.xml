@@ -3,12 +3,22 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://nagilazortea.com.br/</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://nagilazortea.com.br/assets/images/nagila-hero.png</image:loc>
       <image:title>Nágila Bernarda Zortéa — Esteticista e Coordenadora URI Erechim, NZ Beauty Clinic, Erechim/RS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://nagilazortea.com.br/livro.html</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nagilazortea.com.br/assets/images/book/book-capa-contracapa.jpg</image:loc>
+      <image:title>Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica</image:title>
     </image:image>
   </url>
 </urlset>
