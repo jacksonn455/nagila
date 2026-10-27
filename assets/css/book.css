@@ -791,17 +791,6 @@
   }
 }
 
-.book-details__image {
-  width: min(100%, 20rem);
-  margin-block-start: var(--sp-6);
-}
-
-@media (max-width: 51.9rem) {
-  .book-details__image {
-    display: none;
-  }
-}
-
 .book-specs {
   margin: 0;
   border-block-start: 1px solid var(--border-strong);

@@ -448,7 +448,7 @@
               <p class="checkout-result__order">Pedido nº <strong>${DEMO.orderId}</strong> <span class="ph">Demonstração</span></p>
               <p class="checkout-result__lead">Obrigada pela compra. Os detalhes do pedido ficam associados ao e-mail <strong>${escapeHtml(email)}</strong>.</p>
               ${this.summaryHtml()}
-              <p class="checkout-steps__title">Próximos passos <span class="ph">Texto a validar</span></p>
+              <p class="checkout-steps__title">Próximos passos</p>
               <ol class="checkout-steps">
                 <li><span><strong>Pagamento</strong> A confirmação acontece na plataforma de pagamento, logo após a conclusão.</span></li>
                 <li><span><strong>Preparação</strong> Com o pagamento confirmado, o exemplar é separado para envio.</span></li>
