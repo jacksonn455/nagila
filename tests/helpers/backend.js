@@ -25,7 +25,18 @@ const BOOK_ENV = {
 };
 
 // Variáveis que um teste pode ter definido e que não fazem parte do BOOK_ENV
-const OPTIONAL_ENV = ['BOOK_STOCK', 'MERCADOPAGO_WEBHOOK_SECRET', 'MELHOR_ENVIO_SERVICES', 'MELHOR_ENVIO_ENV', 'PICKUP_ENABLED', 'PICKUP_ADDRESS', 'URL'];
+const OPTIONAL_ENV = [
+  'BOOK_STOCK',
+  'MERCADOPAGO_WEBHOOK_SECRET',
+  'MELHOR_ENVIO_SERVICES',
+  'MELHOR_ENVIO_ENV',
+  'PICKUP_ENABLED',
+  'PICKUP_ADDRESS',
+  'URL',
+  'ADMIN_EMAIL',
+  'ADMIN_PASSWORD_HASH',
+  'ADMIN_SESSION_SECRET'
+];
 
 // Cotação padrão do Melhor Envio (inclui um serviço fora da lista e um com erro)
 const ME_QUOTE = [
@@ -49,7 +60,8 @@ function reply(body, status = 200) {
 function matches(row, params) {
   for (const [key, raw] of params) {
     if (['select', 'order', 'limit', 'on_conflict'].includes(key)) continue;
-    const value = row[key];
+    // filtro em recurso embutido (ex.: orders.status com select=...,orders!inner(status))
+    const value = key.includes('.') ? key.split('.').reduce((v, k) => (v == null ? v : v[k]), row) : row[key];
     if (raw.startsWith('eq.')) {
       if (String(value) !== raw.slice(3)) return false;
     } else if (raw.startsWith('in.(')) {
@@ -58,6 +70,8 @@ function matches(row, params) {
       if (value == null) return false;
     } else if (raw.startsWith('gte.')) {
       if (!(String(value) >= raw.slice(4))) return false;
+    } else if (raw.startsWith('lt.')) {
+      if (!(String(value) < raw.slice(3))) return false;
     } else {
       throw new Error(`Filtro não suportado pelo simulador: ${key}=${raw}`);
     }
@@ -73,7 +87,8 @@ function createBackend(options = {}) {
     addresses: [],
     payments: [],
     shipments: [],
-    processed_notifications: []
+    processed_notifications: [],
+    admin_login_attempts: []
   };
   const calls = [];
   const mp = {
@@ -118,6 +133,11 @@ function createBackend(options = {}) {
         const id = `pref-${calls.filter((c) => c.url.includes('/checkout/preferences')).length}`;
         return reply({ id, init_point: `https://mp.test/checkout/${id}` });
       }
+      if (u.pathname === '/v1/payments/search' && method === 'GET') {
+        if (mp.paymentFetchFails) return reply({ message: 'erro simulado' }, 500);
+        const ref = u.searchParams.get('external_reference');
+        return reply({ results: Object.values(mp.payments).filter((p) => p.external_reference === ref) });
+      }
       const m = u.pathname.match(/^\/v1\/payments\/(.+)$/);
       if (m && method === 'GET') {
         if (mp.paymentFetchFails) return reply({ message: 'erro simulado' }, 500);
@@ -141,7 +161,14 @@ function createBackend(options = {}) {
       const prefer = (opts.headers && opts.headers.Prefer) || '';
 
       if (method === 'GET') {
-        let rows = db[table].filter((r) => matches(r, params));
+        let source = db[table];
+        // embed orders!inner(...) em order_items (consulta de estoque)
+        if (table === 'order_items' && (u.searchParams.get('select') || '').includes('orders!inner(')) {
+          source = source
+            .map((item) => ({ ...item, orders: db.orders.find((o) => o.id === item.order_id) }))
+            .filter((item) => item.orders);
+        }
+        let rows = source.filter((r) => matches(r, params));
         const order = u.searchParams.get('order');
         if (order === 'created_at.desc') rows = [...rows].reverse();
         const limit = Number(u.searchParams.get('limit'));
@@ -153,8 +180,16 @@ function createBackend(options = {}) {
         return prefer.includes('return=representation') ? reply(out, 201) : reply(null, 201);
       }
       if (method === 'PATCH') {
+        // simula o banco antes da migração do admin (colunas inexistentes)
+        if (options.missingColumns && Object.keys(body).some((k) => options.missingColumns.includes(k))) {
+          return reply({ message: 'column does not exist' }, 400);
+        }
         const rows = db[table].filter((r) => matches(r, params));
         rows.forEach((r) => Object.assign(r, body));
+        return prefer.includes('return=representation') ? reply(rows, 200) : reply(null, 204);
+      }
+      if (method === 'DELETE') {
+        db[table] = db[table].filter((r) => !matches(r, params));
         return reply(null, 204);
       }
     }
