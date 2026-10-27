@@ -1,5 +1,6 @@
--- Supabase schema for Nagila Zortéa — Book sales (MVP)
--- DO NOT RUN until you review and adjust values marked as NEEDS_CONFIRMATION
+-- OBSOLETO — use scripts/supabase-schema-v2.sql para criar ou recriar o banco.
+-- O v2 é idempotente, liga o RLS nas 7 tabelas e corrige o trigger e os índices.
+-- Este arquivo fica só como histórico do schema original (MVP).
 
 -- Extensions
 create extension if not exists "uuid-ossp";

@@ -5,7 +5,7 @@ Site estático + Netlify Functions (`functions/`) + Supabase (banco) + Mercado P
 ATENÇÃO: nunca commitar `.env`. Em produção as variáveis ficam no painel do Netlify.
 
 ## 1. Supabase
-- Rodar `scripts/supabase-schema.sql` no SQL Editor (com RLS habilitado).
+- Rodar `scripts/supabase-schema-v2.sql` no SQL Editor (idempotente; já liga o RLS nas 7 tabelas).
 - `SUPABASE_URL`: Project Settings → Data API → Project URL.
 - `SUPABASE_SERVICE_ROLE_KEY`: Project Settings → API Keys → Legacy API Keys → `service_role`.
 
