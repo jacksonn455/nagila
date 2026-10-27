@@ -783,12 +783,12 @@
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
     gap: var(--sp-9);
   }
-}
 
-.book-details__note {
-  font-size: var(--fs-sm);
-  color: var(--text-muted);
-  line-height: 1.9;
+  /* O título acompanha a rolagem da ficha, em vez de deixar a coluna vazia */
+  .book-details__intro {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--sp-6));
+  }
 }
 
 .book-details__image {
@@ -832,8 +832,9 @@
 }
 
 /* Observação abaixo do valor (ex.: "Brochura com orelhas"). É bloco: não depende de
-   espaço no texto. O separador ". " fica invisível na tela, mas separa as partes
-   sem CSS, no leitor de tela e ao copiar ("Livro físico. Brochura com orelhas") */
+   espaço no texto. O separador ".&nbsp;" fica invisível na tela, mas separa as partes
+   sem CSS, no leitor de tela e ao copiar ("Livro físico. Brochura com orelhas"); o
+   &nbsp; não é descartado no fim da linha, como aconteceria com um espaço comum */
 .book-specs__sep {
   font-size: 0;
 }
@@ -844,17 +845,6 @@
   font-family: var(--font-sans);
   font-size: var(--fs-xs);
   color: var(--text-muted);
-}
-
-/* "A confirmar" na ficha: discreto e uniforme, sem o selo tracejado */
-.book-specs .ph {
-  padding: 0;
-  font-size: var(--fs-sm);
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--text-muted);
-  border: 0;
 }
 
 @media (max-width: 30rem) {
