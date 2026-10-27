@@ -28,13 +28,19 @@
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
 
   <!-- JSON-LD: só Book com dados confirmados (capa, contracapa e código de barras).
+       O autor aponta para a mesma pessoa (#person) do JSON-LD da página inicial.
        Product/Offer fica de fora até existir uma imagem da capa sozinha. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Book",
     "name": "Pós-operatório e o raciocínio diante da cirurgia plástica",
-    "author": { "@type": "Person", "name": "Nágila Zortéa", "honorificPrefix": "Me." },
+    "author": {
+      "@type": "Person",
+      "@id": "https://nagilazortea.com.br/#person",
+      "name": "Nágila Zortéa",
+      "honorificPrefix": "Me."
+    },
     "publisher": { "@type": "Organization", "name": "Editora Lux" },
     "isbn": "9786553083547",
     "numberOfPages": 231,

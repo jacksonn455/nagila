@@ -48,6 +48,8 @@ test.describe('livro.html — JSON-LD do livro', () => {
     expect(data.inLanguage).toBe('pt-BR');
     expect(data.publisher).toEqual({ '@type': 'Organization', name: 'Editora Lux' });
     expect(data.author.name).toBe('Nágila Zortéa');
+    // mesma pessoa do JSON-LD da página inicial
+    expect(data.author['@id']).toBe('https://nagilazortea.com.br/#person');
     expect(data.url).toBe('https://nagilazortea.com.br/livro.html');
     // Product/Offer e imagem continuam desligados até existir a capa sozinha
     expect(data.offers).toBeUndefined();
@@ -123,4 +125,14 @@ test.describe('livro.html — metadados sociais', () => {
     expect(await meta('meta[name="twitter:description"]')).toBe(await meta('meta[property="og:description"]'));
     await expect(page.locator('meta[property="og:image"], meta[name="twitter:image"]')).toHaveCount(0);
   });
+});
+
+test('o @id do autor no livro existe como Person na página inicial', async ({ request }) => {
+  const id = 'https://nagilazortea.com.br/#person';
+  const html = await (await request.get('/')).text();
+  const graphs = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+  const nodes = graphs.flatMap((g) => g['@graph'] || [g]);
+  const person = nodes.find((n) => n['@id'] === id);
+  expect(person['@type']).toBe('Person');
+  expect(person.alternateName).toContain('Nágila Zortéa');
 });
