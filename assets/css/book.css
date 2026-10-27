@@ -826,19 +826,35 @@
 
 .book-specs dd {
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--sp-2) var(--sp-3);
   font-family: var(--font-serif);
   font-size: var(--fs-md);
   color: var(--text);
 }
 
+/* Observação abaixo do valor (ex.: "Brochura com orelhas"). É bloco: não depende de
+   espaço no texto. O separador ". " fica invisível na tela, mas separa as partes
+   sem CSS, no leitor de tela e ao copiar ("Livro físico. Brochura com orelhas") */
+.book-specs__sep {
+  font-size: 0;
+}
+
 .book-specs__hint {
+  display: block;
+  margin-block-start: var(--sp-1);
   font-family: var(--font-sans);
   font-size: var(--fs-xs);
   color: var(--text-muted);
+}
+
+/* "A confirmar" na ficha: discreto e uniforme, sem o selo tracejado */
+.book-specs .ph {
+  padding: 0;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  border: 0;
 }
 
 @media (max-width: 30rem) {
