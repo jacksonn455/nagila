@@ -4,7 +4,9 @@ All requests/responses are JSON. Error responses are `{ error: string }` with a 
 Shared helpers live in `functions/_lib/` (not a function).
 
 bookInfo — GET /.netlify/functions/bookInfo
-- Response 200: { title, price_cents, max_quantity, available, pickup: { id: 'pickup', service, price_cents: 0, address } | null }
+- Response 200: { title, price_cents, max_quantity, available, sold_out, low_stock, pickup: { id: 'pickup', service, price_cents: 0, address } | null }
+- With BOOK_STOCK: max_quantity = min(BOOK_MAX_QUANTITY, available); sold_out when nothing is available;
+  low_stock when 5 or fewer remain. The stock total is never exposed.
 
 calculateShipping — POST /.netlify/functions/calculateShipping
 - Request: { cep: string, quantity: integer }
@@ -23,7 +25,7 @@ createOrder — POST /.netlify/functions/createOrder
 - With shipping_option_id = 'pickup' the address is not required, no shipping item is added to the preference
   and the back_urls include `&entrega=retirada`.
 - Response 200: { init_point, order_id }
-- 400 validation · 409 shipping option no longer available / order already registered · 502 Mercado Pago error · 503 config missing
+- 400 validation · 409 shipping option no longer available / order already registered / not enough stock (BOOK_STOCK) · 502 Mercado Pago error · 503 config missing
 - Price and shipping are recalculated server-side; the Mercado Pago preference contains the book and the shipping as items,
   so the charged amount equals orders.total_cents.
 

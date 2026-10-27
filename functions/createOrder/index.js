@@ -1,6 +1,7 @@
 /*
  Netlify Function: createOrder
  - Valida o pedido e recalcula preço e frete no servidor
+ - Confere o estoque (BOOK_STOCK, opcional) antes de gravar
  - Grava cliente, pedido, item, endereço e frete escolhido no Supabase
  - Cria a preferência do Mercado Pago (Checkout Pro) e retorna o init_point
 */
@@ -9,6 +10,7 @@ const { json, readBody } = require('../_lib/http');
 const { sb } = require('../_lib/supabase');
 const { getBook, missingBookConfig, getPickup, PICKUP_ID } = require('../_lib/book');
 const { quoteShipping, normalizeCep, ShippingError } = require('../_lib/shipping');
+const { availableStock, stockMessage } = require('../_lib/stock');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const UFS = new Set('AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' '));
@@ -111,6 +113,13 @@ exports.handler = async (event) => {
     }
     if (!shipping) {
       return json(409, { error: 'A opção de frete escolhida não está mais disponível. Calcule o frete novamente.' });
+    }
+
+    // Estoque (BOOK_STOCK): conferido logo antes de gravar, depois da cotação do frete,
+    // para encurtar a janela de corrida entre dois compradores no último exemplar
+    const available = await availableStock(book.stock);
+    if (available != null && quantity > available) {
+      return json(409, { error: stockMessage(available) });
     }
 
     const subtotal = book.priceCents * quantity;

@@ -165,10 +165,27 @@
       document.querySelectorAll('[data-price-display]').forEach((el) => (el.textContent = formatCurrency(data.price_cents)));
       document.querySelectorAll('[data-price-flag]').forEach((el) => (el.hidden = true));
       if (state.maxQuantity) $q('quantity').max = state.maxQuantity;
+      applyStock(data);
       updateSummary();
     } catch (err) {
       console.error(err);
     }
+  }
+
+  // Estoque (BOOK_STOCK): esgotado desativa a compra; poucos exemplares mostram um aviso
+  function applyStock(data) {
+    const label = data.sold_out ? 'Esgotado' : data.low_stock ? 'Últimos exemplares' : null;
+    if (!label) return;
+    document.querySelectorAll('[data-price-display]').forEach((el) => {
+      if (el.closest('.buy-sticky')) return;
+      el.insertAdjacentHTML('afterend', ` <span class="stock-flag${data.sold_out ? ' stock-flag--out' : ''}">${label}</span>`);
+    });
+    if (!data.sold_out) return;
+    $q('buy').disabled = true;
+    $q('buy').textContent = 'Esgotado';
+    $q('calcShipping').disabled = true;
+    document.querySelectorAll('#hero-cta, .buy-sticky .btn').forEach((el) => (el.textContent = 'Esgotado'));
+    setMessage('Livro esgotado no momento.', 'info');
   }
 
   // Shipping calculation

@@ -28,6 +28,8 @@ ATENÇÃO: nunca commitar `.env`. Em produção as variáveis ficam no painel do
 ## 4. Livro
 - `BOOK_TITLE`, `BOOK_PRICE_CENTS` (ex.: `8990` = R$ 89,90), `BOOK_WEIGHT_GRAMS`,
   `BOOK_LENGTH_CM`, `BOOK_WIDTH_CM`, `BOOK_HEIGHT_CM` (livro embalado), opcional `BOOK_MAX_QUANTITY`.
+- Opcional `BOOK_STOCK`: exemplares disponíveis para venda. Vazio = sem controle de estoque; `0` = esgotado.
+  Disponível = estoque − pedidos `paid`/`shipped` − pedidos `pending` das últimas 48 h.
 - Enquanto faltarem, a página mostra "Venda do livro ainda não configurada".
 
 ## 5. Netlify

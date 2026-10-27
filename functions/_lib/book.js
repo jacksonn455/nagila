@@ -6,6 +6,18 @@ function positiveNumber(name) {
   return Number.isFinite(value) && value > 0 ? value : null;
 }
 
+// Estoque opcional: vazio/ausente = sem controle; 0 = esgotado
+function stockFromEnv() {
+  const raw = (process.env.BOOK_STOCK || '').trim();
+  if (!raw) return null;
+  const value = Number(raw);
+  if (!Number.isInteger(value) || value < 0) {
+    console.error('BOOK_STOCK inválido (use um número inteiro): controle de estoque desativado');
+    return null;
+  }
+  return value;
+}
+
 function getBook() {
   const price = positiveNumber('BOOK_PRICE_CENTS');
   const max = positiveNumber('BOOK_MAX_QUANTITY');
@@ -17,7 +29,8 @@ function getBook() {
     lengthCm: positiveNumber('BOOK_LENGTH_CM'),
     widthCm: positiveNumber('BOOK_WIDTH_CM'),
     heightCm: positiveNumber('BOOK_HEIGHT_CM'),
-    maxQuantity: max ? Math.floor(max) : null
+    maxQuantity: max ? Math.floor(max) : null,
+    stock: stockFromEnv()
   };
 }
 
