@@ -1,64 +1,83 @@
 # https://nagilazortea.com.br/robots.txt
-# Site estático e público: todo conteúdo pode ser rastreado e indexado.
+# Site estático e público: todo conteúdo pode ser rastreado e indexado, exceto /admin/.
 # Buscadores tradicionais e sistemas de IA estão explicitamente autorizados.
 
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 # Buscadores tradicionais
 User-agent: Googlebot
 Allow: /
+Disallow: /admin/
 
 User-agent: Googlebot-Image
 Allow: /
+Disallow: /admin/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /admin/
 
 User-agent: DuckDuckBot
 Allow: /
+Disallow: /admin/
 
 User-agent: Slurp
 Allow: /
+Disallow: /admin/
 
 User-agent: Applebot
 Allow: /
+Disallow: /admin/
 
 User-agent: YandexBot
 Allow: /
+Disallow: /admin/
 
 # Buscadores e assistentes de IA (resposta gerada, citação e grounding)
 User-agent: Google-Extended
 Allow: /
+Disallow: /admin/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /admin/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /admin/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /admin/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /admin/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /admin/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /admin/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /admin/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /admin/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /admin/
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://nagilazortea.com.br/sitemap.xml

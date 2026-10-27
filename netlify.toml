@@ -26,6 +26,14 @@
     X-Frame-Options = "SAMEORIGIN"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
 
+# Área administrativa: fora dos buscadores e sem cache. Os dados ficam nas Functions
+# admin*, que exigem sessão; estas regras somam-se às de "/*" acima.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
 # Não expõe código-fonte e arquivos de desenvolvimento como páginas públicas
 [[redirects]]
   from = "/functions/*"

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Entrar · Área administrativa</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,600&amp;display=swap">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="admin">
+  <main class="admin-login">
+    <form class="admin-login__card" id="login-form" novalidate>
+      <div>
+        <p class="admin-brand"><small>Área administrativa</small></p>
+        <h1 class="admin-login__title">Entrar</h1>
+      </div>
+
+      <p class="admin-notice" id="login-notice" role="status" hidden></p>
+
+      <label class="admin-field">E-mail
+        <input class="admin-input" id="email" name="email" type="email" autocomplete="username" required>
+      </label>
+
+      <label class="admin-field">Senha
+        <input class="admin-input" id="password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+
+      <p class="admin-login__error" id="login-error" role="alert"></p>
+
+      <button type="submit" class="admin-btn admin-btn--primary" id="login-submit">Entrar</button>
+    </form>
+  </main>
+
+  <script src="/admin/login.js"></script>
+</body>
+</html>
