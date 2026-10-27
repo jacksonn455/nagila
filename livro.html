@@ -3,26 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Livro — NOME DO LIVRO NOVO (NAO SEI AINDA) — NEEDS_CONFIRMATION</title>
-  <meta name="description" content="Página de venda do livro. NEEDS_CONFIRMATION">
+  <title>Pós-operatório e o raciocínio diante da cirurgia plástica</title>
+  <meta name="description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
   <meta name="author" content="Nágila Bernarda Zortéa">
   <link rel="canonical" href="https://nagilazortea.com.br/livro.html">
 
-  <!-- Open Graph — espelha title/description atuais (NEEDS_CONFIRMATION).
-       og:image omitido de propósito: os mockups SVG não servem para redes sociais;
+  <!-- Open Graph — espelha title/description.
+       og:image omitido de propósito: ainda não há imagem própria para redes sociais;
        adicionar a fotografia oficial do livro (PNG/JPG 1200×630) quando existir. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nágila Bernarda Zortéa">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://nagilazortea.com.br/livro.html">
-  <meta property="og:title" content="Livro — NOME DO LIVRO NOVO (NAO SEI AINDA) — NEEDS_CONFIRMATION">
-  <meta property="og:description" content="Página de venda do livro. NEEDS_CONFIRMATION">
+  <meta property="og:title" content="Pós-operatório e o raciocínio diante da cirurgia plástica">
+  <meta property="og:description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
 
   <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
 
-  <!-- JSON-LD (Book/Product) propositalmente ausente: título, preço, ISBN e demais
-       dados ainda são NEEDS_CONFIRMATION. Não publicar dados estruturados inventados. -->
+  <!-- JSON-LD: só Book com dados confirmados (capa, contracapa e código de barras).
+       Product/Offer fica de fora até existir uma imagem da capa sozinha. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "Pós-operatório e o raciocínio diante da cirurgia plástica",
+    "author": { "@type": "Person", "name": "Nágila Zortéa", "honorificPrefix": "Me." },
+    "publisher": { "@type": "Organization", "name": "Editora Lux" },
+    "isbn": "9786553083547",
+    "inLanguage": "pt-BR",
+    "url": "https://nagilazortea.com.br/livro.html"
+  }
+  </script>
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
@@ -32,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&amp;display=swap">
 
-  <link rel="preload" as="image" href="assets/images/book/book-cover-mock.svg">
+  <link rel="preload" as="image" href="assets/images/book/book-capa-contracapa.jpg">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/book.css">
 
@@ -105,24 +117,8 @@
 
         <!-- Galeria -->
         <div class="book-gallery" data-reveal="">
-          <div class="book-gallery__stage" id="gallery-main" data-fit="cover-art">
-            <img id="main-image" class="book-gallery__image" src="assets/images/book/book-cover-mock.svg" alt="Mockup ilustrativo da capa do livro (não é a capa oficial)" width="400" height="600" fetchpriority="high">
-            <span class="book-gallery__badge">Mockup ilustrativo</span>
-          </div>
-
-          <div class="book-gallery__thumbs" role="group" aria-label="Imagens do livro">
-            <button type="button" class="thumb is-active" aria-pressed="true" data-src="assets/images/book/book-cover-mock.svg" data-fit="cover-art" data-alt="Mockup ilustrativo da capa do livro (não é a capa oficial)" aria-label="Ver capa">
-              <img src="assets/images/book/book-cover-mock.svg" alt="" width="400" height="600">
-            </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-perspective-mock.svg" data-fit="object" data-alt="Mockup ilustrativo do livro em perspectiva" aria-label="Ver livro em perspectiva">
-              <img src="assets/images/book/book-perspective-mock.svg" alt="" width="1000" height="1000" loading="lazy">
-            </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-open-mock.svg" data-fit="object" data-alt="Mockup ilustrativo do livro aberto com páginas de exemplo" aria-label="Ver livro aberto">
-              <img src="assets/images/book/book-open-mock.svg" alt="" width="1000" height="1000" loading="lazy">
-            </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-lifestyle-mock.svg" data-fit="scene" data-alt="Ilustração de ambientação com o livro sobre uma mesa" aria-label="Ver ambientação">
-              <img src="assets/images/book/book-lifestyle-mock.svg" alt="" width="1000" height="1000" loading="lazy">
-            </button>
+          <div class="book-gallery__stage" id="gallery-main" data-fit="object">
+            <img id="main-image" class="book-gallery__image" src="assets/images/book/book-capa-contracapa.jpg" alt="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" width="1454" height="1082" fetchpriority="high">
           </div>
         </div>
 
@@ -133,14 +129,11 @@
             <span class="hero__label">Livro · Lançamento</span>
           </div>
 
-          <h1 id="product-title" class="book-hero__title" data-reveal="" data-delay="1">Título do livro</h1>
-          <p class="book-hero__subtitle" data-reveal="" data-delay="1">
-            <span class="ph-text">Subtítulo do livro</span>
-          </p>
+          <h1 id="product-title" class="book-hero__title" data-reveal="" data-delay="1">Pós-operatório e o raciocínio diante da cirurgia plástica</h1>
 
           <p id="product-author" class="book-hero__author" data-reveal="" data-delay="2">por <strong>Nágila Bernarda Zortéa</strong></p>
 
-          <p id="product-desc" class="book-hero__desc" data-reveal="" data-delay="2">Descrição curta do livro — resumo em 2 ou 3 frases apresentando o tema e para quem ele é.</p>
+          <p id="product-desc" class="book-hero__desc" data-reveal="" data-delay="2">A cirurgia plástica evolui constantemente, e o pós-operatório não pode ficar para trás. Este livro reúne os fundamentos da recuperação pós-cirúrgica, como fases de reparo, alterações teciduais e recursos terapêuticos, e propõe o raciocínio clínico para individualizar o cuidado de cada paciente. Destinado a estudantes e profissionais da saúde e da estética.</p>
 
           <div class="book-price" data-reveal="" data-delay="3">
             <p class="book-price__label">Livro físico</p>
@@ -172,15 +165,21 @@
       <div class="container book-about__grid">
         <div class="book-about__text">
           <span class="section__label" data-reveal="">Sobre o livro</span>
-          <h2 id="sobre-livro-heading" class="section__title book-about__title" data-reveal="" data-delay="1">Frase de <em>destaque</em> do livro</h2>
-          <p class="book-about__lead" data-reveal="" data-delay="2">Parágrafo de abertura — apresentação do livro.</p>
-          <p class="book-about__body" data-reveal="" data-delay="2">Texto sobre o livro: proposta, conteúdo e diferencial da abordagem.</p>
-          <p class="book-about__body " data-reveal="" data-delay="3">Texto complementar (opcional): público-alvo, contexto ou motivação da autora.</p>
+          <h2 id="sobre-livro-heading" class="section__title book-about__title" data-reveal="" data-delay="1">Mais do que oferecer protocolos prontos, a obra incentiva o <em>raciocínio clínico</em> e a tomada de decisões baseada nas necessidades de cada paciente.</h2>
+          <p class="book-about__lead" data-reveal="" data-delay="2">Este livro nasce do encontro entre a ciência, a rotina clínica do pós-operatório e anos dedicados ao ensino e ao atendimento direto de pacientes em condições estéticas e cirúrgicas.</p>
+          <p class="book-about__body" data-reveal="" data-delay="2">Em vez de um protocolo fechado, a proposta é aplicar o raciocínio clínico ao pós-operatório, com um olhar holístico, individual e baseado em evidências. Cada pessoa responde de um jeito e cada cirurgia tem suas particularidades: por isso, nenhum protocolo serve igualmente a todos.</p>
+          <p class="book-about__body" data-reveal="" data-delay="2">Professora e profissional de saúde, a autora acompanhou cirurgias dentro do centro cirúrgico. Dessa vivência vem a convicção que atravessa a obra: entender as camadas de tecido, as técnicas e os dispositivos utilizados torna o cuidado pós-operatório mais lógico, seguro e confiante.</p>
+          <p class="book-about__body " data-reveal="" data-delay="3">Destinado a estudantes e profissionais da saúde e da estética.</p>
+          <blockquote class="event-card__quote" data-reveal="" data-delay="3">
+            <p>“Não estamos apenas tratando corpos. Estamos impactando histórias.”</p>
+            <cite>Dr. Ícaro Samuel, no prefácio</cite>
+          </blockquote>
+          <p class="book-about__body" data-reveal="" data-delay="3">No prefácio, o Dr. Ícaro Samuel lembra que o pós-operatório costuma ser o momento de maior vulnerabilidade do paciente, e que é ali que o profissional preparado faz a diferença.</p>
         </div>
 
         <figure class="book-about__figure" data-reveal="" data-delay="2">
-          <img src="assets/images/book/book-open-mock.svg" alt="Mockup ilustrativo do livro aberto com páginas de exemplo" width="1000" height="1000" loading="lazy">
-          <figcaption>Mockup ilustrativo — páginas de exemplo</figcaption>
+          <img src="assets/images/book/book-capa-contracapa.jpg" alt="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica" width="1454" height="1082" loading="lazy">
+          <figcaption>Capa e contracapa</figcaption>
         </figure>
       </div>
     </section>
@@ -191,37 +190,36 @@
         <header class="section__header book-contents__header">
           <span class="section__label" data-reveal="">No livro</span>
           <h2 id="conteudo-heading" class="section__title" data-reveal="" data-delay="1">O que você vai encontrar</h2>
-          <p class="section__subtitle" data-reveal="" data-delay="2">Resumo do conteúdo do livro.</p>
+          <p class="section__subtitle" data-reveal="" data-delay="2">43 capítulos organizados em quatro blocos.</p>
         </header>
 
-        <!-- PLACEHOLDER: substituir cada item pelo tema real do livro -->
         <ol class="book-contents__list">
           <li class="book-topic" data-reveal="">
             <span class="book-topic__num" aria-hidden="true">01</span>
             <div>
-              <h3 class="book-topic__title">Tema / capítulo 01</h3>
-              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+              <h3 class="book-topic__title">Cirurgias faciais</h3>
+              <p class="book-topic__desc">O pós-operatório de otoplastia, rinoplastia, lifting facial, lipoaspiração de papada, blefaroplastia, bichectomia e mentoplastia.</p>
             </div>
           </li>
           <li class="book-topic" data-reveal="" data-delay="1">
             <span class="book-topic__num" aria-hidden="true">02</span>
             <div>
-              <h3 class="book-topic__title">Tema / capítulo 02</h3>
-              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+              <h3 class="book-topic__title">Cirurgias corporais</h3>
+              <p class="book-topic__desc">Cirurgias mamárias, abdominoplastia, lipoaspiração, body lifting e cirurgia de lipedema, além da diferenciação de anestesias, drenos e fios de sutura.</p>
             </div>
           </li>
           <li class="book-topic" data-reveal="" data-delay="2">
             <span class="book-topic__num" aria-hidden="true">03</span>
             <div>
-              <h3 class="book-topic__title">Tema / capítulo 03</h3>
-              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+              <h3 class="book-topic__title">Fundamentos do pós-operatório</h3>
+              <p class="book-topic__desc">Fases da recuperação e processo cicatricial, com malhas compressivas, taping, drenagem linfática, ozonoterapia, radiofrequência, laser, LED, ultrassom e outros recursos terapêuticos.</p>
             </div>
           </li>
           <li class="book-topic" data-reveal="" data-delay="3">
             <span class="book-topic__num" aria-hidden="true">04</span>
             <div>
-              <h3 class="book-topic__title">Tema / capítulo 04</h3>
-              <p class="book-topic__desc">Descrição do tema ou capítulo.</p>
+              <h3 class="book-topic__title">Prática clínica e intercorrências</h3>
+              <p class="book-topic__desc">Quadro por fase do pós-operatório; hematoma, seroma, fibrose, deiscência, infecção e cicatrizes inestéticas; perguntas e respostas da prática clínica.</p>
             </div>
           </li>
         </ol>
@@ -234,14 +232,28 @@
         <div class="book-details__intro">
           <span class="section__label" data-reveal="">Ficha técnica</span>
           <h2 id="detalhes-heading" class="section__title" data-reveal="" data-delay="1">Detalhes do produto</h2>
-          <p class="book-details__note" data-reveal="" data-delay="2">Itens marcados como <span class="ph">A confirmar</span> serão preenchidos com os dados oficiais da edição.</p>
-          <img class="book-details__image" src="assets/images/book/book-perspective-mock.svg" alt="Mockup ilustrativo do livro em perspectiva" width="1000" height="1000" loading="lazy" data-reveal="" data-delay="2">
-        </div>
+          <p class="book-details__note" data-reveal="" data-delay="2">Itens marcados como <span class="ph">A confirmar</span> serão preenchidos com os dados oficiais da edição.</p>        </div>
 
         <dl class="book-specs" data-reveal="" data-delay="1">
           <div class="book-specs__row">
             <dt>Autora</dt>
-            <dd>Nágila Bernarda Zortéa</dd>
+            <dd>Me. Nágila Zortéa</dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Prefácio</dt>
+            <dd>Dr. Ícaro Samuel</dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Editora</dt>
+            <dd>Editora Lux</dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>ISBN</dt>
+            <dd>978-65-5308-354-7</dd>
+          </div>
+          <div class="book-specs__row">
+            <dt>Idioma</dt>
+            <dd>Português</dd>
           </div>
           <div class="book-specs__row">
             <dt>Formato</dt>
@@ -264,7 +276,7 @@
             <dd><span class="ph">A confirmar</span></dd>
           </div>
           <div class="book-specs__row">
-            <dt>Edição</dt>
+            <dt>Edição e ano</dt>
             <dd><span class="ph">A confirmar</span></dd>
           </div>
           <div class="book-specs__row">
@@ -284,9 +296,9 @@
         <div class="book-author__content">
           <span class="section__label" data-reveal="">A autora</span>
           <h2 id="autora-heading" class="section__title" data-reveal="" data-delay="1">Nágila Bernarda Zortéa</h2>
-          <p class="book-author__bio" data-reveal="" data-delay="2">Mestre em Estética e Cosmetologia, esteticista e docente. Coordena o Curso de Graduação em Estética e Cosmética e a Pós-Graduação em Estética Avançada da URI Erechim. Pesquisadora, palestrante e responsável pela NZ Beauty Clinic, em Erechim/RS.</p>
+          <p class="book-author__bio" data-reveal="" data-delay="2">Nágila Zortéa é esteticista e cosmetóloga, mestre em Envelhecimento Humano e especialista em Estética Clínica Avançada, Docência do Ensino Superior, Ortomolecular e Ozonoterapia Integrativa. Coordena o curso de Estética e Cosmética e a pós-graduação em Estética Avançada da URI Erechim e é docente em cursos de graduação e pós-graduação. À frente da NZ Beauty Clinic, em Erechim, dedica-se ao acompanhamento pós-operatório de cirurgias plásticas, ao tratamento do lipedema e ao rejuvenescimento facial não injetável. Tem formação internacional na metodologia Total Definer® e qualificação pela Lipedema Academy.</p>
           <ul class="tags" data-reveal="" data-delay="3">
-            <li class="tag tag--accent">Mestre em Estética e Cosmetologia</li>
+            <li class="tag tag--accent">Mestre em Envelhecimento Humano</li>
             <li class="tag tag--accent">Coordenadora — URI Erechim</li>
             <li class="tag">NZ Beauty Clinic</li>
           </ul>
@@ -310,9 +322,9 @@
           <h2 id="comprar-heading" class="section__title">Compre seu exemplar</h2>
 
           <div class="book-buy__product">
-            <img src="assets/images/book/book-cover-mock.svg" alt="" width="400" height="600" loading="lazy">
+            <img src="assets/images/book/book-capa-contracapa.jpg" alt="" width="1454" height="1082" loading="lazy">
             <div>
-              <p class="book-buy__product-title">Título do livro</p>
+              <p class="book-buy__product-title">Pós-operatório e o raciocínio diante da cirurgia plástica</p>
               <p class="book-buy__product-author">Nágila Bernarda Zortéa</p>
               <p class="book-buy__product-price"><span data-price-display="">R$ —</span> <span class="ph" data-price-flag="">Preço a definir</span></p>
             </div>
@@ -469,8 +481,8 @@
               <!-- Etapa 3 — Resumo -->
               <div class="buy-step buy-step--summary" data-step="3">
                 <p class="buy-step__legend"><span class="buy-step__num" aria-hidden="true">3</span> Resumo</p>
-                <div id="order-summary" class="order-summary" aria-live="polite" aria-atomic="true" aria-label="Resumo do pedido">
-                  <p class="order-summary__row"><span>Produto</span> <span id="summary-product">Título do livro</span></p>
+                <div id="order-summary" class="order-summary" aria-live="polite" aria-atomic="true">
+                  <p class="order-summary__row"><span>Produto</span> <span id="summary-product">Pós-operatório e o raciocínio diante da cirurgia plástica</span></p>
                   <p class="order-summary__row"><span>Quantidade</span> <span id="summary-qty">1</span></p>
                   <p class="order-summary__row"><span>Livro</span> <span id="summary-subtotal">—</span></p>
                   <p class="order-summary__row"><span>Frete</span> <span id="summary-shipping">—</span></p>

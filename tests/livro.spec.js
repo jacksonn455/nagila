@@ -41,7 +41,7 @@ test.describe('Livro page', () => {
   test('opens livro page and shows server price', async ({ page }) => {
     await mockApi(page);
     await page.goto('/livro.html');
-    await expect(page.locator('#product-title')).toHaveText(/Título do livro/);
+    await expect(page.locator('#product-title')).toHaveText(/Pós-operatório e o raciocínio diante da cirurgia plástica/);
     await expect(page.locator('#product-price')).toHaveText('R$ 89,90');
   });
 

@@ -953,6 +953,10 @@
 .book-buy__product img {
   width: 4.5rem;
   flex-shrink: 0;
+  /* A foto tem capa e contracapa lado a lado: o recorte mostra só a capa (metade esquerda) */
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: left center;
   border-radius: 2px;
   box-shadow: var(--shadow);
 }
