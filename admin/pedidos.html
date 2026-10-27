@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pedidos · Área administrativa</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,600&amp;display=swap">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="admin">
+  <header class="admin-header">
+    <div class="container admin-header__inner">
+      <p class="admin-brand"><small>Área administrativa</small>Pedidos do livro</p>
+      <div class="admin-actions">
+        <label class="admin-toggle"><input type="checkbox" id="auto-refresh" checked> Atualizar a cada 60 s</label>
+        <button type="button" class="admin-btn" id="refresh">Atualizar</button>
+        <button type="button" class="admin-btn" id="export">Exportar CSV</button>
+        <button type="button" class="admin-btn" id="logout">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container admin-main" id="panel" hidden>
+    <p class="admin-notice" id="notice" role="status" hidden></p>
+
+    <h1 class="visually-hidden">Pedidos</h1>
+
+    <h2 class="visually-hidden">Resumo</h2>
+    <dl class="admin-summary" id="summary"></dl>
+
+    <form class="admin-filters" id="filters" aria-label="Filtros">
+      <label class="admin-field">Pagamento
+        <select class="admin-input" id="f-status" name="status">
+          <option value="">Todos</option>
+          <option value="aprovado">Aprovado</option>
+          <option value="pendente">Pendente</option>
+          <option value="recusado">Recusado</option>
+          <option value="estornado">Estornado/Chargeback</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+      </label>
+      <label class="admin-field">Situação para envio
+        <select class="admin-input" id="f-situacao" name="situacao">
+          <option value="">Todas</option>
+          <option value="pronto">Pronto para envio</option>
+          <option value="nao_liberar">Não liberar</option>
+          <option value="enviado">Enviado ou retirado</option>
+        </select>
+      </label>
+      <label class="admin-field">Entrega
+        <select class="admin-input" id="f-entrega" name="entrega">
+          <option value="">Todas</option>
+          <option value="frete">Frete</option>
+          <option value="retirada">Retirada no local</option>
+        </select>
+      </label>
+      <label class="admin-field">De
+        <input class="admin-input" id="f-de" name="de" type="date">
+      </label>
+      <label class="admin-field">Até
+        <input class="admin-input" id="f-ate" name="ate" type="date">
+      </label>
+      <label class="admin-field admin-filters__search">Busca
+        <input class="admin-input" id="f-q" name="q" type="search" maxlength="100" placeholder="Nome, e-mail ou nº do pedido">
+      </label>
+      <div class="admin-filters__buttons">
+        <button type="submit" class="admin-btn admin-btn--primary">Filtrar</button>
+        <button type="button" class="admin-btn" id="clear-filters">Limpar</button>
+      </div>
+    </form>
+
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Comprador</th>
+            <th scope="col">Itens</th>
+            <th scope="col">Entrega</th>
+            <th scope="col">Pagamento</th>
+            <th scope="col">Situação para envio</th>
+            <th scope="col">Envio</th>
+            <th scope="col"><span class="visually-hidden">Ações</span></th>
+          </tr>
+        </thead>
+        <tbody id="orders"></tbody>
+      </table>
+    </div>
+
+    <nav class="admin-pager" aria-label="Paginação">
+      <button type="button" class="admin-btn" id="prev">Anterior</button>
+      <span id="page-info" aria-live="polite"></span>
+      <button type="button" class="admin-btn" id="next">Próxima</button>
+    </nav>
+  </main>
+
+  <dialog class="admin-detail" id="detail" aria-labelledby="detail-title">
+    <div class="admin-detail__head">
+      <h2 id="detail-title">Pedido</h2>
+      <button type="button" class="admin-btn" id="detail-close">Fechar</button>
+    </div>
+    <div class="admin-detail__body" id="detail-body"></div>
+  </dialog>
+
+  <script src="/admin/pedidos.js"></script>
+</body>
+</html>
