@@ -113,3 +113,14 @@ test.describe('livro.html — preço', () => {
     expect(called).toBe(false);
   });
 });
+
+test.describe('livro.html — metadados sociais', () => {
+  test('twitter:card summary espelha og:title/og:description, sem imagem social', async ({ page }) => {
+    await page.goto('/livro.html');
+    const meta = (sel) => page.locator(sel).getAttribute('content');
+    expect(await meta('meta[name="twitter:card"]')).toBe('summary');
+    expect(await meta('meta[name="twitter:title"]')).toBe(await meta('meta[property="og:title"]'));
+    expect(await meta('meta[name="twitter:description"]')).toBe(await meta('meta[property="og:description"]'));
+    await expect(page.locator('meta[property="og:image"], meta[name="twitter:image"]')).toHaveCount(0);
+  });
+});
