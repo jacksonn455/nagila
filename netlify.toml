@@ -14,6 +14,18 @@
   # ou são palavras comuns. Tokens e chaves continuam sendo verificados pelo secrets scanning.
   SECRETS_SCAN_OMIT_KEYS = "ORIGIN_CEP,NODE_ENV,BOOK_TITLE,BOOK_PRICE_CENTS,BOOK_WEIGHT_GRAMS,BOOK_LENGTH_CM,BOOK_WIDTH_CM,BOOK_HEIGHT_CM,BOOK_MAX_QUANTITY,BOOK_STOCK,PICKUP_ENABLED,PICKUP_ADDRESS,MELHOR_ENVIO_SERVICES,MELHOR_ENVIO_ENV,SITE_URL,PAYMENT_WEBHOOK_URL"
 
+# Cabeçalhos de segurança para todas as rotas (o HSTS já vem do Netlify no domínio próprio).
+# Sem CSP completa por enquanto. O checkout é o Checkout Pro do Mercado Pago, por
+# redirecionamento: a página não carrega scripts nem iframes do Mercado Pago, então
+# nada aqui afeta o pagamento.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+
 # Não expõe código-fonte e arquivos de desenvolvimento como páginas públicas
 [[redirects]]
   from = "/functions/*"
