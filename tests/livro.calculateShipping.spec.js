@@ -67,7 +67,13 @@ test.describe('calculateShipping — servidor', () => {
 });
 
 test.describe('calculateShipping', () => {
-  test.beforeEach(async ({ page }) => { await page.goto('/livro.html'); });
+  test.beforeEach(async ({ page }) => {
+    // sem bookInfo a página desativa a compra (estado seguro); aqui o preço vem do servidor
+    await page.route('**/.netlify/functions/bookInfo', (route) =>
+      route.fulfill({ status: 200, body: JSON.stringify({ title: 'Livro', price_cents: 39990, max_quantity: 3, available: true, pickup: null }) })
+    );
+    await page.goto('/livro.html');
+  });
 
   test('invalid CEP', async ({ page }) => {
     await page.fill('#cep', 'badcep');

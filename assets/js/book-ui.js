@@ -222,7 +222,10 @@
 
       // Preço demonstrativo nos pontos de exibição
       $$('[data-price-display]').forEach((el) => (el.textContent = brl(DEMO.priceCents)));
-      $$('[data-price-flag]').forEach((el) => (el.textContent = 'Valor demonstrativo'));
+      $$('[data-price-flag]').forEach((el) => {
+        el.textContent = 'Valor demonstrativo';
+        el.hidden = false; // o selo vem oculto no HTML (fora do preview o preço é o real)
+      });
 
       $$('[data-preview-state]').forEach((btn) => {
         btn.addEventListener('click', () => this.set(btn.dataset.previewState, { scroll: true }));

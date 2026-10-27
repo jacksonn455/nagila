@@ -148,13 +148,26 @@
     updateSummary();
   }
 
+  // Sem resposta válida da bookInfo, o preço estático do HTML pode estar desatualizado:
+  // esconde o valor e desativa a compra em vez de exibir um preço que o servidor não confirmou
+  function applyPriceUnavailable() {
+    document.querySelectorAll('[data-price-display]').forEach((el) => (el.textContent = 'R$ —'));
+    document.querySelectorAll('[data-price-flag]').forEach((el) => {
+      el.textContent = 'Indisponível no momento';
+      el.hidden = false;
+    });
+    $q('buy').disabled = true;
+    $q('calcShipping').disabled = true;
+    setMessage('Não foi possível carregar o preço agora. Recarregue a página em instantes.', 'error');
+  }
+
   // Price (server-side config)
   async function loadProduct() {
     try {
       const res = await fetch(`${API}/bookInfo`);
-      if (!res.ok) return;
+      if (!res.ok) return applyPriceUnavailable();
       const data = await res.json();
-      if (data.price_cents == null) return;
+      if (data.price_cents == null) return applyPriceUnavailable();
       state.priceCents = data.price_cents;
       state.maxQuantity = data.max_quantity || null;
       state.pickup = data.pickup || null;
@@ -169,6 +182,7 @@
       updateSummary();
     } catch (err) {
       console.error(err);
+      applyPriceUnavailable();
     }
   }
 

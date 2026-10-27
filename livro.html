@@ -138,9 +138,13 @@
 
           <p id="product-desc" class="book-hero__desc" data-reveal="" data-delay="2">A cirurgia plástica evolui constantemente, e o pós-operatório não pode ficar para trás. Este livro reúne os fundamentos da recuperação pós-cirúrgica, como fases de reparo, alterações teciduais e recursos terapêuticos, e propõe o raciocínio clínico para individualizar o cuidado de cada paciente. Destinado a estudantes e profissionais da saúde e da estética.</p>
 
+          <!-- Preço estático para prévias de link e buscadores que não rodam JavaScript.
+               Se BOOK_PRICE_CENTS mudar no Netlify, atualize também os 3 [data-price-display]
+               desta página (topo, compra e barra fixa). O book.js troca pelo valor do servidor
+               e, se a bookInfo falhar, esconde o preço e desativa a compra. -->
           <div class="book-price" data-reveal="" data-delay="3">
             <p class="book-price__label">Livro físico</p>
-            <p class="book-price__value"><span id="product-price" data-price-display="">R$ —</span> <span class="ph" data-price-flag="">Preço a definir</span></p>
+            <p class="book-price__value"><span id="product-price" data-price-display="">R$ 399,90</span> <span class="ph" data-price-flag="" hidden></span></p>
             <p class="book-price__note">Pagamento seguro pelo Mercado Pago</p>
           </div>
 
@@ -325,7 +329,7 @@
             <div>
               <p class="book-buy__product-title">Pós-operatório e o raciocínio diante da cirurgia plástica</p>
               <p class="book-buy__product-author">Nágila Bernarda Zortéa</p>
-              <p class="book-buy__product-price"><span data-price-display="">R$ —</span> <span class="ph" data-price-flag="">Preço a definir</span></p>
+              <p class="book-buy__product-price"><span data-price-display="">R$ 399,90</span> <span class="ph" data-price-flag="" hidden></span></p>
             </div>
           </div>
 
@@ -541,7 +545,7 @@
     <div class="buy-sticky__inner">
       <div class="buy-sticky__info">
         <span class="buy-sticky__title">Livro físico</span>
-        <span class="buy-sticky__price" data-price-display="">R$ —</span>
+        <span class="buy-sticky__price" data-price-display="">R$ 399,90</span>
       </div>
       <a href="#comprar" class="btn btn--primary" tabindex="-1">Comprar</a>
     </div>

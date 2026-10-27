@@ -1015,6 +1015,15 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Selos longos ("Indisponível no momento") quebram linha na coluna estreita do cartão */
+.book-buy__product > div {
+  min-width: 0;
+}
+
+.book-buy__product-price .ph {
+  white-space: normal;
+}
+
 /* Confiança */
 .book-trust {
   display: grid;

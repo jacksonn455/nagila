@@ -2,12 +2,23 @@ const { test, expect } = require('@playwright/test');
 
 // livro.html: layout no celular e dados estruturados (JSON-LD)
 
+function mockBookInfo(page, body = {}, status = 200) {
+  return page.route('**/.netlify/functions/bookInfo', (route) =>
+    route.fulfill({
+      status,
+      body: JSON.stringify({ title: 'Livro', price_cents: 39990, max_quantity: 3, available: true, sold_out: false, low_stock: false, pickup: null, ...body })
+    })
+  );
+}
+
 test.describe('livro.html — sem rolagem horizontal', () => {
   for (const width of [320, 375, 390, 768]) {
-    for (const preview of [false, true]) {
-      test(`${width}px${preview ? ' (preview)' : ''}`, async ({ page }) => {
+    // normal: preço do servidor · indisponível: bookInfo fora do ar · preview: dados de demonstração
+    for (const mode of ['normal', 'indisponível', 'preview']) {
+      test(`${width}px (${mode})`, async ({ page }) => {
+        if (mode === 'normal') await mockBookInfo(page);
         await page.setViewportSize({ width, height: 800 });
-        await page.goto(`/livro.html${preview ? '?preview=1' : ''}`);
+        await page.goto(`/livro.html${mode === 'preview' ? '?preview=1' : ''}`);
         // revela as seções animadas para medir o layout final
         await page.evaluate(() => document.querySelectorAll('[data-reveal]').forEach((el) => el.setAttribute('data-reveal', 'visible')));
         const { scrollWidth, clientWidth } = await page.evaluate(() => ({
@@ -51,5 +62,54 @@ test.describe('livro.html — JSON-LD do livro', () => {
     const digits = data.isbn.split('').map(Number);
     const sum = digits.slice(0, 12).reduce((acc, d, i) => acc + d * (i % 2 ? 3 : 1), 0);
     expect((10 - (sum % 10)) % 10).toBe(digits[12]);
+  });
+});
+
+test.describe('livro.html — preço', () => {
+  // Intl.NumberFormat usa espaço não separável depois do "R$"
+  const displays = (page) => page.$$eval('[data-price-display]', (els) => els.map((el) => el.textContent.replace(/\s/g, ' ')));
+
+  test('o HTML estático já traz R$ 399,90 (prévias de link e buscadores sem JavaScript)', async ({ request }) => {
+    const html = await (await request.get('/livro.html')).text();
+    expect(html.match(/data-price-display="">R\$ 399,90</g)).toHaveLength(3);
+    expect(html).not.toContain('Preço a definir');
+  });
+
+  test('o valor do servidor substitui o estático', async ({ page }) => {
+    await mockBookInfo(page, { price_cents: 41990 });
+    await page.goto('/livro.html');
+    await expect(page.locator('#product-price')).toHaveText('R$ 419,90');
+    expect(await displays(page)).toEqual(['R$ 419,90', 'R$ 419,90', 'R$ 419,90']);
+    await expect(page.locator('[data-price-flag]:visible')).toHaveCount(0);
+    await expect(page.locator('#buy')).toBeEnabled();
+  });
+
+  for (const [name, setup] of [
+    ['bookInfo com erro', (page) => mockBookInfo(page, {}, 500)],
+    ['bookInfo sem preço', (page) => mockBookInfo(page, { price_cents: null })],
+    ['bookInfo fora do ar', (page) => page.route('**/.netlify/functions/bookInfo', (route) => route.abort())]
+  ]) {
+    test(`${name}: esconde o preço e desativa a compra`, async ({ page }) => {
+      await setup(page);
+      await page.goto('/livro.html');
+      await expect(page.locator('#buy')).toBeDisabled();
+      expect(await displays(page)).toEqual(['R$ —', 'R$ —', 'R$ —']);
+      await expect(page.locator('.book-price [data-price-flag]')).toHaveText('Indisponível no momento');
+      await expect(page.locator('#calc-shipping')).toBeDisabled();
+      await expect(page.locator('#messages')).toHaveText('Não foi possível carregar o preço agora. Recarregue a página em instantes.');
+    });
+  }
+
+  test('preview continua com R$ 99,00 e o selo “Valor demonstrativo”, sem chamar a API', async ({ page }) => {
+    let called = false;
+    await page.route('**/.netlify/functions/**', (route) => {
+      called = true;
+      route.abort();
+    });
+    await page.goto('/livro.html?preview=1');
+    expect(await displays(page)).toEqual(['R$ 99,00', 'R$ 99,00', 'R$ 99,00']);
+    await expect(page.locator('.book-price [data-price-flag]')).toHaveText('Valor demonstrativo');
+    await expect(page.locator('.book-price [data-price-flag]')).toBeVisible();
+    expect(called).toBe(false);
   });
 });
