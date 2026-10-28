@@ -38,7 +38,24 @@
     const thumbs = $$('.book-gallery__thumbs .thumb');
     if (!stage || !main || !thumbs.length) return;
 
+    const count = $('[data-gallery-count]', stage);
+    let current = Math.max(0, thumbs.findIndex((t) => t.classList.contains('is-active')));
+
+    function step(delta) {
+      const next = thumbs[(current + delta + thumbs.length) % thumbs.length];
+      select(next);
+      // rola só a faixa de miniaturas (scrollIntoView poderia mover a página)
+      const strip = next.parentElement;
+      const offset = next.getBoundingClientRect().left - strip.getBoundingClientRect().left;
+      strip.scrollBy({
+        left: offset - (strip.clientWidth - next.offsetWidth) / 2,
+        behavior: reducedMotion ? 'auto' : 'smooth',
+      });
+    }
+
     function select(thumb) {
+      current = thumbs.indexOf(thumb);
+      if (count) count.textContent = `${current + 1} / ${thumbs.length}`;
       thumbs.forEach((t) => {
         const active = t === thumb;
         t.classList.toggle('is-active', active);
@@ -68,6 +85,23 @@
         select(next);
       });
     });
+
+    $('[data-gallery-prev]', stage)?.addEventListener('click', () => step(-1));
+    $('[data-gallery-next]', stage)?.addEventListener('click', () => step(1));
+
+    // Deslizar o dedo no palco troca a foto
+    let touchX = null;
+    stage.addEventListener('touchstart', (e) => (touchX = e.touches[0].clientX), { passive: true });
+    stage.addEventListener(
+      'touchend',
+      (e) => {
+        if (touchX == null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+      },
+      { passive: true },
+    );
 
     stage.addEventListener('animationend', () => stage.classList.remove('is-swapping'));
   }

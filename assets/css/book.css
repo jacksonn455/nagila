@@ -498,8 +498,86 @@
   opacity: 0.45;
 }
 
+/* Fotos reais em fundo branco: o palco fica branco para a foto emendar sem moldura */
+.book-gallery__stage[data-fit='photo'] {
+  background: #fff;
+}
+
+.book-gallery__stage[data-fit='photo']::before {
+  opacity: 0;
+}
+
+.book-gallery__stage[data-fit='photo'] .book-gallery__image {
+  padding: 0;
+}
+
 .book-gallery__stage.is-swapping .book-gallery__image {
   animation: book-swap var(--dur-slow) var(--ease-out);
+}
+
+.book-gallery__nav {
+  position: absolute;
+  inset-block-start: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  translate: 0 -50%;
+  color: #1a1714;
+  background: rgb(255 255 255 / 0.88);
+  border: 1px solid rgb(26 23 20 / 0.12);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity var(--dur) var(--ease),
+    background var(--dur) var(--ease);
+}
+
+.book-gallery__nav svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.book-gallery__nav--prev {
+  inset-inline-start: var(--sp-3);
+}
+
+.book-gallery__nav--next {
+  inset-inline-end: var(--sp-3);
+}
+
+.book-gallery__nav:hover {
+  background: #fff;
+}
+
+.book-gallery__stage:hover .book-gallery__nav,
+.book-gallery__nav:focus-visible {
+  opacity: 1;
+}
+
+/* Toque: setas sempre visíveis (não há hover) */
+@media (hover: none) {
+  .book-gallery__nav {
+    opacity: 1;
+  }
+}
+
+.book-gallery__count {
+  position: absolute;
+  inset-block-end: var(--sp-3);
+  inset-inline-end: var(--sp-3);
+  z-index: 2;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgb(26 23 20 / 0.55);
+  border-radius: var(--radius-full);
 }
 
 @keyframes book-swap {
@@ -570,6 +648,17 @@
   height: 100%;
   object-fit: contain;
   border-radius: var(--radius-sm);
+}
+
+.thumb[data-fit='photo'] {
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.thumb[data-fit='photo'] img {
+  object-fit: cover;
+  border-radius: 0;
 }
 
 .thumb:hover {
@@ -692,8 +781,8 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
-  background: var(--bg);
+  object-fit: cover;
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--book-radius);
 }
@@ -788,6 +877,24 @@
   .book-details__intro {
     position: sticky;
     top: calc(var(--nav-h) + var(--sp-6));
+  }
+}
+
+/* Capa e contracapa ao lado da ficha — só com duas colunas; no celular a galeria já mostra */
+.book-details__image {
+  display: none;
+}
+
+@media (min-width: 52rem) {
+  .book-details__image {
+    display: block;
+    width: 100%;
+    margin-block-start: var(--sp-7);
+    padding: var(--sp-4);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--book-radius);
+    box-shadow: var(--shadow);
   }
 }
 
@@ -973,10 +1080,9 @@
 .book-buy__product img {
   width: 4.5rem;
   flex-shrink: 0;
-  /* A foto tem capa e contracapa lado a lado: o recorte mostra só a capa (metade esquerda) */
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  object-position: left center;
+  background: #fff;
   border-radius: 2px;
   box-shadow: var(--shadow);
 }

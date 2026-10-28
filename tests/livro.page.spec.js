@@ -51,9 +51,9 @@ test.describe('livro.html — JSON-LD do livro', () => {
     // mesma pessoa do JSON-LD da página inicial
     expect(data.author['@id']).toBe('https://nagilazortea.com.br/#person');
     expect(data.url).toBe('https://nagilazortea.com.br/livro.html');
-    // Product/Offer e imagem continuam desligados até existir a capa sozinha
+    // Offer fica de fora: o preço vem do servidor
     expect(data.offers).toBeUndefined();
-    expect(data.image).toBeUndefined();
+    expect(data.image[0]).toBe('https://nagilazortea.com.br/assets/images/book/livro-capa.webp');
   });
 
   test('o ISBN do JSON-LD é o mesmo da ficha técnica e tem dígito verificador válido', async ({ page }) => {
@@ -117,13 +117,16 @@ test.describe('livro.html — preço', () => {
 });
 
 test.describe('livro.html — metadados sociais', () => {
-  test('twitter:card summary espelha og:title/og:description, sem imagem social', async ({ page }) => {
+  test('twitter:card summary_large_image espelha og:title/og:description/og:image', async ({ page, request }) => {
     await page.goto('/livro.html');
     const meta = (sel) => page.locator(sel).getAttribute('content');
-    expect(await meta('meta[name="twitter:card"]')).toBe('summary');
+    expect(await meta('meta[name="twitter:card"]')).toBe('summary_large_image');
     expect(await meta('meta[name="twitter:title"]')).toBe(await meta('meta[property="og:title"]'));
     expect(await meta('meta[name="twitter:description"]')).toBe(await meta('meta[property="og:description"]'));
-    await expect(page.locator('meta[property="og:image"], meta[name="twitter:image"]')).toHaveCount(0);
+    const image = await meta('meta[property="og:image"]');
+    expect(await meta('meta[name="twitter:image"]')).toBe(image);
+    // a imagem existe no próprio site
+    expect((await request.get(new URL(image).pathname)).ok()).toBe(true);
   });
 });
 

@@ -8,28 +8,29 @@
   <meta name="author" content="Nágila Bernarda Zortéa">
   <link rel="canonical" href="https://nagilazortea.com.br/livro.html">
 
-  <!-- Open Graph — espelha title/description.
-       og:image omitido de propósito: ainda não há imagem própria para redes sociais;
-       adicionar a fotografia oficial do livro (PNG/JPG 1200×630) quando existir. -->
+  <!-- Open Graph — espelha title/description. og:image: capa e contracapa em 1200×630 -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nágila Bernarda Zortéa">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://nagilazortea.com.br/livro.html">
   <meta property="og:title" content="Pós-operatório e o raciocínio diante da cirurgia plástica">
   <meta property="og:description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
+  <meta property="og:image" content="https://nagilazortea.com.br/assets/images/book/livro-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica">
 
-  <!-- Twitter/X: "summary" (sem imagem) até existir a capa sozinha; com ela, trocar por
-       "summary_large_image" e ativar og:image/twitter:image -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pós-operatório e o raciocínio diante da cirurgia plástica">
   <meta name="twitter:description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
+  <meta name="twitter:image" content="https://nagilazortea.com.br/assets/images/book/livro-og.jpg">
 
   <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
 
   <!-- JSON-LD: só Book com dados confirmados (capa, contracapa e código de barras).
        O autor aponta para a mesma pessoa (#person) do JSON-LD da página inicial.
-       Product/Offer fica de fora até existir uma imagem da capa sozinha. -->
+       Offer fica de fora: o preço vem do servidor (bookInfo) e pode mudar sem novo deploy. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -47,7 +48,12 @@
     "bookEdition": "1ª edição",
     "datePublished": "2026",
     "inLanguage": "pt-BR",
-    "url": "https://nagilazortea.com.br/livro.html"
+    "url": "https://nagilazortea.com.br/livro.html",
+    "image": [
+      "https://nagilazortea.com.br/assets/images/book/livro-capa.webp",
+      "https://nagilazortea.com.br/assets/images/book/livro-contracapa.webp",
+      "https://nagilazortea.com.br/assets/images/book/book-capa-contracapa.jpg"
+    ]
   }
   </script>
 
@@ -59,7 +65,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&amp;display=swap">
 
-  <link rel="preload" as="image" href="assets/images/book/book-capa-contracapa.jpg">
+  <link rel="preload" as="image" href="assets/images/book/livro-capa.webp">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/book.css">
 
@@ -132,8 +138,41 @@
 
         <!-- Galeria -->
         <div class="book-gallery" data-reveal="">
-          <div class="book-gallery__stage" id="gallery-main" data-fit="object">
-            <img id="main-image" class="book-gallery__image" src="assets/images/book/book-capa-contracapa.jpg" alt="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" width="1454" height="1082" fetchpriority="high">
+          <div class="book-gallery__stage" id="gallery-main" data-fit="photo">
+            <img id="main-image" class="book-gallery__image" src="assets/images/book/livro-capa.webp" alt="Foto da capa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" width="1200" height="1200" fetchpriority="high">
+
+            <button type="button" class="book-gallery__nav book-gallery__nav--prev" data-gallery-prev="" aria-label="Foto anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="book-gallery__nav book-gallery__nav--next" data-gallery-next="" aria-label="Próxima foto">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <p class="book-gallery__count" data-gallery-count="" aria-hidden="true">1 / 7</p>
+          </div>
+
+          <!-- Fotos reais do livro: capa, marcador, contracapa e páginas internas -->
+          <div class="book-gallery__thumbs" role="group" aria-label="Fotos do livro">
+            <button type="button" class="thumb is-active" aria-pressed="true" data-src="assets/images/book/livro-capa.webp" data-fit="photo" data-alt="Foto da capa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" aria-label="Ver capa">
+              <img src="assets/images/book/livro-capa.webp" alt="" width="1200" height="1200">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-capa-marcador.webp" data-fit="photo" data-alt="Livro ao lado do marcador de páginas com o resumo da obra" aria-label="Ver livro com marcador">
+              <img src="assets/images/book/livro-capa-marcador.webp" alt="" width="1200" height="1200" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-contracapa.webp" data-fit="photo" data-alt="Foto da contracapa do livro, com o texto de apresentação da obra e o código de barras" aria-label="Ver contracapa">
+              <img src="assets/images/book/livro-contracapa.webp" alt="" width="1200" height="1200" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-capa-contracapa.jpg" data-fit="object" data-alt="Capa e contracapa do livro lado a lado" aria-label="Ver capa e contracapa">
+              <img src="assets/images/book/book-capa-contracapa.jpg" alt="" width="1454" height="1082" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-miolo-meias.webp" data-fit="photo" data-alt="Livro aberto nas páginas 134 e 135, com ilustrações de faixas para lipedema e meias de compressão" aria-label="Ver páginas 134 e 135">
+              <img src="assets/images/book/livro-miolo-meias.webp" alt="" width="1200" height="1200" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-miolo-ilib.webp" data-fit="photo" data-alt="Página 174 do livro, com ilustração da aplicação de ILIB no punho" aria-label="Ver página 174">
+              <img src="assets/images/book/livro-miolo-ilib.webp" alt="" width="960" height="960" loading="lazy">
+            </button>
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-miolo-lipo.webp" data-fit="photo" data-alt="Página 86 do livro, com ilustração da marcação para lipoaspiração HD" aria-label="Ver página 86">
+              <img src="assets/images/book/livro-miolo-lipo.webp" alt="" width="960" height="960" loading="lazy">
+            </button>
           </div>
         </div>
 
@@ -193,8 +232,8 @@
         </div>
 
         <figure class="book-about__figure" data-reveal="" data-delay="2">
-          <img src="assets/images/book/book-capa-contracapa.jpg" alt="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica" width="1454" height="1082" loading="lazy">
-          <figcaption>Capa e contracapa</figcaption>
+          <img src="assets/images/book/livro-miolo-meias.webp" alt="Livro aberto nas páginas 134 e 135, com ilustrações de faixas para lipedema e meias de compressão" width="1200" height="1200" loading="lazy">
+          <figcaption>Páginas 134 e 135: faixas e meias de compressão</figcaption>
         </figure>
       </div>
     </section>
@@ -247,6 +286,7 @@
         <div class="book-details__intro">
           <span class="section__label" data-reveal="">Ficha técnica</span>
           <h2 id="detalhes-heading" class="section__title" data-reveal="" data-delay="1">Detalhes do produto</h2>
+          <img class="book-details__image" src="assets/images/book/book-capa-contracapa.jpg" alt="Capa e contracapa do livro lado a lado" width="1454" height="1082" loading="lazy" data-reveal="" data-delay="2">
         </div>
 
         <dl class="book-specs" data-reveal="" data-delay="1">
@@ -333,7 +373,7 @@
           <h2 id="comprar-heading" class="section__title">Compre seu exemplar</h2>
 
           <div class="book-buy__product">
-            <img src="assets/images/book/book-capa-contracapa.jpg" alt="" width="1454" height="1082" loading="lazy">
+            <img src="assets/images/book/livro-capa-retrato.webp" alt="" width="600" height="802" loading="lazy">
             <div>
               <p class="book-buy__product-title">Pós-operatório e o raciocínio diante da cirurgia plástica</p>
               <p class="book-buy__product-author">Nágila Bernarda Zortéa</p>
