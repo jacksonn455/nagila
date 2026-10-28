@@ -2,6 +2,7 @@
  Netlify Function: createOrder
  - Valida o pedido e recalcula preço e frete no servidor
  - Confere o estoque (BOOK_STOCK, opcional) antes de gravar
+ - Aplica o cupom de desconto (opcional), validado no servidor
  - Grava cliente, pedido, item, endereço e frete escolhido no Supabase
  - Cria a preferência do Mercado Pago (Checkout Pro) e retorna o init_point
 */
@@ -11,6 +12,7 @@ const { sb } = require('../_lib/supabase');
 const { getBook, missingBookConfig, getPickup, PICKUP_ID } = require('../_lib/book');
 const { quoteShipping, normalizeCep, ShippingError } = require('../_lib/shipping');
 const { availableStock, stockMessage } = require('../_lib/stock');
+const { findCoupon, discountFor } = require('../_lib/coupons');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const UFS = new Set('AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' '));
@@ -83,6 +85,10 @@ exports.handler = async (event) => {
     return json(400, { error: `Máximo de ${book.maxQuantity} exemplares por pedido.` });
   }
 
+  const couponCode = clean(p.coupon, 40);
+  const coupon = couponCode ? findCoupon(couponCode) : null;
+  if (couponCode && !coupon) return json(400, { error: 'Cupom inválido.' });
+
   const missing = missingBookConfig(book);
   if (missing.length) {
     console.error('Book config missing:', missing.join(', '));
@@ -123,7 +129,8 @@ exports.handler = async (event) => {
     }
 
     const subtotal = book.priceCents * quantity;
-    const total = subtotal + shipping.price_cents;
+    const discount = discountFor(coupon, book.priceCents);
+    const total = subtotal - discount + shipping.price_cents;
 
     const [customer] = await sb('customers?on_conflict=email', {
       method: 'POST',
@@ -140,7 +147,9 @@ exports.handler = async (event) => {
         status: 'pending',
         total_cents: total,
         shipping_cents: shipping.price_cents,
-        currency: 'BRL'
+        currency: 'BRL',
+        // Só envia as colunas do cupom quando há desconto (scripts/supabase-coupon-migration.sql)
+        ...(coupon && { coupon_code: coupon.code, discount_cents: discount })
       }
     });
 
@@ -166,15 +175,21 @@ exports.handler = async (event) => {
       }
     });
 
-    const items = [
-      {
-        id: book.productId,
-        title: book.title,
-        quantity,
-        unit_price: book.priceCents / 100,
+    // Com cupom, um exemplar sai com o desconto: a soma dos itens continua igual ao total
+    const items = [];
+    const fullPriceQty = discount ? quantity - 1 : quantity;
+    if (fullPriceQty > 0) {
+      items.push({ id: book.productId, title: book.title, quantity: fullPriceQty, unit_price: book.priceCents / 100, currency_id: 'BRL' });
+    }
+    if (discount) {
+      items.push({
+        id: `${book.productId}-${coupon.code.toLowerCase()}`,
+        title: `${book.title} (cupom ${coupon.code})`,
+        quantity: 1,
+        unit_price: (book.priceCents - discount) / 100,
         currency_id: 'BRL'
-      }
-    ];
+      });
+    }
     // O Mercado Pago não aceita item com valor zero: a retirada não gera item de frete
     if (shipping.price_cents > 0) {
       items.push({

@@ -211,6 +211,8 @@
       { id: 'demo_pac', service: 'PAC', carrier: 'Correios', price_cents: 1850, estimated_days: 7 },
       { id: 'demo_sedex', service: 'SEDEX', carrier: 'Correios', price_cents: 4500, estimated_days: 2 },
     ],
+    // Espelha functions/_lib/coupons.js só para visualizar; o servidor valida de verdade
+    coupons: { '50OFF': { discount_cents: 5000, description: 'R$ 50,00 de desconto no livro' } },
     orderId: 'DEMO-000123',
     buyer: {
       cep: '00000-000',
@@ -236,6 +238,7 @@
   const Preview = {
     state: 'initial',
     timer: null,
+    coupon: null,
 
     card: null,
     result: null,
@@ -271,14 +274,22 @@
         (e) => {
           const calc = e.target.closest('#calc-shipping');
           const buy = e.target.closest('#buy');
-          if (!calc && !buy) return;
+          const coupon = e.target.closest('#apply-coupon');
+          if (!calc && !buy && !coupon) return;
           e.preventDefault();
           e.stopPropagation();
           if (calc) this.simulateShipping();
           if (buy) this.simulateOrder();
+          if (coupon) this.simulateCoupon();
         },
         true,
       );
+      $('#coupon')?.addEventListener('input', () => {
+        if (!this.coupon) return;
+        this.coupon = null;
+        this.couponStatus('', '');
+        this.updateSummary();
+      });
 
       this.set('initial');
     },
@@ -297,10 +308,12 @@
     totals() {
       const subtotal = DEMO.priceCents * this.qty();
       const ship = this.selectedShipping();
+      const discount = this.coupon ? this.coupon.discount_cents : 0;
       return {
         subtotal,
+        discount,
         shipping: ship ? ship.price_cents : null,
-        total: ship ? subtotal + ship.price_cents : null,
+        total: ship ? subtotal - discount + ship.price_cents : null,
         ship,
       };
     },
@@ -315,6 +328,31 @@
       set('summary-subtotal', brl(t.subtotal));
       set('summary-shipping', brl(t.shipping));
       set('summary-total', brl(t.total));
+      const row = $('#summary-discount-row');
+      if (row) row.hidden = !t.discount;
+      set('summary-discount-label', this.coupon ? `Desconto (${this.coupon.code})` : 'Desconto');
+      set('summary-discount', t.discount ? `− ${brl(t.discount)}` : '—');
+    },
+
+    couponStatus(text, type) {
+      const el = $('#coupon-status');
+      if (!el) return;
+      el.textContent = text;
+      el.dataset.state = type;
+    },
+
+    simulateCoupon() {
+      const input = $('#coupon');
+      const code = (input?.value || '').trim().toUpperCase();
+      const found = DEMO.coupons[code];
+      this.coupon = found ? { code, ...found } : null;
+      if (found) {
+        input.value = code;
+        this.couponStatus(`Cupom aplicado: ${found.description}.`, 'success');
+      } else {
+        this.couponStatus(code ? 'Cupom inválido.' : 'Digite o código do cupom.', 'error');
+      }
+      this.updateSummary();
     },
 
     message(text, type = 'info') {
@@ -388,6 +426,7 @@
           <p class="order-summary__row"><span>Produto</span> <span>${escapeHtml($('#summary-product')?.textContent || 'Livro')}</span></p>
           <p class="order-summary__row"><span>Quantidade</span> <span>${this.qty()}</span></p>
           <p class="order-summary__row"><span>Frete${t.ship ? ` · ${t.ship.service}` : ''}</span> <span>${brl(t.shipping)}</span></p>
+          ${t.discount ? `<p class="order-summary__row order-summary__row--discount"><span>Desconto (${escapeHtml(this.coupon.code)})</span> <span>− ${brl(t.discount)}</span></p>` : ''}
           <p class="order-summary__row order-summary__row--total"><span>Total</span> <span>${brl(t.total)}</span></p>
         </div>`;
     },

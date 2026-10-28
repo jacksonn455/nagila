@@ -205,6 +205,7 @@
     const items = section('Itens e valores', [
       el('ul', {}, o.items.map((i) => el('li', { text: `${i.quantity}× ${i.title} — ${money(i.unit_price_cents)} cada (${money(i.subtotal_cents)})` }))),
       el('p', { text: `Frete: ${pickup ? 'grátis (retirada)' : money(o.shipping_cents)}` }),
+      ...(o.discount_cents ? [el('p', { text: `Desconto${o.coupon_code ? ` (cupom ${o.coupon_code})` : ''}: −${money(o.discount_cents)}` })] : []),
       el('p', { text: `Total: ${money(o.total_cents)}` })
     ]);
 

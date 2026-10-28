@@ -1608,6 +1608,35 @@ select.input {
   }
 }
 
+/* Cupom */
+.coupon {
+  margin-block-end: var(--sp-5);
+}
+
+.coupon__input {
+  text-transform: uppercase;
+}
+
+.coupon__status:empty {
+  display: none;
+}
+
+.coupon__status[data-state='success'] {
+  color: var(--accent);
+}
+
+.coupon__status[data-state='error'] {
+  color: var(--danger);
+}
+
+.order-summary__row[hidden] {
+  display: none;
+}
+
+.order-summary__row--discount span:last-child {
+  color: var(--accent);
+}
+
 /* Resumo */
 .order-summary {
   display: flex;

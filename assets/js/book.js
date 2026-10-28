@@ -1,6 +1,7 @@
 /* Frontend logic for livro.html
  - Loads the server-side price (bookInfo)
  - Handles quantity, CEP, shipping calculation (calculateShipping) and order summary
+ - Applies a discount coupon (validateCoupon), revalidated by createOrder
  - Creates the order (createOrder) and redirects to the Mercado Pago init_point
  - Shows the result when the buyer returns from Mercado Pago (?pagamento=...)
 
@@ -39,6 +40,12 @@
     summaryProduct: '#summary-product',
     summarySubtotal: '#summary-subtotal',
     summaryShipping: '#summary-shipping',
+    summaryDiscountRow: '#summary-discount-row',
+    summaryDiscountLabel: '#summary-discount-label',
+    summaryDiscount: '#summary-discount',
+    coupon: '#coupon',
+    applyCoupon: '#apply-coupon',
+    couponStatus: '#coupon-status',
     summaryTotal: '#summary-total'
   };
 
@@ -57,6 +64,7 @@
     maxQuantity: null,
     options: [],
     pickup: null,
+    coupon: null, // { code, description, discount_cents } validado pelo servidor
     clientToken: null
   };
 
@@ -135,9 +143,52 @@
     const qty = quantity() || 1;
     const subtotal = state.priceCents != null ? state.priceCents * qty : null;
     const ship = selectedOption();
+    const discount = state.coupon ? state.coupon.discount_cents : 0;
     $q('summarySubtotal').textContent = formatCurrency(subtotal);
     $q('summaryShipping').textContent = ship ? (ship.price_cents === 0 ? 'Grátis' : formatCurrency(ship.price_cents)) : '—';
-    $q('summaryTotal').textContent = subtotal != null && ship ? formatCurrency(subtotal + ship.price_cents) : '—';
+    $q('summaryDiscountRow').hidden = !discount;
+    $q('summaryDiscountLabel').textContent = state.coupon ? `Desconto (${state.coupon.code})` : 'Desconto';
+    $q('summaryDiscount').textContent = discount ? `− ${formatCurrency(discount)}` : '—';
+    $q('summaryTotal').textContent = subtotal != null && ship ? formatCurrency(subtotal - discount + ship.price_cents) : '—';
+  }
+
+  function setCouponStatus(msg, type) {
+    const s = $q('couponStatus');
+    s.textContent = msg;
+    s.dataset.state = type || '';
+  }
+
+  async function applyCoupon() {
+    const code = value('coupon').toUpperCase();
+    state.coupon = null;
+    updateSummary();
+    if (!code) return setCouponStatus('Digite o código do cupom.', 'error');
+
+    const btn = $q('applyCoupon');
+    btn.disabled = true;
+    try {
+      const { ok, data } = await postJson('validateCoupon', { code });
+      if (!ok || !data || !data.discount_cents) {
+        return setCouponStatus((data && data.error) || 'Não foi possível validar o cupom.', 'error');
+      }
+      state.coupon = data;
+      $q('coupon').value = data.code;
+      setCouponStatus(`Cupom aplicado: ${data.description}.`, 'success');
+      updateSummary();
+    } catch (err) {
+      console.error(err);
+      setCouponStatus('Não foi possível validar o cupom. Verifique sua conexão.', 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // Editar o código depois de aplicado remove o desconto até aplicar de novo
+  function resetCoupon() {
+    if (!state.coupon || value('coupon').toUpperCase() === state.coupon.code) return;
+    state.coupon = null;
+    setCouponStatus('', '');
+    updateSummary();
   }
 
   // Frete depende do CEP e da quantidade: qualquer mudança invalida a cotação
@@ -298,7 +349,8 @@
         phone: value('phone'),
         quantity: qty,
         address: pickup ? {} : address,
-        shipping_option_id: ship.id
+        shipping_option_id: ship.id,
+        ...(state.coupon && { coupon: state.coupon.code })
       });
 
       if (ok && data && data.init_point) {
@@ -467,6 +519,16 @@
       updateSummary();
     });
     $q('shippingOptions').addEventListener('change', updateSummary);
+    $q('applyCoupon').addEventListener('click', (e) => {
+      e.preventDefault();
+      applyCoupon();
+    });
+    $q('coupon').addEventListener('input', resetCoupon);
+    $q('coupon').addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      applyCoupon();
+    });
     $q('deliveryMode').addEventListener('change', () => {
       clearMessage();
       updateDeliveryMode();

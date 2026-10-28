@@ -20,14 +20,23 @@ createOrder — POST /.netlify/functions/createOrder
     name, email, phone?,
     quantity: integer,
     address: { cep, street, number, complement?, neighborhood, city, state },
-    shipping_option_id: string       // id returned by calculateShipping, or 'pickup'
+    shipping_option_id: string,      // id returned by calculateShipping, or 'pickup'
+    coupon?: string                  // coupon code (case-insensitive), see functions/_lib/coupons.js
   }
+- With a coupon the discount is fixed per order (capped below one copy's price): one copy goes to the preference
+  with the discounted price, and orders.coupon_code / orders.discount_cents are stored (scripts/supabase-coupon-migration.sql).
+  Unknown coupon → 400 'Cupom inválido.'
 - With shipping_option_id = 'pickup' the address is not required, no shipping item is added to the preference
   and the back_urls include `&entrega=retirada`.
 - Response 200: { init_point, order_id }
 - 400 validation · 409 shipping option no longer available / order already registered / not enough stock (BOOK_STOCK) · 502 Mercado Pago error · 503 config missing
 - Price and shipping are recalculated server-side; the Mercado Pago preference contains the book and the shipping as items,
   so the charged amount equals orders.total_cents.
+
+validateCoupon — POST /.netlify/functions/validateCoupon
+- Request: { code: string }
+- Response 200: { code, description, discount_cents } (display only; createOrder validates again)
+- 404 unknown coupon · 503 price not configured
 
 orderStatus — GET /.netlify/functions/orderStatus?order_id=<uuid>[&payment_id=<id>]
 - Response 200: { status } (pending, paid, failed, cancelled, refunded, shipped). Read-only.

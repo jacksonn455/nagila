@@ -532,11 +532,20 @@
               <!-- Etapa 3 — Resumo -->
               <div class="buy-step buy-step--summary" data-step="3">
                 <p class="buy-step__legend"><span class="buy-step__num" aria-hidden="true">3</span> Resumo</p>
+                <div class="buy-field coupon">
+                  <label for="coupon">Cupom de desconto <span class="buy-field__optional">opcional</span></label>
+                  <div class="cep-row">
+                    <input id="coupon" name="coupon" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" class="input coupon__input">
+                    <button type="button" id="apply-coupon" class="btn btn--ghost">Aplicar</button>
+                  </div>
+                  <span class="buy-field__hint coupon__status" id="coupon-status" aria-live="polite"></span>
+                </div>
                 <div id="order-summary" class="order-summary" aria-live="polite" aria-atomic="true">
                   <p class="order-summary__row"><span>Produto</span> <span id="summary-product">Pós-operatório e o raciocínio diante da cirurgia plástica</span></p>
                   <p class="order-summary__row"><span>Quantidade</span> <span id="summary-qty">1</span></p>
                   <p class="order-summary__row"><span>Livro</span> <span id="summary-subtotal">—</span></p>
                   <p class="order-summary__row"><span>Frete</span> <span id="summary-shipping">—</span></p>
+                  <p class="order-summary__row order-summary__row--discount" id="summary-discount-row" hidden><span id="summary-discount-label">Desconto</span> <span id="summary-discount">—</span></p>
                   <p class="order-summary__row order-summary__row--total"><span>Total</span> <span id="summary-total">—</span></p>
                 </div>
 

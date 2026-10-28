@@ -153,6 +153,8 @@ function buildView(order, { customer, items, address, payments, shipment, title 
     quantity: items.reduce((n, i) => n + (Number(i.quantity) || 0), 0),
     total_cents: Number(order.total_cents) || 0,
     shipping_cents: Number(order.shipping_cents) || 0,
+    discount_cents: Number(order.discount_cents) || 0,
+    coupon_code: order.coupon_code || null,
     order_status: order.status,
     delivery: { type: pickup ? 'retirada' : 'frete', label: deliveryLabel(shipment) },
     payment: { status: payStatus, label: PAYMENT_LABELS[payStatus] },
