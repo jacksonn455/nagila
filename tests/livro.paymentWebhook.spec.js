@@ -218,4 +218,60 @@ test.describe('paymentWebhook', () => {
       expect((await call('paymentWebhook', { httpMethod: 'GET' })).status).toBe(405);
     });
   });
+
+  test.describe('aviso no Discord', () => {
+    const DISCORD = 'https://discord.test/api/webhooks/1/abc';
+
+    function seedFullOrder() {
+      backend.db.customers.push({ id: 'c1', name: 'Maria Souza', email: 'maria@example.com' });
+      backend.db.orders.push({ id: ORDER_ID, status: 'pending', total_cents: TOTAL, customer_id: 'c1' });
+      backend.db.order_items.push({ order_id: ORDER_ID, quantity: 1 });
+      backend.db.addresses.push({ order_id: ORDER_ID, city: 'Erechim', state: 'RS' });
+      backend.db.shipments.push({ order_id: ORDER_ID, provider: 'melhorenvio', raw: { carrier: 'Correios', service: 'PAC' } });
+    }
+
+    test('venda aprovada: uma mensagem, mesmo com notificações repetidas', async () => {
+      process.env.DISCORD_WEBHOOK_URL = DISCORD;
+      seedFullOrder();
+      mpPayment('123', 'approved', TOTAL, { payment_type_id: 'bank_transfer' });
+      await notify('123');
+      await notify('123', { notificationId: 'n-repetida' });
+
+      expect(backend.discord.messages).toHaveLength(1);
+      const [embed] = backend.discord.messages[0].embeds;
+      const field = (name) => embed.fields.find((f) => f.name === name).value;
+      expect(field('Cliente')).toBe('Maria Souza');
+      expect(field('Exemplares')).toBe('1');
+      expect(field('Total').replace(/\s/g, ' ')).toBe('R$ 425,65');
+      expect(field('Entrega')).toBe('Correios PAC — Erechim/RS');
+      expect(field('Pagamento')).toBe('Pix');
+      expect(JSON.stringify(embed)).not.toContain('maria@example.com');
+    });
+
+    test('pagamento pendente ou recusado: sem aviso', async () => {
+      process.env.DISCORD_WEBHOOK_URL = DISCORD;
+      seedFullOrder();
+      mpPayment('123', 'pending');
+      mpPayment('124', 'rejected');
+      await notify('123');
+      await notify('124');
+      expect(backend.discord.messages).toHaveLength(0);
+    });
+
+    test('sem DISCORD_WEBHOOK_URL: aprova sem chamar o Discord', async () => {
+      seedFullOrder();
+      mpPayment('123', 'approved');
+      expect(await notify('123')).toEqual({ status: 200, body: { ok: true, status: 'paid' } });
+      expect(backend.calls.some((c) => c.url.includes('discord'))).toBe(false);
+    });
+
+    test('Discord fora do ar: o pedido continua pago e o webhook responde 200', async () => {
+      process.env.DISCORD_WEBHOOK_URL = DISCORD;
+      backend.discord.fails = true;
+      seedFullOrder();
+      mpPayment('123', 'approved');
+      expect(await notify('123')).toEqual({ status: 200, body: { ok: true, status: 'paid' } });
+      expect(orderStatus()).toBe('paid');
+    });
+  });
 });

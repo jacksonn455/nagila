@@ -32,6 +32,12 @@ ATENÇÃO: nunca commitar `.env`. Em produção as variáveis ficam no painel do
   Disponível = estoque − pedidos `paid`/`shipped` − pedidos `pending` das últimas 48 h.
 - Enquanto faltarem, a página mostra "Venda do livro ainda não configurada".
 
+## 4.1 Aviso de venda no Discord
+- Opcional `DISCORD_WEBHOOK_URL`: no Discord, Configurações do canal → Integrações → Webhooks → copiar URL.
+  A cada pedido que passa a `paid`, o `paymentWebhook` manda uma mensagem com cliente, exemplares,
+  total, entrega e meio de pagamento (sem e-mail nem telefone). Falha no Discord não afeta o pedido.
+- A URL é um segredo: só no `.env` e no painel do Netlify, nunca no repositório.
+
 ## 5. Netlify
 - Add new site → Import an existing project → GitHub → este repositório. `netlify.toml` já define publish `.` e functions.
 - Site configuration → Environment variables: cadastrar as variáveis acima.

@@ -3,6 +3,7 @@
 //   (filtros eq / in / not.is.null, limit, upsert por on_conflict, PATCH)
 // - Mercado Pago: criação de preferência e consulta de pagamento
 // - Melhor Envio: cotação de frete
+// - Discord: webhook de aviso de venda (mensagens em `discord.messages`)
 // Cada chamada fica registrada em `calls` para as verificações dos testes.
 
 const crypto = require('crypto');
@@ -35,7 +36,8 @@ const OPTIONAL_ENV = [
   'URL',
   'ADMIN_EMAIL',
   'ADMIN_PASSWORD_HASH',
-  'ADMIN_SESSION_SECRET'
+  'ADMIN_SESSION_SECRET',
+  'DISCORD_WEBHOOK_URL'
 ];
 
 // Cotação padrão do Melhor Envio (inclui um serviço fora da lista e um com erro)
@@ -97,6 +99,7 @@ function createBackend(options = {}) {
     paymentFetchFails: false
   };
   const me = { quote: ME_QUOTE, fails: false, lastPayload: null };
+  const discord = { fails: false, messages: [] };
   Object.assign(mp, options.mp);
   Object.assign(me, options.me);
 
@@ -153,6 +156,13 @@ function createBackend(options = {}) {
       return reply(me.quote);
     }
 
+    // Discord
+    if (u.hostname === 'discord.test' && method === 'POST') {
+      if (discord.fails) return reply('erro simulado', 500);
+      discord.messages.push(body);
+      return reply(null, 204);
+    }
+
     // Supabase (PostgREST)
     if (u.hostname === 'supabase.test' && u.pathname.startsWith('/rest/v1/')) {
       const table = u.pathname.slice('/rest/v1/'.length);
@@ -197,7 +207,7 @@ function createBackend(options = {}) {
     throw new Error(`Chamada não simulada: ${method} ${url}`);
   }
 
-  return { db, calls, mp, me, fetchImpl };
+  return { db, calls, mp, me, discord, fetchImpl };
 }
 
 // Instala o backend simulado e as variáveis do livro; devolve uma função que desfaz tudo

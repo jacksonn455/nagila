@@ -4,6 +4,7 @@
  - Valida a assinatura x-signature quando MERCADOPAGO_WEBHOOK_SECRET está configurado
  - Busca o pagamento na API do Mercado Pago (fonte da verdade — nunca confia no corpo)
  - Atualiza payments e o status do pedido no Supabase
+ - Avisa no Discord quando o pedido passa a pago (DISCORD_WEBHOOK_URL)
 
  Respostas 2xx encerram as tentativas do Mercado Pago; 5xx fazem ele reenviar.
 */
@@ -11,6 +12,7 @@
 const crypto = require('crypto');
 const { json, readBody } = require('../_lib/http');
 const { sb } = require('../_lib/supabase');
+const { notifySale } = require('../_lib/discord');
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -142,7 +144,13 @@ exports.handler = async (event) => {
 
     if ((TRANSITIONS[order.status] || []).includes(mapped)) {
       // Filtra pelo status atual para não sobrescrever uma atualização concorrente
-      await sb(`orders?id=eq.${order.id}&status=eq.${order.status}`, { method: 'PATCH', body: { status: mapped } });
+      const updated = await sb(`orders?id=eq.${order.id}&status=eq.${order.status}`, {
+        method: 'PATCH',
+        prefer: 'return=representation',
+        body: { status: mapped }
+      });
+      // Só quem fez a transição avisa: notificações repetidas não geram aviso duplicado
+      if (mapped === 'paid' && updated && updated.length) await notifySale(order.id, payment);
     }
 
     return json(200, { ok: true, status: mapped });
