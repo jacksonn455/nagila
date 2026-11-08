@@ -33,8 +33,12 @@ exports.handler = async (event) => {
   if (!process.env.MERCADOPAGO_ACCESS_TOKEN) return adminJson(503, { error: 'Mercado Pago não configurado.' });
 
   try {
-    const [order] = await sb(`orders?id=eq.${orderId}&select=id,status,total_cents`);
+    const [order] = await sb(`orders?id=eq.${orderId}&select=*`);
     if (!order) return adminJson(404, { error: 'Pedido não encontrado.' });
+    // Pedidos do Mercado Livre não têm external_reference = id do pedido: a consulta não se aplica
+    if (order.channel === 'mercadolivre') {
+      return adminJson(409, { error: 'Pedidos do Mercado Livre são atualizados pela sincronização com o Mercado Livre.' });
+    }
 
     const res = await fetch(
       `https://api.mercadopago.com/v1/payments/search?external_reference=${orderId}&sort=date_created&criteria=desc`,

@@ -153,3 +153,19 @@ nagila/
 | `--text`         | `#1a1714` (warm black)   | `#f5f0e8` (ivory)         |
 | `--accent`       | `#8b6914` (dark gold)    | `#c9a84c` (gold)          |
 | `--accent-vivid` | `#c9a84c` (gold)         | `#d4b55a` (bright gold)   |
+
+---
+
+## Book store, admin and Mercado Livre integration
+
+The book store runs on Netlify Functions (`functions/`) + Supabase. Setup steps (environment variables, SQL
+migrations, Mercado Pago, Melhor Envio, Discord) are in [README-setup-book.md](README-setup-book.md); endpoint
+contracts are in [functions/CONTRACTS.md](functions/CONTRACTS.md).
+
+Mercado Livre sales (OAuth + PKCE, notifications `orders_v2` / `shipments`) are documented in
+**README-setup-book.md §7**:
+
+- Redirect URI: `https://nagilazortea.com.br/.netlify/functions/mercadoLivreOAuthCallback`
+- Notifications URL: `https://nagilazortea.com.br/.netlify/functions/mercadoLivreWebhook`
+- Migration: `scripts/supabase-mercadolivre-migration.sql` (run before deploying)
+- Encryption key: `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`

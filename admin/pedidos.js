@@ -70,7 +70,7 @@
 
   /* ---------- filtros na URL ---------- */
 
-  const FILTER_KEYS = ['status', 'situacao', 'entrega', 'de', 'ate', 'q'];
+  const FILTER_KEYS = ['status', 'situacao', 'entrega', 'canal', 'de', 'ate', 'q'];
 
   function filtersFromUrl() {
     const params = new URLSearchParams(location.search);
@@ -101,6 +101,7 @@
       ['Exemplares vendidos', s.exemplares_vendidos]
     ];
     if (s.exemplares_restantes != null) items.push(['Exemplares restantes', s.exemplares_restantes]);
+    if (s.vendas_mercadolivre != null) items.push(['Vendas no Mercado Livre', s.vendas_mercadolivre]);
     $('summary').replaceChildren(...items.map(([label, value]) => el('div', {}, [el('dt', { text: label }), el('dd', { text: value })])));
   }
 
@@ -115,7 +116,12 @@
     const readiness = [badge(o.readiness.state, o.readiness.label)];
     if (o.readiness.reasons.length) readiness.push(el('span', { cls: 'admin-muted', text: o.readiness.reasons.join(' · ') }));
     return el('tr', {}, [
-      cell('Pedido', [el('strong', { text: o.short_id }), el('span', { cls: 'admin-muted', text: dateTime(o.created_at) })]),
+      cell('Pedido', [
+        el('strong', { text: o.short_id }),
+        o.channel === 'mercadolivre' ? badge('canal', 'Mercado Livre') : null,
+        o.external && o.external.order_id ? el('span', { cls: 'admin-muted', text: `ML #${o.external.order_id}` }) : null,
+        el('span', { cls: 'admin-muted', text: dateTime(o.created_at) })
+      ]),
       cell('Comprador', [
         el('span', { text: o.customer.name || '—' }),
         el('span', { cls: 'admin-muted', text: o.customer.email }),
@@ -177,16 +183,27 @@
     state.current = o;
     $('detail-title').textContent = `Pedido ${o.short_id}`;
     const pickup = o.delivery.type === 'retirada';
+    const marketplace = o.channel === 'mercadolivre';
+    const ext = o.external || {};
 
-    const buyer = section('Comprador', [
-      el('p', { text: o.customer.name || '—' }),
-      el('p', { text: o.customer.email }),
-      el('p', { text: o.customer.phone || 'Sem telefone' }),
-      el('p', { cls: 'admin-muted', text: `Pedido feito em ${dateTime(o.created_at)} · ID ${o.id}` })
-    ]);
+    const buyer = marketplace
+      ? section('Comprador', [
+          el('p', { text: o.customer.name || '—' }),
+          ext.buyer_nickname ? el('p', { cls: 'admin-muted', text: `Apelido no Mercado Livre: ${ext.buyer_nickname}` }) : null,
+          el('p', { text: `Canal: Mercado Livre · Pedido ML #${ext.order_id || '—'}${ext.pack_id ? ` · Carrinho #${ext.pack_id}` : ''}` }),
+          el('p', { cls: 'admin-muted', text: `Pedido feito em ${dateTime(o.created_at)} · ID ${o.id}` }),
+          el('p', { cls: 'admin-muted', text: 'Contato e endereço do comprador ficam no Mercado Livre.' })
+        ])
+      : section('Comprador', [
+          el('p', { text: o.customer.name || '—' }),
+          el('p', { text: o.customer.email }),
+          el('p', { text: o.customer.phone || 'Sem telefone' }),
+          el('p', { cls: 'admin-muted', text: `Pedido feito em ${dateTime(o.created_at)} · ID ${o.id}` })
+        ]);
 
     const deliveryChildren = [el('p', { text: o.delivery.label })];
     if (pickup) deliveryChildren.push(el('p', { text: 'Retirada no local: não há endereço de envio.' }));
+    else if (marketplace) deliveryChildren.push(el('p', { text: 'Etiqueta e envio pelo Mercado Livre.' }));
     else if (o.address) {
       addressLines(o.address).forEach((line) => deliveryChildren.push(el('p', { text: line })));
       const copy = el('button', { cls: 'admin-btn', text: 'Copiar endereço de envio', attrs: { type: 'button' } });
@@ -204,7 +221,7 @@
 
     const items = section('Itens e valores', [
       el('ul', {}, o.items.map((i) => el('li', { text: `${i.quantity}× ${i.title} — ${money(i.unit_price_cents)} cada (${money(i.subtotal_cents)})` }))),
-      el('p', { text: `Frete: ${pickup ? 'grátis (retirada)' : money(o.shipping_cents)}` }),
+      el('p', { text: `Frete: ${pickup ? 'grátis (retirada)' : marketplace ? `${money(o.shipping_cents)} (pago pelo comprador no Mercado Livre)` : money(o.shipping_cents)}` }),
       ...(o.discount_cents ? [el('p', { text: `Desconto${o.coupon_code ? ` (cupom ${o.coupon_code})` : ''}: −${money(o.discount_cents)}` })] : []),
       el('p', { text: `Total: ${money(o.total_cents)}` })
     ]);
@@ -228,7 +245,7 @@
           })
         )
       ),
-      recheckBlock(o)
+      marketplace ? el('p', { cls: 'admin-muted', text: 'Pagamento processado pelo Mercado Livre e atualizado automaticamente.' }) : recheckBlock(o)
     ]);
 
     const rule = section('Situação para envio', [
@@ -280,6 +297,10 @@
   }
 
   function shipBlock(o) {
+    // Mercado Livre: envio feito e atualizado no próprio Mercado Livre
+    if (o.channel === 'mercadolivre') {
+      return o.readiness.state === 'enviado' ? null : el('p', { cls: 'admin-muted', text: 'Para enviar, use a venda no Mercado Livre. A situação é atualizada aqui automaticamente.' });
+    }
     const pickup = o.delivery.type === 'retirada';
     const ready = o.readiness.state === 'pronto';
     const tracking = el('input', { cls: 'admin-input', attrs: { id: 'ship-tracking', maxlength: 40, autocomplete: 'off' } });
@@ -349,6 +370,74 @@
     }
   }
 
+  /* ---------- Mercado Livre ---------- */
+
+  const ML_RESULTS = {
+    conectado: ['Conta do Mercado Livre conectada.', 'info'],
+    recusado: ['A autorização no Mercado Livre foi cancelada. Nada foi alterado.', 'error'],
+    expirado: ['A autorização demorou mais de 10 minutos. Clique em “Conectar conta” de novo.', 'error'],
+    estado_invalido: ['Não foi possível confirmar a autorização (sessão de conexão inválida). Tente de novo pelo painel.', 'error'],
+    sem_offline_access: ['A aplicação do Mercado Livre não concedeu acesso contínuo (offline_access). Revise as permissões da aplicação.', 'error'],
+    nao_configurado: ['Integração com o Mercado Livre não configurada no servidor.', 'error'],
+    erro: ['Não foi possível conectar a conta do Mercado Livre. Tente novamente.', 'error']
+  };
+
+  const ML_STATUS = {
+    active: 'Conectada',
+    reauthorization_required: 'Precisa reconectar',
+    disconnected: 'Desconectada'
+  };
+
+  async function loadIntegration() {
+    const status = $('ml-status');
+    const button = $('ml-connect');
+    try {
+      const res = await api('adminMercadoLivreStatus');
+      const data = await readJson(res);
+      if (!res.ok || !data) {
+        status.textContent = (data && data.error) || 'Não foi possível consultar a integração.';
+        return;
+      }
+      if (!data.configured) {
+        status.textContent = 'Integração não configurada no servidor (variáveis de ambiente).';
+        button.hidden = true;
+        return;
+      }
+      const account = data.accounts[0];
+      const lines = [];
+      if (!account) lines.push('Nenhuma conta conectada.');
+      else {
+        lines.push(`${ML_STATUS[account.status] || account.status}${account.seller_nickname ? ` · ${account.seller_nickname}` : ''} (vendedor ${account.seller_id})`);
+        if (account.status === 'active' && account.last_refreshed_at) lines.push(`acesso renovado em ${dateTime(account.last_refreshed_at)}`);
+      }
+      if (data.queue && data.queue.pending) lines.push(`${data.queue.pending} notificação(ões) na fila`);
+      if (data.queue && data.queue.failed) lines.push(`${data.queue.failed} com falha (ver logs)`);
+      status.textContent = lines.join(' · ');
+      button.textContent = account ? 'Reconectar conta' : 'Conectar conta';
+      button.hidden = false;
+      if (account && account.status !== 'active') notify('A conta do Mercado Livre precisa ser reconectada: as vendas novas ficam na fila até lá.', 'error');
+    } catch (err) {
+      if (err.message !== 'sessao') status.textContent = 'Sem conexão com o servidor.';
+    }
+  }
+
+  async function connectMercadoLivre() {
+    const button = $('ml-connect');
+    button.disabled = true;
+    try {
+      const res = await api('mercadoLivreConnect', { method: 'POST' });
+      const data = await readJson(res);
+      if (res.ok && data && data.authorization_url) {
+        location.assign(data.authorization_url);
+        return;
+      }
+      notify((data && data.error) || 'Não foi possível iniciar a conexão.', 'error');
+    } catch (err) {
+      if (err.message !== 'sessao') notify('Sem conexão com o servidor.', 'error');
+    }
+    button.disabled = false;
+  }
+
   /* ---------- ações do topo ---------- */
 
   async function exportCsv() {
@@ -392,6 +481,9 @@
     }
     $('panel').hidden = false;
 
+    // Retorno do Mercado Livre (mercadoLivreOAuthCallback): a mensagem aparece uma vez;
+    // load() reescreve a URL só com os filtros, tirando o parâmetro ml
+    const mlResult = ML_RESULTS[new URLSearchParams(location.search).get('ml')];
     filtersFromUrl();
     $('filters').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -412,6 +504,7 @@
       load();
     });
     $('refresh').addEventListener('click', load);
+    $('ml-connect').addEventListener('click', connectMercadoLivre);
     $('export').addEventListener('click', exportCsv);
     $('detail-close').addEventListener('click', () => $('detail').close());
     $('logout').addEventListener('click', async () => {
@@ -432,7 +525,11 @@
     $('auto-refresh').addEventListener('change', (e) => setAutoRefresh(e.target.checked));
     setAutoRefresh(auto);
 
-    load();
+    // Em sequência: load() limpa o aviso ao terminar, então os avisos da integração vêm depois
+    load().then(() => {
+      if (mlResult) notify(mlResult[0], mlResult[1]);
+      loadIntegration();
+    });
   }
 
   init();

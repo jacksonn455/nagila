@@ -1,6 +1,6 @@
 /* Cliente mínimo da API REST do Supabase usando a service_role (SERVER-ONLY). */
 
-async function sb(path, { method = 'GET', body, prefer } = {}) {
+async function sb(path, { method = 'GET', body, prefer, signal } = {}) {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error('Supabase not configured');
@@ -11,7 +11,8 @@ async function sb(path, { method = 'GET', body, prefer } = {}) {
   const res = await fetch(`${url}/rest/v1/${path}`, {
     method,
     headers,
-    body: body === undefined ? undefined : JSON.stringify(body)
+    body: body === undefined ? undefined : JSON.stringify(body),
+    signal
   });
   const text = await res.text();
   if (!res.ok) throw new Error(`Supabase ${method} ${path.split('?')[0]} failed (${res.status}): ${text}`);

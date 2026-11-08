@@ -30,6 +30,14 @@
 
     <h1 class="visually-hidden">Pedidos</h1>
 
+    <section class="admin-integration" id="ml-panel" aria-labelledby="ml-title">
+      <div>
+        <h2 class="admin-integration__title" id="ml-title">Mercado Livre</h2>
+        <p class="admin-muted" id="ml-status" aria-live="polite">Verificando a integração…</p>
+      </div>
+      <button type="button" class="admin-btn" id="ml-connect" hidden>Conectar conta</button>
+    </section>
+
     <h2 class="visually-hidden">Resumo</h2>
     <dl class="admin-summary" id="summary"></dl>
 
@@ -50,6 +58,7 @@
           <option value="pronto">Pronto para envio</option>
           <option value="nao_liberar">Não liberar</option>
           <option value="enviado">Enviado ou retirado</option>
+          <option value="mercadolivre">Envio pelo Mercado Livre</option>
         </select>
       </label>
       <label class="admin-field">Entrega
@@ -57,6 +66,14 @@
           <option value="">Todas</option>
           <option value="frete">Frete</option>
           <option value="retirada">Retirada no local</option>
+          <option value="mercadolivre">Mercado Livre</option>
+        </select>
+      </label>
+      <label class="admin-field">Canal
+        <select class="admin-input" id="f-canal" name="canal">
+          <option value="">Todos</option>
+          <option value="site">Site</option>
+          <option value="mercadolivre">Mercado Livre</option>
         </select>
       </label>
       <label class="admin-field">De
@@ -66,7 +83,7 @@
         <input class="admin-input" id="f-ate" name="ate" type="date">
       </label>
       <label class="admin-field admin-filters__search">Busca
-        <input class="admin-input" id="f-q" name="q" type="search" maxlength="100" placeholder="Nome, e-mail ou nº do pedido">
+        <input class="admin-input" id="f-q" name="q" type="search" maxlength="100" placeholder="Nome, e-mail ou nº do pedido (site ou Mercado Livre)">
       </label>
       <div class="admin-filters__buttons">
         <button type="submit" class="admin-btn admin-btn--primary">Filtrar</button>

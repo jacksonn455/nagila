@@ -51,9 +51,73 @@ ATENÇÃO: nunca commitar `.env`. Em produção as variáveis ficam no painel do
 - Colocar temporariamente `BOOK_PRICE_CENTS=100`, comprar, conferir no Supabase `orders.status = paid`,
   estornar no Mercado Pago e restaurar o preço.
 
+## 7. Mercado Livre (vendas do marketplace no painel e no Discord)
+
+Integração oficial: OAuth Authorization Code + PKCE (obrigatório) + Refresh Token, notificações `orders_v2` e `shipments`.
+Os pedidos do Mercado Livre entram nas mesmas tabelas (`orders.channel = 'mercadolivre'`) e aparecem no painel.
+
+### 7.1 Banco
+- Rodar `scripts/supabase-mercadolivre-migration.sql` no SQL Editor **antes do deploy** (idempotente).
+  Antes, rodar a "PRÉ-VERIFICAÇÃO" do fim do arquivo (deve voltar vazia).
+
+### 7.2 Aplicação no Mercado Livre Developers (conferir)
+- Redirect URI: `https://nagilazortea.com.br/.netlify/functions/mercadoLivreOAuthCallback` (exatamente assim; sem `www`, sem barra final).
+- Fluxos: Authorization Code e Refresh Token; PKCE ativado.
+- Escopos: leitura (`read`) e `offline_access` (sem ele não há refresh token). `write` não é necessário.
+- Permissões funcionais: leitura de vendas/pedidos, envios e usuários.
+- URL de notificações: `https://nagilazortea.com.br/.netlify/functions/mercadoLivreWebhook`.
+- Tópicos: `orders_v2` e, se usar Mercado Envios, `shipments`.
+
+### 7.3 Variáveis no Netlify
+- `MERCADO_LIVRE_CLIENT_ID`, `MERCADO_LIVRE_CLIENT_SECRET` (da aplicação).
+- `MERCADO_LIVRE_REDIRECT_URI` = a Redirect URI acima; `MERCADO_LIVRE_WEBHOOK_URL` = a URL de notificações (informativa).
+- `MERCADO_LIVRE_TOKEN_ENCRYPTION_KEY`: gerar uma vez e guardar só no Netlify:
+  `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`.
+  Trocar a chave torna os tokens gravados ilegíveis: depois de trocar, reconectar a conta.
+- Opcionais: `MERCADO_LIVRE_DISCORD_WEBHOOK_URL` (canal próprio; sem ela usa `DISCORD_WEBHOOK_URL`),
+  `MERCADO_LIVRE_BOOK_ITEM_IDS` (ver 7.6), `MERCADO_LIVRE_BACKGROUND_PROCESSING=true` (ver 7.5).
+- Lembrar do limite de 4 KB das variáveis das functions.
+
+### 7.4 Conectar a conta do vendedor
+- Painel `/admin/pedidos.html` → bloco "Mercado Livre" → **Conectar conta**. Entrar no Mercado Livre com a conta
+  **vendedora principal** (não colaborador) e autorizar. O retorno mostra "Conta do Mercado Livre conectada."
+- O botão vira **Reconectar conta**: use quando o painel mostrar "Precisa reconectar".
+- O fluxo só funciona no domínio de produção (a Redirect URI precisa ser idêntica).
+
+### 7.5 Processamento e renovação do token
+- O webhook só grava a notificação e responde 200; o pedido é buscado na API do Mercado Livre depois.
+- `mercadoLivreScheduler` (a cada 5 min, `netlify.toml`) processa a fila, refaz o que falhou (espera crescente,
+  até 8 tentativas) e renova o access token quando faltam menos de 10 min (dura ~6 h).
+- O refresh token é de uso único: cada renovação grava um par novo (com controle de versão para duas renovações
+  simultâneas não se atrapalharem). Se o Mercado Livre recusar (`invalid_grant`), a integração fica
+  "Precisa reconectar", chega um alerta no Discord e as vendas novas ficam na fila até reconectar.
+- Opcional: com `MERCADO_LIVRE_BACKGROUND_PROCESSING=true` o webhook aciona `mercadoLivreProcess-background` na hora
+  (requer Background Functions no plano do Netlify). Sem isso, o atraso máximo é ~5 min.
+
+### 7.6 Estoque e envio — decisões de negócio
+- Estoque: por padrão as vendas do Mercado Livre **não** descontam o `BOOK_STOCK` do site (comportamento anterior).
+  Se o livro do Mercado Livre sai do mesmo estoque físico, listar os anúncios em `MERCADO_LIVRE_BOOK_ITEM_IDS`
+  (`MLB123456789`, ou `MLB123456789:<variation_id>` para variações), separados por vírgula.
+- Envio: pedidos do Mercado Livre são enviados pelo próprio Mercado Livre. O painel mostra a situação, mas não deixa
+  "marcar como enviado" (isso exigiria escopo `write` e regras diferentes por modalidade: Full, Flex, coleta, envio próprio).
+
+### 7.7 Problemas comuns
+- Painel mostra "Integração não configurada": falta variável (o painel lista os nomes) ou a chave não tem 32 bytes.
+- Retorno `?ml=estado_invalido`: a conexão não começou pelo botão do painel, ou começou em outro navegador/domínio.
+- Retorno `?ml=expirado`: mais de 10 min entre clicar em Conectar e autorizar.
+- Retorno `?ml=sem_offline_access`: a aplicação não tem o escopo `offline_access`.
+- Retorno `?ml=erro`: ver o log da function `mercadoLivreOAuthCallback` (redirect_uri diferente da cadastrada,
+  credenciais erradas, código já usado).
+- Vendas não aparecem: conferir no log do `mercadoLivreWebhook` se as notificações chegam (403 = application_id ou
+  vendedor diferente da conta conectada) e, no Supabase, `processed_notifications` com `provider = 'mercadolivre'`
+  (`status`, `attempts`, `last_error`). Os logs nunca mostram tokens.
+
 ## Pedidos
 - `orders` (status: pending, paid, failed, cancelled, shipped), `order_items`, `addresses`,
   `shipments` (serviço de frete escolhido em `raw`), `payments` (retorno do Mercado Pago em `raw`).
+- `orders.channel`: `site` ou `mercadolivre` (com `external_order_id`, `external_pack_id`, `external_data`).
+  `marketplace_integrations` guarda a conta conectada (tokens só criptografados).
+  `processed_notifications` é também a fila das notificações do Mercado Livre.
 
 ## Testes
 - `npm run test:mobile` roda os testes Playwright com as APIs mockadas.

@@ -5,6 +5,7 @@
 const { sb } = require('./supabase');
 const { getBook } = require('./book');
 const { availableStock } = require('./stock');
+const { shippingLabel } = require('./mercadoLivreSync');
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const UFS = new Set('AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO'.split(' '));
@@ -18,13 +19,27 @@ const PAYMENT_LABELS = {
   cancelado: 'Cancelado'
 };
 
-const READINESS_LABELS = { pronto: 'Pronto para envio', nao_liberar: 'Não liberar', enviado: 'Enviado' };
+const READINESS_LABELS = {
+  pronto: 'Pronto para envio',
+  nao_liberar: 'Não liberar',
+  enviado: 'Enviado',
+  mercadolivre: 'Envio pelo Mercado Livre'
+};
+
+const CHANNEL_LABELS = { site: 'Site', mercadolivre: 'Mercado Livre' };
 
 const SHIPMENT_LABELS = {
   quoted: 'Não enviado',
   awaiting_pickup: 'Aguardando retirada',
   shipped: 'Enviado',
-  picked_up: 'Retirado'
+  picked_up: 'Retirado',
+  // status de envio do Mercado Livre
+  pending: 'Aguardando',
+  handling: 'Em preparação',
+  ready_to_ship: 'Pronto para despachar',
+  delivered: 'Entregue',
+  not_delivered: 'Não entregue',
+  cancelled: 'Cancelado'
 };
 
 const MP_STATUS_LABELS = {
@@ -104,6 +119,23 @@ function paymentStatus(order, payments) {
   return 'pendente';
 }
 
+/* Mercado Livre: o envio é feito e acompanhado no próprio Mercado Livre (etiqueta,
+   coleta, Full, Flex...). O painel só mostra a situação; nunca libera "marcar enviado". */
+function marketplaceReadiness(order, { shipment, payStatus }) {
+  const reasons = [];
+  const shipped = order.status === 'shipped' || (shipment && ['shipped', 'delivered'].includes(shipment.status));
+  if (shipped) {
+    if (payStatus === 'estornado') reasons.push('Pagamento estornado depois do envio');
+    return { state: 'enviado', reasons };
+  }
+  if (payStatus === 'pendente') reasons.push('Pagamento pendente');
+  if (payStatus === 'recusado') reasons.push('Pagamento recusado');
+  if (payStatus === 'cancelado') reasons.push('Pedido cancelado');
+  if (payStatus === 'estornado') reasons.push('Pagamento estornado');
+  if (!reasons.length) reasons.push('Gerencie o envio no Mercado Livre');
+  return { state: 'mercadolivre', reasons };
+}
+
 /* Regra "Pronto para envio": todas as condições precisam ser verdadeiras.
    Devolve { state: 'pronto' | 'nao_liberar' | 'enviado', reasons: [...] } */
 function readiness(order, { payments, address, shipment, payStatus }) {
@@ -135,28 +167,48 @@ function readiness(order, { payments, address, shipment, payStatus }) {
 
 function deliveryLabel(shipment) {
   if (!shipment) return '—';
+  if (shipment.provider === 'mercadolivre') return shippingLabel(shipment.raw) || 'Mercado Livre';
   if (shipment.provider === 'pickup') return 'Retirada no local';
   const raw = shipment.raw || {};
   return [raw.carrier, raw.service].filter(Boolean).join(' ') || 'Frete';
 }
 
 function buildView(order, { customer, items, address, payments, shipment, title }) {
+  const channel = order.channel === 'mercadolivre' ? 'mercadolivre' : 'site';
+  const marketplace = channel === 'mercadolivre';
+  const external = order.external_data || {};
   const payStatus = paymentStatus(order, payments);
-  const ready = readiness(order, { payments, address, shipment, payStatus });
+  const ready = marketplace
+    ? marketplaceReadiness(order, { shipment, payStatus })
+    : readiness(order, { payments, address, shipment, payStatus });
   const pickup = !!shipment && shipment.provider === 'pickup';
   const doneLabel = ready.state === 'enviado' ? (pickup ? 'Retirado' : 'Enviado') : READINESS_LABELS[ready.state];
+  const buyer = external.buyer || {};
   return {
     id: order.id,
     short_id: order.id.slice(0, 8).toUpperCase(),
     created_at: order.created_at,
-    customer: { name: customer?.name || '', email: customer?.email || '', phone: customer?.phone || '' },
+    channel,
+    channel_label: CHANNEL_LABELS[channel],
+    // Mercado Livre: comprador vem do pedido externo (sem e-mail/telefone)
+    external: marketplace
+      ? {
+          order_id: order.external_order_id || null,
+          pack_id: order.external_pack_id || null,
+          status: external.status || null,
+          buyer_nickname: buyer.nickname || null
+        }
+      : null,
+    customer: marketplace
+      ? { name: buyer.name || buyer.nickname || '', email: '', phone: '' }
+      : { name: customer?.name || '', email: customer?.email || '', phone: customer?.phone || '' },
     quantity: items.reduce((n, i) => n + (Number(i.quantity) || 0), 0),
     total_cents: Number(order.total_cents) || 0,
     shipping_cents: Number(order.shipping_cents) || 0,
     discount_cents: Number(order.discount_cents) || 0,
     coupon_code: order.coupon_code || null,
     order_status: order.status,
-    delivery: { type: pickup ? 'retirada' : 'frete', label: deliveryLabel(shipment) },
+    delivery: { type: marketplace ? 'mercadolivre' : pickup ? 'retirada' : 'frete', label: deliveryLabel(shipment) },
     payment: { status: payStatus, label: PAYMENT_LABELS[payStatus] },
     readiness: { state: ready.state, label: doneLabel, reasons: ready.reasons },
     shipment: shipment
@@ -180,7 +232,7 @@ function buildView(order, { customer, items, address, payments, shipment, title 
         state: address.state
       },
       items: items.map((i) => ({
-        title: i.product_id === 'book-nagila-zortea' && title ? title : i.product_id,
+        title: i.title || (i.product_id === 'book-nagila-zortea' && title ? title : i.product_id),
         quantity: Number(i.quantity) || 0,
         unit_price_cents: Number(i.unit_price_cents) || 0,
         subtotal_cents: Number(i.subtotal_cents) || 0
@@ -212,14 +264,15 @@ function detailItem(view) {
 const FILTERS = {
   status: Object.keys(PAYMENT_LABELS),
   situacao: Object.keys(READINESS_LABELS),
-  entrega: ['frete', 'retirada']
+  entrega: ['frete', 'retirada', 'mercadolivre'],
+  canal: Object.keys(CHANNEL_LABELS)
 };
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 // Valida os parâmetros; devolve { ok, params } ou { ok: false }
 function parseQuery(q = {}) {
   const params = { page: 1, pageSize: 20 };
-  for (const key of ['status', 'situacao', 'entrega']) {
+  for (const key of ['status', 'situacao', 'entrega', 'canal']) {
     if (q[key] == null || q[key] === '') continue;
     if (!FILTERS[key].includes(q[key])) return { ok: false };
     params[key] = q[key];
@@ -258,11 +311,16 @@ function applyFilters(views, p) {
     if (p.status && v.payment.status !== p.status) return false;
     if (p.situacao && v.readiness.state !== p.situacao) return false;
     if (p.entrega && v.delivery.type !== p.entrega) return false;
+    if (p.canal && v.channel !== p.canal) return false;
     const t = Date.parse(v.created_at);
     if (from != null && !(t >= from)) return false;
     if (to != null && !(t <= to)) return false;
     if (p.q) {
-      const haystack = [v.customer.name, v.customer.email, v.id, v.short_id].join(' ').toLowerCase();
+      const ext = v.external || {};
+      const haystack = [v.customer.name, v.customer.email, v.id, v.short_id, ext.order_id, ext.pack_id, ext.buyer_nickname]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
       if (!haystack.includes(p.q)) return false;
     }
     return true;
@@ -276,11 +334,13 @@ async function summarize(views) {
     prontos: count((v) => v.readiness.state === 'pronto'),
     pendentes: count((v) => v.payment.status === 'pendente'),
     recusados_cancelados_estornados: count((v) => ['recusado', 'cancelado', 'estornado'].includes(v.payment.status)),
-    // pagos ainda não enviados + já enviados; estornados não contam
+    // pagos ainda não enviados + já enviados; estornados não contam (só o livro do site)
     exemplares_vendidos: views
-      .filter((v) => v.payment.status === 'aprovado')
+      .filter((v) => v.channel === 'site' && v.payment.status === 'aprovado')
       .reduce((n, v) => n + v.quantity, 0)
   };
+  const marketplace = views.filter((v) => v.channel === 'mercadolivre');
+  if (marketplace.length) summary.vendas_mercadolivre = marketplace.filter((v) => v.payment.status === 'aprovado').length;
   const book = getBook();
   if (book.stock != null) summary.exemplares_restantes = await availableStock(book.stock);
   return summary;
@@ -296,7 +356,8 @@ function csvCell(value) {
 }
 
 function toCsv(views) {
-  const header = ['Pedido', 'ID completo', 'Nome', 'Telefone', 'Endereço', 'Complemento', 'Bairro', 'Cidade', 'UF', 'CEP', 'Itens', 'Quantidade', 'Serviço'];
+  // "Canal" no fim, para não deslocar as colunas que já eram usadas
+  const header = ['Pedido', 'ID completo', 'Nome', 'Telefone', 'Endereço', 'Complemento', 'Bairro', 'Cidade', 'UF', 'CEP', 'Itens', 'Quantidade', 'Serviço', 'Canal'];
   const rows = views
     .filter((v) => v.readiness.state === 'pronto' && v.delivery.type === 'frete')
     .map((v) => {
@@ -316,7 +377,8 @@ function toCsv(views) {
         cep,
         d.items.map((i) => `${i.quantity}× ${i.title}`).join(' | '),
         v.quantity,
-        v.delivery.label
+        v.delivery.label,
+        v.channel_label
       ];
     });
   // BOM + ";" para o Excel em português abrir com acentos e colunas certas
@@ -325,6 +387,7 @@ function toCsv(views) {
 
 module.exports = {
   UUID_RE,
+  CHANNEL_LABELS,
   loadOrders,
   readiness,
   parseQuery,

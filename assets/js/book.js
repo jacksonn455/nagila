@@ -230,10 +230,28 @@
       document.querySelectorAll('[data-price-flag]').forEach((el) => (el.hidden = true));
       if (state.maxQuantity) $q('quantity').max = state.maxQuantity;
       applyStock(data);
+      syncStructuredData(data);
       updateSummary();
     } catch (err) {
       console.error(err);
       applyPriceUnavailable();
+    }
+  }
+
+  // JSON-LD: o Offer do HTML traz o preço estático; aqui recebe o preço e a disponibilidade
+  // do servidor, para o Google (que lê a página renderizada) não ver "em estoque" num livro esgotado
+  function syncStructuredData(data) {
+    const script = document.querySelector('script[type="application/ld+json"]');
+    if (!script) return;
+    try {
+      const json = JSON.parse(script.textContent);
+      const book = (json['@graph'] || [json]).find((node) => node.offers);
+      if (!book) return;
+      book.offers.price = (data.price_cents / 100).toFixed(2);
+      book.offers.availability = data.sold_out ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock';
+      script.textContent = JSON.stringify(json);
+    } catch (err) {
+      console.error(err);
     }
   }
 

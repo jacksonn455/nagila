@@ -103,11 +103,14 @@ exports.handler = async (event) => {
     const orderId = payment.external_reference;
     if (!orderId || !UUID_RE.test(orderId)) return json(200, { ok: true, ignored: 'no_order_reference' });
 
-    const [order] = await sb(`orders?id=eq.${orderId}&select=id,status,total_cents`);
+    const [order] = await sb(`orders?id=eq.${orderId}&select=*`);
     if (!order) {
       console.warn('Webhook for unknown order', orderId);
       return json(200, { ok: true, ignored: 'order_not_found' });
     }
+    // Pagamentos de vendas do Mercado Livre são sincronizados pelo mercadoLivreWebhook
+    // (eles não têm o id do pedido em external_reference; isto é só uma proteção extra)
+    if (order.channel === 'mercadolivre') return json(200, { ok: true, ignored: 'marketplace_order' });
 
     const paidCents = Math.round(Number(payment.transaction_amount || 0) * 100);
     const amountOk = paidCents === Number(order.total_cents);

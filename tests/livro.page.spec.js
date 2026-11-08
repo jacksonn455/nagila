@@ -36,10 +36,12 @@ test.describe('livro.html — JSON-LD do livro', () => {
     await page.goto('/livro.html');
     const blocks = await page.$$eval('script[type="application/ld+json"]', (els) => els.map((el) => el.textContent));
     expect(blocks).toHaveLength(1);
-    const data = JSON.parse(blocks[0]);
+    const graph = JSON.parse(blocks[0]);
+    expect(graph['@context']).toBe('https://schema.org');
+    const data = graph['@graph'].find((node) => node['@id'] === 'https://nagilazortea.com.br/livro.html#book');
 
-    expect(data['@context']).toBe('https://schema.org');
-    expect(data['@type']).toBe('Book');
+    // livro e produto no mesmo nó
+    expect(data['@type']).toEqual(['Book', 'Product']);
     expect(data.name).toBe('Pós-operatório e o raciocínio diante da cirurgia plástica');
     expect(data.isbn).toBe('9786553083547');
     expect(data.numberOfPages).toBe(231);
@@ -51,14 +53,17 @@ test.describe('livro.html — JSON-LD do livro', () => {
     // mesma pessoa do JSON-LD da página inicial
     expect(data.author['@id']).toBe('https://nagilazortea.com.br/#person');
     expect(data.url).toBe('https://nagilazortea.com.br/livro.html');
-    // Offer fica de fora: o preço vem do servidor
-    expect(data.offers).toBeUndefined();
+    expect(data.gtin13).toBe(data.isbn);
     expect(data.image[0]).toBe('https://nagilazortea.com.br/assets/images/book/livro-capa.webp');
+    // sem nota/avaliações inventadas
+    expect(data.aggregateRating).toBeUndefined();
+    expect(data.review).toBeUndefined();
   });
 
   test('o ISBN do JSON-LD é o mesmo da ficha técnica e tem dígito verificador válido', async ({ page }) => {
     await page.goto('/livro.html');
-    const data = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+    const graph = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
+    const data = graph['@graph'].find((node) => node.isbn);
     const ficha = await page.locator('.book-specs__row', { hasText: 'ISBN' }).locator('dd').textContent();
     expect(ficha.replace(/-/g, '')).toBe(data.isbn);
     const digits = data.isbn.split('').map(Number);

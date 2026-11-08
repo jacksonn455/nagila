@@ -39,6 +39,11 @@ exports.handler = async (event) => {
   try {
     const [view] = await loadOrders({ orderId });
     if (!view) return adminJson(404, { error: 'Pedido não encontrado.' });
+    // Mercado Livre: o envio é registrado no próprio Mercado Livre (Mercado Envios, Full, Flex...)
+    // e chega aqui pela sincronização; marcar à mão deixaria os dois sistemas divergentes
+    if (view.channel === 'mercadolivre') {
+      return adminJson(409, { error: 'Pedidos do Mercado Livre são enviados e atualizados pelo Mercado Livre.' });
+    }
     if (view.readiness.state === 'enviado') return adminJson(409, { error: 'Este pedido já foi marcado como enviado ou retirado.' });
     if (view.readiness.state !== 'pronto') {
       return adminJson(409, { error: 'Pedido não liberado para envio.', reasons: view.readiness.reasons });

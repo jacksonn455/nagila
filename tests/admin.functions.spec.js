@@ -463,7 +463,7 @@ test.describe('adminExport (CSV)', () => {
     expect(res.raw.startsWith('﻿')).toBe(true);
     const lines = res.raw.slice(1).trim().split('\r\n');
     expect(lines).toHaveLength(2); // cabeçalho + 1 pedido pronto por frete
-    expect(lines[0]).toBe('"Pedido";"ID completo";"Nome";"Telefone";"Endereço";"Complemento";"Bairro";"Cidade";"UF";"CEP";"Itens";"Quantidade";"Serviço"');
+    expect(lines[0]).toBe('"Pedido";"ID completo";"Nome";"Telefone";"Endereço";"Complemento";"Bairro";"Cidade";"UF";"CEP";"Itens";"Quantidade";"Serviço";"Canal"');
     const row = lines[1];
     expect(row).toContain(`"'=HYPERLINK(""http://x"",""clique"")"`);
     expect(row).toContain(`"'+5554999"`);

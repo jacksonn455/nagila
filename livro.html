@@ -3,56 +3,115 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Pós-operatório e o raciocínio diante da cirurgia plástica</title>
-  <meta name="description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
+  <!-- SEO: a página de venda é a página de destino para buscas como "livro de pós-operatório"
+       e "livro pós-cirúrgico". O title começa pelo termo buscado e mantém o nome real da obra. -->
+  <title>Livro Pós-operatório e o raciocínio diante da cirurgia plástica</title>
+  <meta name="description" content="Livro sobre cuidados pós-operatórios em cirurgia plástica: recuperação pós-cirúrgica, intercorrências e raciocínio clínico. Para profissionais da saúde e estética.">
   <meta name="author" content="Nágila Bernarda Zortéa">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://nagilazortea.com.br/livro.html">
 
   <!-- Open Graph — espelha title/description. og:image: capa e contracapa em 1200×630 -->
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="book">
   <meta property="og:site_name" content="Nágila Bernarda Zortéa">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://nagilazortea.com.br/livro.html">
-  <meta property="og:title" content="Pós-operatório e o raciocínio diante da cirurgia plástica">
-  <meta property="og:description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
+  <meta property="og:title" content="Livro Pós-operatório e o raciocínio diante da cirurgia plástica">
+  <meta property="og:description" content="Livro sobre cuidados pós-operatórios em cirurgia plástica: recuperação pós-cirúrgica, intercorrências e raciocínio clínico. Para profissionais da saúde e estética.">
   <meta property="og:image" content="https://nagilazortea.com.br/assets/images/book/livro-og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica">
+  <meta property="book:author" content="https://nagilazortea.com.br/">
+  <meta property="book:isbn" content="9786553083547">
+  <meta property="book:release_date" content="2026">
+  <meta property="book:tag" content="pós-operatório">
+  <meta property="book:tag" content="cirurgia plástica">
+  <meta property="book:tag" content="recuperação pós-cirúrgica">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pós-operatório e o raciocínio diante da cirurgia plástica">
-  <meta name="twitter:description" content="Fundamentos da recuperação pós-cirúrgica e raciocínio clínico para individualizar o pós-operatório. Para estudantes e profissionais da saúde e da estética.">
+  <meta name="twitter:title" content="Livro Pós-operatório e o raciocínio diante da cirurgia plástica">
+  <meta name="twitter:description" content="Livro sobre cuidados pós-operatórios em cirurgia plástica: recuperação pós-cirúrgica, intercorrências e raciocínio clínico. Para profissionais da saúde e estética.">
   <meta name="twitter:image" content="https://nagilazortea.com.br/assets/images/book/livro-og.jpg">
+  <meta name="twitter:image:alt" content="Capa e contracapa do livro Pós-operatório e o raciocínio diante da cirurgia plástica">
 
   <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
 
-  <!-- JSON-LD: só Book com dados confirmados (capa, contracapa e código de barras).
-       O autor aponta para a mesma pessoa (#person) do JSON-LD da página inicial.
-       Offer fica de fora: o preço vem do servidor (bookInfo) e pode mudar sem novo deploy. -->
+  <!-- JSON-LD (só dados confirmados: capa, contracapa, código de barras e preço da página).
+       - Livro e produto são o mesmo nó (Book + Product), para resultados de livro e de produto.
+       - O autor aponta para a mesma pessoa (#person) do JSON-LD da página inicial.
+       - Offer: preço igual ao estático dos [data-price-display]. Se BOOK_PRICE_CENTS mudar no
+         Netlify, atualize aqui também. O book.js ajusta preço e disponibilidade (esgotado) com os
+         dados do servidor, e o Google lê o JSON-LD já renderizado.
+       - Sem avaliações, nota ou política de devolução: não há dados reais para declarar. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Book",
-    "name": "Pós-operatório e o raciocínio diante da cirurgia plástica",
-    "author": {
-      "@type": "Person",
-      "@id": "https://nagilazortea.com.br/#person",
-      "name": "Nágila Zortéa",
-      "honorificPrefix": "Me."
-    },
-    "publisher": { "@type": "Organization", "name": "Editora Lux" },
-    "isbn": "9786553083547",
-    "numberOfPages": 231,
-    "bookEdition": "1ª edição",
-    "datePublished": "2026",
-    "inLanguage": "pt-BR",
-    "url": "https://nagilazortea.com.br/livro.html",
-    "image": [
-      "https://nagilazortea.com.br/assets/images/book/livro-capa.webp",
-      "https://nagilazortea.com.br/assets/images/book/livro-contracapa.webp",
-      "https://nagilazortea.com.br/assets/images/book/book-capa-contracapa.jpg"
+    "@graph": [
+      {
+        "@type": ["Book", "Product"],
+        "@id": "https://nagilazortea.com.br/livro.html#book",
+        "name": "Pós-operatório e o raciocínio diante da cirurgia plástica",
+        "description": "Livro sobre o pós-operatório de cirurgias plásticas faciais e corporais: fases da recuperação pós-cirúrgica e processo cicatricial, recursos terapêuticos, intercorrências e raciocínio clínico para individualizar o cuidado. Para estudantes e profissionais da saúde e da estética.",
+        "author": {
+          "@type": "Person",
+          "@id": "https://nagilazortea.com.br/#person",
+          "name": "Nágila Zortéa",
+          "honorificPrefix": "Me."
+        },
+        "publisher": { "@type": "Organization", "name": "Editora Lux" },
+        "isbn": "9786553083547",
+        "gtin13": "9786553083547",
+        "bookFormat": "https://schema.org/Paperback",
+        "numberOfPages": 231,
+        "bookEdition": "1ª edição",
+        "datePublished": "2026",
+        "inLanguage": "pt-BR",
+        "about": [
+          { "@type": "Thing", "name": "Pós-operatório" },
+          { "@type": "Thing", "name": "Cirurgia plástica" },
+          { "@type": "Thing", "name": "Recuperação pós-cirúrgica" }
+        ],
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "Estudantes e profissionais da saúde e da estética"
+        },
+        "url": "https://nagilazortea.com.br/livro.html",
+        "image": [
+          "https://nagilazortea.com.br/assets/images/book/livro-capa.webp",
+          "https://nagilazortea.com.br/assets/images/book/livro-capa-retrato.webp",
+          "https://nagilazortea.com.br/assets/images/book/book-capa-contracapa.webp"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://nagilazortea.com.br/livro.html",
+          "price": "399.90",
+          "priceCurrency": "BRL",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "seller": { "@id": "https://nagilazortea.com.br/#person" }
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://nagilazortea.com.br/livro.html#page",
+        "url": "https://nagilazortea.com.br/livro.html",
+        "name": "Livro Pós-operatório e o raciocínio diante da cirurgia plástica",
+        "inLanguage": "pt-BR",
+        "isPartOf": { "@id": "https://nagilazortea.com.br/#website" },
+        "mainEntity": { "@id": "https://nagilazortea.com.br/livro.html#book" },
+        "primaryImageOfPage": "https://nagilazortea.com.br/assets/images/book/livro-capa.webp",
+        "breadcrumb": { "@id": "https://nagilazortea.com.br/livro.html#breadcrumb" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://nagilazortea.com.br/livro.html#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://nagilazortea.com.br/" },
+          { "@type": "ListItem", "position": 2, "name": "Livro Pós-operatório e o raciocínio diante da cirurgia plástica" }
+        ]
+      }
     ]
   }
   </script>
@@ -139,7 +198,7 @@
         <!-- Galeria -->
         <div class="book-gallery" data-reveal="">
           <div class="book-gallery__stage" id="gallery-main" data-fit="photo">
-            <img id="main-image" class="book-gallery__image" src="assets/images/book/livro-capa.webp" alt="Foto da capa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" width="1200" height="1200" fetchpriority="high">
+            <img id="main-image" class="book-gallery__image" src="assets/images/book/livro-capa.webp" alt="Foto da capa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" width="1024" height="1024" fetchpriority="high">
 
             <button type="button" class="book-gallery__nav book-gallery__nav--prev" data-gallery-prev="" aria-label="Foto anterior">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -150,19 +209,19 @@
             <p class="book-gallery__count" data-gallery-count="" aria-hidden="true">1 / 7</p>
           </div>
 
-          <!-- Fotos reais do livro: capa, marcador, contracapa e páginas internas -->
+          <!-- Fotos do livro: capa, capa em ângulo, capa e contracapa, e páginas internas -->
           <div class="book-gallery__thumbs" role="group" aria-label="Fotos do livro">
             <button type="button" class="thumb is-active" aria-pressed="true" data-src="assets/images/book/livro-capa.webp" data-fit="photo" data-alt="Foto da capa do livro Pós-operatório e o raciocínio diante da cirurgia plástica, de Me. Nágila Zortéa" aria-label="Ver capa">
-              <img src="assets/images/book/livro-capa.webp" alt="" width="1200" height="1200">
+              <img src="assets/images/book/livro-capa.webp" alt="" width="1024" height="1024">
             </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-capa-marcador.webp" data-fit="photo" data-alt="Livro ao lado do marcador de páginas com o resumo da obra" aria-label="Ver livro com marcador">
-              <img src="assets/images/book/livro-capa-marcador.webp" alt="" width="1200" height="1200" loading="lazy">
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-capa-retrato.webp" data-fit="photo" data-alt="Livro em pé, visto em ângulo, mostrando a capa e a lombada" aria-label="Ver capa em ângulo">
+              <img src="assets/images/book/livro-capa-retrato.webp" alt="" width="1024" height="1024" loading="lazy">
             </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-contracapa.webp" data-fit="photo" data-alt="Foto da contracapa do livro, com o texto de apresentação da obra e o código de barras" aria-label="Ver contracapa">
-              <img src="assets/images/book/livro-contracapa.webp" alt="" width="1200" height="1200" loading="lazy">
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-capa-contracapa.webp" data-fit="photo" data-alt="Capa e contracapa do livro lado a lado sobre a mesa, com o texto de apresentação da obra e o código de barras" aria-label="Ver capa e contracapa">
+              <img src="assets/images/book/book-capa-contracapa.webp" alt="" width="1024" height="1024" loading="lazy">
             </button>
-            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/book-capa-contracapa.jpg" data-fit="object" data-alt="Capa e contracapa do livro lado a lado" aria-label="Ver capa e contracapa">
-              <img src="assets/images/book/book-capa-contracapa.jpg" alt="" width="1454" height="1082" loading="lazy">
+            <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-og.webp" data-fit="photo" data-alt="Dois exemplares do livro em pé, um mostrando a capa e outro a contracapa" aria-label="Ver capa e contracapa em pé">
+              <img src="assets/images/book/livro-og.webp" alt="" width="1024" height="1024" loading="lazy">
             </button>
             <button type="button" class="thumb" aria-pressed="false" data-src="assets/images/book/livro-miolo-meias.webp" data-fit="photo" data-alt="Livro aberto nas páginas 134 e 135, com ilustrações de faixas para lipedema e meias de compressão" aria-label="Ver páginas 134 e 135">
               <img src="assets/images/book/livro-miolo-meias.webp" alt="" width="1200" height="1200" loading="lazy">
@@ -180,7 +239,7 @@
         <div class="book-hero__info">
           <div class="book-hero__eyebrow" data-reveal="">
             <span class="hero__line" aria-hidden="true"></span>
-            <span class="hero__label">Livro · Lançamento</span>
+            <span class="hero__label">Livro de pós-operatório · Lançamento</span>
           </div>
 
           <h1 id="product-title" class="book-hero__title" data-reveal="" data-delay="1">Pós-operatório e o raciocínio diante da cirurgia plástica</h1>
@@ -190,7 +249,7 @@
           <p id="product-desc" class="book-hero__desc" data-reveal="" data-delay="2">A cirurgia plástica evolui constantemente, e o pós-operatório não pode ficar para trás. Este livro reúne os fundamentos da recuperação pós-cirúrgica, como fases de reparo, alterações teciduais e recursos terapêuticos, e propõe o raciocínio clínico para individualizar o cuidado de cada paciente. Destinado a estudantes e profissionais da saúde e da estética.</p>
 
           <!-- Preço estático para prévias de link e buscadores que não rodam JavaScript.
-               Se BOOK_PRICE_CENTS mudar no Netlify, atualize também os 3 [data-price-display]
+               Se BOOK_PRICE_CENTS mudar no Netlify, atualize também os 3 [data-price-display] e o "price" do Offer no JSON-LD
                desta página (topo, compra e barra fixa). O book.js troca pelo valor do servidor
                e, se a bookInfo falhar, esconde o preço e desativa a compra. -->
           <div class="book-price" data-reveal="" data-delay="3">
@@ -244,7 +303,7 @@
         <header class="section__header book-contents__header">
           <span class="section__label" data-reveal="">No livro</span>
           <h2 id="conteudo-heading" class="section__title" data-reveal="" data-delay="1">O que você vai encontrar</h2>
-          <p class="section__subtitle" data-reveal="" data-delay="2">43 capítulos organizados em quatro blocos.</p>
+          <p class="section__subtitle" data-reveal="" data-delay="2">43 capítulos sobre cuidados pós-operatórios em cirurgia plástica, organizados em quatro blocos.</p>
         </header>
 
         <ol class="book-contents__list">
@@ -286,7 +345,7 @@
         <div class="book-details__intro">
           <span class="section__label" data-reveal="">Ficha técnica</span>
           <h2 id="detalhes-heading" class="section__title" data-reveal="" data-delay="1">Detalhes do produto</h2>
-          <img class="book-details__image" src="assets/images/book/book-capa-contracapa.jpg" alt="Capa e contracapa do livro lado a lado" width="1454" height="1082" loading="lazy" data-reveal="" data-delay="2">
+          <img class="book-details__image" src="assets/images/book/book-capa-contracapa.webp" alt="Capa e contracapa do livro lado a lado" width="1024" height="1024" loading="lazy" data-reveal="" data-delay="2">
         </div>
 
         <dl class="book-specs" data-reveal="" data-delay="1">
@@ -373,7 +432,7 @@
           <h2 id="comprar-heading" class="section__title">Compre seu exemplar</h2>
 
           <div class="book-buy__product">
-            <img src="assets/images/book/livro-capa-retrato.webp" alt="" width="600" height="802" loading="lazy">
+            <img src="assets/images/book/livro-capa-retrato.webp" alt="" width="1024" height="1024" loading="lazy">
             <div>
               <p class="book-buy__product-title">Pós-operatório e o raciocínio diante da cirurgia plástica</p>
               <p class="book-buy__product-author">Nágila Bernarda Zortéa</p>
@@ -564,6 +623,91 @@
                  (retorno do Mercado Pago) e pelo book-ui.js no preview -->
 
             <div class="buy-card__result" id="checkout-result" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PERGUNTAS FREQUENTES =====
+         Só fatos já presentes nesta página (público, conteúdo, ficha técnica e envio). -->
+    <section id="perguntas" class="section book-faq" aria-labelledby="perguntas-heading">
+      <div class="container">
+        <header class="section__header book-contents__header">
+          <span class="section__label" data-reveal="">Dúvidas</span>
+          <h2 id="perguntas-heading" class="section__title" data-reveal="" data-delay="1">Perguntas frequentes sobre o livro</h2>
+        </header>
+
+        <div class="faq__list">
+          <div class="faq-item">
+            <button type="button" class="faq-item__trigger" aria-expanded="false" id="livro-faq-q1" aria-controls="livro-faq-a1">
+              <span>Para quem é este livro de pós-operatório?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-item__body" id="livro-faq-a1" aria-labelledby="livro-faq-q1">
+              <div class="faq-item__inner">
+                <p class="faq-item__answer">Para estudantes e profissionais da saúde e da estética que acompanham, ou querem acompanhar, pacientes no pós-operatório de cirurgias plásticas. Em vez de protocolos prontos, a obra trabalha o raciocínio clínico para individualizar o cuidado de cada paciente.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-item__trigger" aria-expanded="false" id="livro-faq-q2" aria-controls="livro-faq-a2">
+              <span>O livro é um guia de cuidados para pacientes?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-item__body" id="livro-faq-a2" aria-labelledby="livro-faq-q2">
+              <div class="faq-item__inner">
+                <p class="faq-item__answer">Não. É um livro técnico, voltado à formação de profissionais. Quem está se recuperando de uma cirurgia deve seguir as orientações do seu cirurgião e da equipe que acompanha o seu pós-operatório.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-item__trigger" aria-expanded="false" id="livro-faq-q3" aria-controls="livro-faq-a3">
+              <span>Quais cirurgias o livro aborda?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-item__body" id="livro-faq-a3" aria-labelledby="livro-faq-q3">
+              <div class="faq-item__inner">
+                <p class="faq-item__answer">Cirurgias faciais (otoplastia, rinoplastia, lifting facial, lipoaspiração de papada, blefaroplastia, bichectomia e mentoplastia) e corporais (cirurgias mamárias, abdominoplastia, lipoaspiração, body lifting e cirurgia de lipedema), além da diferenciação de anestesias, drenos e fios de sutura.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-item__trigger" aria-expanded="false" id="livro-faq-q4" aria-controls="livro-faq-a4">
+              <span>O livro trata das intercorrências do pós-operatório?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-item__body" id="livro-faq-a4" aria-labelledby="livro-faq-q4">
+              <div class="faq-item__inner">
+                <p class="faq-item__answer">Sim. Aborda hematoma, seroma, fibrose, deiscência, infecção e cicatrizes inestéticas, com um quadro por fase do pós-operatório e perguntas e respostas da prática clínica.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-item__trigger" aria-expanded="false" id="livro-faq-q5" aria-controls="livro-faq-a5">
+              <span>O livro é físico ou digital?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-item__body" id="livro-faq-a5" aria-labelledby="livro-faq-q5">
+              <div class="faq-item__inner">
+                <p class="faq-item__answer">É um livro físico: brochura com orelhas, 231 páginas, 16 × 23 cm, 1ª edição (2026), pela Editora Lux.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-item__trigger" aria-expanded="false" id="livro-faq-q6" aria-controls="livro-faq-a6">
+              <span>Vocês enviam para todo o Brasil?</span>
+              <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-item__body" id="livro-faq-a6" aria-labelledby="livro-faq-q6">
+              <div class="faq-item__inner">
+                <p class="faq-item__answer">Sim. O frete e o prazo são calculados pelo seu CEP na <a href="#comprar">área de compra</a>, e o pagamento é concluído com segurança no Mercado Pago.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

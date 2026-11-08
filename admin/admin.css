@@ -165,6 +165,32 @@ body.admin {
   color: var(--bad);
 }
 
+/* ---------- Integração Mercado Livre ---------- */
+
+.admin-integration {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-block-end: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.admin-integration__title {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.admin-integration p {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
 /* ---------- Login ---------- */
 
 .admin-login {
@@ -387,6 +413,16 @@ body.admin {
 .badge--enviado {
   color: var(--info);
   background: var(--info-soft);
+}
+
+.badge--mercadolivre {
+  color: var(--info);
+  background: var(--info-soft);
+}
+
+.badge--canal {
+  color: var(--neutral);
+  background: var(--neutral-soft);
 }
 
 /* ---------- Paginação ---------- */

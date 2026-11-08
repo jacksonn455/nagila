@@ -13,11 +13,12 @@
     "build:favicon": "node scripts/generate-favicon.js",
     "build:i18n": "node scripts/build-i18n.js",
     "build:sitemap": "node scripts/build-sitemap.js",
+    "check:sitemap": "node scripts/build-sitemap.js --check",
     "check:links": "node scripts/check-links.js",
-    "check:html": "html-validate index.html 404.html",
+    "check:html": "html-validate index.html 404.html livro.html",
     "check:format": "prettier --check \"assets/**/*.{css,js}\" \"scripts/**/*.js\" \"data/**/*.json\" \"assets/i18n/**/*.json\" \"*.{json,md}\"",
     "format": "prettier --write \"assets/**/*.{css,js}\" \"scripts/**/*.js\" \"data/**/*.json\" \"assets/i18n/**/*.json\" \"*.{json,md}\"",
-    "check": "npm run check:html && npm run check:links",
+    "check": "npm run check:html && npm run check:links && npm run check:sitemap",
     "test:mobile": "playwright test",
     "test:mobile:install": "playwright install chromium"
   },
@@ -30,5 +31,8 @@
   "prettier": {
     "printWidth": 100,
     "singleQuote": true
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.7.13"
   }
 }

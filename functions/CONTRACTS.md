@@ -52,3 +52,61 @@ paymentWebhook — POST /.netlify/functions/paymentWebhook
   status (pending → paid/failed/cancelled, failed → paid/pending, paid → cancelled on refund).
 - Amount different from orders.total_cents is stored as status `amount_mismatch` and the order is not changed.
 - 2xx stops Mercado Pago retries; 5xx makes it retry.
+
+supabaseHealthCheck — Netlify Scheduled Function (no public URL in production)
+- Schedule: netlify.toml `[functions.supabaseHealthCheck] schedule = "0 */6 * * *"` (every 6 h, UTC). Runs only on
+  published production deploys. Each run does at most 2 attempts (5 s timeout each) of one read-only query:
+  GET /rest/v1/orders?select=id&limit=1 (service role, server-only). Nothing is written to the database.
+- Discord (DISCORD_WEBHOOK_URL): one alert when Supabase becomes unavailable, one when it recovers, one per distinct
+  monitor error (e.g. missing config). A continuous outage is not re-announced; an alert that Discord did not accept
+  is retried on the next run. Fields: project (NZ Livros), environment (MONITOR_ENVIRONMENT | CONTEXT | NODE_ENV),
+  check timestamp, status and error details.
+- State (dedup + last success/failure) lives in Netlify Blobs, store "monitoring", key "supabase-health".
+- LIMITATION: this only monitors availability. Supabase pauses Free Plan projects with "low activity over a 7-day
+  period" based on "user database activity" and does not document scheduled requests as a guaranteed way to avoid
+  it (https://supabase.com/docs/guides/platform/free-project-pausing). Pausing is only ruled out on a paid plan.
+  If an alert says the project is down because it was paused, restore it from the Supabase dashboard.
+
+Mercado Livre integration (see README-setup-book.md §7 and scripts/supabase-mercadolivre-migration.sql)
+
+mercadoLivreConnect — POST /.netlify/functions/mercadoLivreConnect (admin: session + X-Admin-Request: 1)
+- Response 200: { authorization_url } + Set-Cookie `__Host-nz_ml_oauth` (state + PKCE verifier, AES-256-GCM sealed,
+  HttpOnly, Secure, SameSite=Lax, 10 min). The admin page navigates to authorization_url.
+- 503 { error, missing: [variable names] } when not configured.
+
+mercadoLivreOAuthCallback — GET /.netlify/functions/mercadoLivreOAuthCallback?code=&state= (Redirect URI)
+- No admin session (cross-site navigation; admin cookie is SameSite=Strict). Protected by the sealed state cookie
+  (constant-time state comparison, 10 min expiry). Exchanges the code with code_verifier, reads GET /users/me,
+  stores encrypted tokens in marketplace_integrations, clears the cookie.
+- Always 303 to /admin/pedidos.html?ml=conectado|recusado|expirado|estado_invalido|sem_offline_access|nao_configurado|erro
+
+mercadoLivreWebhook — POST /.netlify/functions/mercadoLivreWebhook (Notifications URL)
+- Body: { _id, resource, user_id, topic, application_id, attempts, sent, received }.
+- 403 application_id ≠ MERCADO_LIVRE_CLIENT_ID or user_id not connected · 400 malformed _id/resource
+  (orders_v2: /orders/<n>; shipments: /shipments/<n> or /marketplace/shipments/<n>) · 200 ignored for other topics.
+- Stores the notification in processed_notifications (provider 'mercadolivre', status 'pending') BEFORE answering 200;
+  duplicate _id → 200 { duplicate: true }; storage failure → 503 (Mercado Livre retries). No order processing here.
+
+mercadoLivreProcess-background — Background Function (only with MERCADO_LIVRE_BACKGROUND_PROCESSING=true)
+- Triggered by the webhook with header x-nz-internal (HMAC derived from the encryption key); 403 otherwise.
+
+mercadoLivreScheduler — Scheduled Function, netlify.toml `*/5 * * * *` (no public URL in production)
+- Processes due notifications (claim pending → processing by conditional PATCH; retries with backoff 2,4,8…60 min;
+  'failed' after 8 attempts; stuck 'processing' > 10 min is released) and refreshes access tokens < 10 min from expiry.
+
+adminMercadoLivreStatus — GET /.netlify/functions/adminMercadoLivreStatus (admin)
+- Response 200: { configured, missing?, accounts: [{ seller_id, seller_nickname, status, token_expires_at,
+  last_refreshed_at, last_error, scopes, connected_at }], queue: { pending, failed } }. Never returns tokens.
+
+Order sync (functions/_lib/mercadoLivreSync.js)
+- Source of truth: GET /orders/{id} and GET /shipments/{id} (x-format-new: true) with the seller's token.
+- Upserts: orders by (channel='mercadolivre', external_order_id) · order_items by (order_id, product_id = MLB… or
+  MLB…:<variation>) · payments by mercadopago_payment_id (provider 'mercadolivre'; never overwrites a payment linked
+  to another order) · shipments by (provider='mercadolivre', external_shipment_id).
+- Status map: paid/partially_refunded → paid · confirmed/payment_required/payment_in_process/partially_paid → pending ·
+  cancelled/invalid → cancelled · pending_cancel/unknown → unchanged · shipment shipped/delivered on a paid order → shipped.
+  Transitions only forward (pending→paid/cancelled, paid→shipped/cancelled; shipped and cancelled are final).
+- Discord: only the process whose conditional PATCH moved the order to 'paid' notifies
+  (MERCADO_LIVRE_DISCORD_WEBHOOK_URL, fallback DISCORD_WEBHOOK_URL).
+- Admin: Mercado Livre orders show channel/buyer nickname, are excluded from "Pronto para envio"/CSV rows and
+  adminMarkShipped/adminRecheckPayment answer 409 for them (shipping is done in Mercado Livre).

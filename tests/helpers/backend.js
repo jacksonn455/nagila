@@ -4,6 +4,7 @@
 // - Mercado Pago: criação de preferência e consulta de pagamento
 // - Melhor Envio: cotação de frete
 // - Discord: webhook de aviso de venda (mensagens em `discord.messages`)
+// - Mercado Livre: OAuth (code + PKCE, refresh de uso único), /users/me, /orders, /shipments
 // Cada chamada fica registrada em `calls` para as verificações dos testes.
 
 const crypto = require('crypto');
@@ -37,7 +38,15 @@ const OPTIONAL_ENV = [
   'ADMIN_EMAIL',
   'ADMIN_PASSWORD_HASH',
   'ADMIN_SESSION_SECRET',
-  'DISCORD_WEBHOOK_URL'
+  'DISCORD_WEBHOOK_URL',
+  'MERCADO_LIVRE_CLIENT_ID',
+  'MERCADO_LIVRE_CLIENT_SECRET',
+  'MERCADO_LIVRE_REDIRECT_URI',
+  'MERCADO_LIVRE_WEBHOOK_URL',
+  'MERCADO_LIVRE_TOKEN_ENCRYPTION_KEY',
+  'MERCADO_LIVRE_DISCORD_WEBHOOK_URL',
+  'MERCADO_LIVRE_BOOK_ITEM_IDS',
+  'MERCADO_LIVRE_BACKGROUND_PROCESSING'
 ];
 
 // Cotação padrão do Melhor Envio (inclui um serviço fora da lista e um com erro)
@@ -68,6 +77,8 @@ function matches(row, params) {
       if (String(value) !== raw.slice(3)) return false;
     } else if (raw.startsWith('in.(')) {
       if (!raw.slice(4, -1).split(',').includes(String(value))) return false;
+    } else if (raw.startsWith('lte.')) {
+      if (!(String(value) <= raw.slice(4))) return false;
     } else if (raw === 'not.is.null') {
       if (value == null) return false;
     } else if (raw.startsWith('gte.')) {
@@ -90,7 +101,8 @@ function createBackend(options = {}) {
     payments: [],
     shipments: [],
     processed_notifications: [],
-    admin_login_attempts: []
+    admin_login_attempts: [],
+    marketplace_integrations: []
   };
   const calls = [];
   const mp = {
@@ -99,7 +111,33 @@ function createBackend(options = {}) {
     paymentFetchFails: false
   };
   const me = { quote: ME_QUOTE, fails: false, lastPayload: null };
-  const discord = { fails: false, messages: [] };
+  const discord = { fails: false, messages: [], urls: [] };
+  // Supabase: tabelas cuja escrita falha (simula banco fora do ar)
+  const supabase = { failWrites: new Set() };
+
+  // API do Mercado Livre simulada. Refresh token é de uso único, como na API real.
+  let mlSeq = 0;
+  const ml = {
+    clientId: '1234567890',
+    clientSecret: 'test-ml-secret',
+    seller: { id: 7777, nickname: 'LOJA_NZ' },
+    codes: {}, // code -> { challenge, redirect_uri }
+    accessTokens: new Set(),
+    refreshTokens: new Set(),
+    orders: {}, // id -> pedido
+    shipments: {}, // id -> envio
+    tokenCalls: [],
+    apiFails: false,
+    tokenFails: false,
+    // emite um par de tokens válido (para semear a integração nos testes)
+    issue() {
+      mlSeq += 1;
+      const pair = { access_token: `APP_USR-access-${mlSeq}-${crypto.randomBytes(6).toString('hex')}`, refresh_token: `TG-refresh-${mlSeq}-${crypto.randomBytes(6).toString('hex')}` };
+      ml.accessTokens.add(pair.access_token);
+      ml.refreshTokens.add(pair.refresh_token);
+      return { ...pair, token_type: 'Bearer', expires_in: 21600, scope: 'offline_access read', user_id: ml.seller.id };
+    }
+  };
   Object.assign(mp, options.mp);
   Object.assign(me, options.me);
 
@@ -125,7 +163,14 @@ function createBackend(options = {}) {
 
   async function fetchImpl(url, opts = {}) {
     const method = (opts.method || 'GET').toUpperCase();
-    const body = opts.body ? JSON.parse(opts.body) : undefined;
+    let body;
+    if (opts.body) {
+      try {
+        body = JSON.parse(opts.body);
+      } catch {
+        body = String(opts.body); // form-urlencoded (OAuth do Mercado Livre)
+      }
+    }
     const u = new URL(String(url));
     calls.push({ url: String(url), method, body, headers: opts.headers || {} });
 
@@ -156,10 +201,42 @@ function createBackend(options = {}) {
       return reply(me.quote);
     }
 
+    // Mercado Livre
+    if (u.hostname === 'api.mercadolibre.com') {
+      if (u.pathname === '/oauth/token' && method === 'POST') {
+        const f = Object.fromEntries(new URLSearchParams(body));
+        ml.tokenCalls.push(f);
+        if (ml.tokenFails) return reply({ error: 'internal_error' }, 500);
+        if (f.client_id !== ml.clientId || f.client_secret !== ml.clientSecret) return reply({ error: 'invalid_client' }, 401);
+        if (f.grant_type === 'authorization_code') {
+          const entry = ml.codes[f.code];
+          delete ml.codes[f.code]; // código de uso único
+          const challenge = f.code_verifier && crypto.createHash('sha256').update(f.code_verifier).digest('base64url');
+          if (!entry || entry.challenge !== challenge || entry.redirect_uri !== f.redirect_uri) return reply({ error: 'invalid_grant' }, 400);
+          return reply(ml.issue());
+        }
+        if (f.grant_type === 'refresh_token') {
+          if (!ml.refreshTokens.has(f.refresh_token)) return reply({ error: 'invalid_grant' }, 400);
+          ml.refreshTokens.delete(f.refresh_token); // uso único: o antigo deixa de valer
+          return reply(ml.issue());
+        }
+        return reply({ error: 'unsupported_grant_type' }, 400);
+      }
+      const auth = ((opts.headers && opts.headers.Authorization) || '').replace(/^Bearer /, '');
+      if (!ml.accessTokens.has(auth)) return reply({ error: 'invalid_token' }, 401);
+      if (ml.apiFails) return reply({ error: 'internal_error' }, 500);
+      if (u.pathname === '/users/me') return reply({ id: ml.seller.id, nickname: ml.seller.nickname });
+      let m = u.pathname.match(/^\/orders\/(\d+)$/);
+      if (m) return ml.orders[m[1]] ? reply(ml.orders[m[1]]) : reply({ error: 'not_found' }, 404);
+      m = u.pathname.match(/^\/shipments\/(\d+)$/);
+      if (m) return ml.shipments[m[1]] ? reply(ml.shipments[m[1]]) : reply({ error: 'not_found' }, 404);
+    }
+
     // Discord
     if (u.hostname === 'discord.test' && method === 'POST') {
       if (discord.fails) return reply('erro simulado', 500);
       discord.messages.push(body);
+      discord.urls.push(String(url));
       return reply(null, 204);
     }
 
@@ -185,6 +262,7 @@ function createBackend(options = {}) {
         if (limit) rows = rows.slice(0, limit);
         return reply(rows);
       }
+      if (method !== 'GET' && supabase.failWrites.has(table)) return reply({ message: 'erro simulado' }, 503);
       if (method === 'POST') {
         const out = insert(table, body, u.searchParams.get('on_conflict'), prefer);
         return prefer.includes('return=representation') ? reply(out, 201) : reply(null, 201);
@@ -207,7 +285,7 @@ function createBackend(options = {}) {
     throw new Error(`Chamada não simulada: ${method} ${url}`);
   }
 
-  return { db, calls, mp, me, discord, fetchImpl };
+  return { db, calls, mp, me, discord, ml, supabase, fetchImpl };
 }
 
 // Instala o backend simulado e as variáveis do livro; devolve uma função que desfaz tudo

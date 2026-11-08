@@ -8,11 +8,21 @@
 [functions]
   node_bundler = "esbuild"
 
+# Monitor do Supabase: a cada 6 horas (UTC). Só monitora e avisa no Discord; não garante que o
+# plano Free deixe de pausar o projeto por inatividade (ver functions/CONTRACTS.md).
+[functions.supabaseHealthCheck]
+  schedule = "0 */6 * * *"
+
+# Mercado Livre: processa a fila de notificações (com retentativas) e renova o token de acesso.
+# A cada 5 min (~8.700 execuções/mês). Funções agendadas não têm URL pública.
+[functions.mercadoLivreScheduler]
+  schedule = "*/5 * * * *"
+
 [build.environment]
   NODE_VERSION = "20"
   # Valores públicos: aparecem no próprio site (CEP e endereço da clínica, dados do livro)
   # ou são palavras comuns. Tokens e chaves continuam sendo verificados pelo secrets scanning.
-  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_CEP,NODE_ENV,BOOK_TITLE,BOOK_PRICE_CENTS,BOOK_WEIGHT_GRAMS,BOOK_LENGTH_CM,BOOK_WIDTH_CM,BOOK_HEIGHT_CM,BOOK_MAX_QUANTITY,BOOK_STOCK,PICKUP_ENABLED,PICKUP_ADDRESS,MELHOR_ENVIO_SERVICES,MELHOR_ENVIO_ENV,SITE_URL,PAYMENT_WEBHOOK_URL"
+  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_CEP,NODE_ENV,BOOK_TITLE,BOOK_PRICE_CENTS,BOOK_WEIGHT_GRAMS,BOOK_LENGTH_CM,BOOK_WIDTH_CM,BOOK_HEIGHT_CM,BOOK_MAX_QUANTITY,BOOK_STOCK,PICKUP_ENABLED,PICKUP_ADDRESS,MELHOR_ENVIO_SERVICES,MELHOR_ENVIO_ENV,SITE_URL,PAYMENT_WEBHOOK_URL,MONITOR_ENVIRONMENT,MERCADO_LIVRE_REDIRECT_URI,MERCADO_LIVRE_WEBHOOK_URL,MERCADO_LIVRE_BOOK_ITEM_IDS,MERCADO_LIVRE_BACKGROUND_PROCESSING"
 
 # Cabeçalhos de segurança para todas as rotas (o HSTS já vem do Netlify no domínio próprio).
 # Sem CSP completa por enquanto. O checkout é o Checkout Pro do Mercado Pago, por
@@ -33,6 +43,21 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
     Cache-Control = "no-store"
+
+# URLs duplicadas → URL canônica (a mesma do <link rel="canonical"> e do sitemap.xml).
+# O Netlify serve /livro e /index.html com status 200; o 301 concentra os sinais numa URL só.
+# force = true porque o arquivo existe e, sem isso, a regra seria ignorada.
+[[redirects]]
+  from = "/livro"
+  to = "/livro.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
 
 # Não expõe código-fonte e arquivos de desenvolvimento como páginas públicas
 [[redirects]]
