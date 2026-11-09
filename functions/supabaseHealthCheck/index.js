@@ -12,7 +12,10 @@ const { runMonitor } = require('../_lib/healthMonitor');
 
 function blobStore(event) {
   connectLambda(event);
-  const store = getStore({ name: 'monitoring', consistency: 'strong' });
+  // Sem consistency: 'strong': no modo Lambda (connectLambda) o Netlify não fornece o
+  // uncachedEdgeURL que a leitura forte exige. Com execuções a cada 6h, a consistência
+  // eventual (propagação em até ~60s) é suficiente para deduplicar os avisos.
+  const store = getStore('monitoring');
   return {
     get: (key) => store.get(key, { type: 'json' }),
     set: (key, value) => store.setJSON(key, value),
